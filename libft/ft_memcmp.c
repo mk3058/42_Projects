@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:07:56 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/07 17:06:17 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:22:42 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	diff = 0;
 	while (i < n)
 	{
-		diff = (int)((unsigned char)s1[i] - (unsigned char)s2[i]);
+		diff = (int)(((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 		if (diff != 0)
 			return (diff);
 	}

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:51:06 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/07 15:58:53 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:23:12 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == (char)c)
-			return (s + i);
+			return ((char *)(s + i));
 	}
 	return (0);
 }
