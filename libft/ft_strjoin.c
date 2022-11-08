@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 19:11:56 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/08 20:14:37 by minkyuki         ###   ########.fr       */
+/*   Created: 2022/11/08 20:48:18 by minkyuki          #+#    #+#             */
+/*   Updated: 2022/11/08 21:11:28 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*dest;
-	int		size;
-	int		index;
+	t_size_t	tot_size;
+	char		*result;
 
-	index = 0;
-	size = ft_strlen(s1);
-	dest = (char *)malloc(sizeof(char) * (size + 1));
-	if (dest == 0)
-		return (0);
-	while (index < size)
-	{
-		dest[index] = s1[index];
-		index++;
-	}
-	dest[size] = '\0';
-	return (dest);
+	tot_size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	result = (char *)ft_calloc(tot_size, sizeof(char));
+	ft_strlcat(result, s1, tot_size);
+	ft_strlcat(result, s2, tot_size);
+	return (result);
 }

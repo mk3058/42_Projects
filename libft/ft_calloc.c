@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:48:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/08 19:29:37 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/08 20:19:00 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_calloc(t_size_t count, t_size_t size)
 	void	*result;
 
 	result = malloc(size * count);
+	if (result == 0)
+		return (0);
 	ft_bzero(result, size * count);
 	return (result);
 }
