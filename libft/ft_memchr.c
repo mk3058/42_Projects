@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:57:13 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/07 20:19:12 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/08 09:34:26 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	{
 		if ((((unsigned char *)s)[i]) == (unsigned char)c)
 			return ((void *)s + i);
+		i++;
 	}
 	return (0);
 }

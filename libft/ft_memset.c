@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:46:37 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/07 20:21:21 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/08 09:51:20 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	while (i < len)
 	{
 		((unsigned char *)b)[i] = (unsigned char)c;
+		i++;
 	}
 	return (b);
 }
