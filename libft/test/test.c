@@ -106,4 +106,24 @@ int main()
 	printf("\n\nstrrchr test\n");
 	printf("%s\n", ft_strrchr("strrchr test Test", 'D'));
 	printf("%s\n", strrchr("strrchr test Test", 'D'));
+
+	printf("\ncalloc test\n");
+	char *mycalloc = ft_calloc(5, 0);
+	char *orcalloc = calloc(5, 0);
+
+	for(int i = 0; i < 10; i++)
+	{
+		if(mycalloc[i] == 0)
+			printf("\\0 ");
+		else
+			printf("? ");
+	}
+	printf("\n");
+	for(int i = 0; i < 10; i++)
+	{
+		if(orcalloc[i] == 0)
+			printf("\\0 ");
+		else
+			printf("? ");
+	}
 }

@@ -6,17 +6,17 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:20:57 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/08 10:05:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:29:13 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check(const char *start_add, const char *needle, size_t len);
+static int	check(const char *start_add, const char *needle, t_size_t len);
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, t_size_t len)
 {
-	size_t	h_ind;
+	t_size_t	h_ind;
 
 	h_ind = 0;
 	if (needle[0] == 0)
@@ -35,9 +35,9 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (0);
 }
 
-static int	check(const char *start_add, const char *needle, size_t len)
+static int	check(const char *start_add, const char *needle, t_size_t len)
 {
-	size_t	i;
+	t_size_t	i;
 	int		flag;
 
 	i = 0;

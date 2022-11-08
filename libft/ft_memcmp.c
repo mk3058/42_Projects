@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:07:56 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/08 09:40:13 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:29:36 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <string.h>
 #include <stdio.h>
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, t_size_t n)
 {
-	size_t	i;
+	t_size_t	i;
 	int		diff;
 
 	i = 0;
