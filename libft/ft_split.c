@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:48:50 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/09 12:28:58 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:22:33 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	**ft_split(char const *s, char c)
 	{
 		find_next(s, c, &word_start, &word_length);
 		result[i] = ft_substr(s, word_start, word_length);
+		if (result[i] == 0)
+			return (0);
 		word_start += word_length;
 		i++;
 	}
