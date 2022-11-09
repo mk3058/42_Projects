@@ -6,15 +6,15 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:18:15 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/08 19:29:38 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/09 09:10:46 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, t_size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	t_size_t	i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)

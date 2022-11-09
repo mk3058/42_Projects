@@ -6,11 +6,10 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:11:56 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/08 20:14:37 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/09 10:12:04 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strdup(const char *s1)

@@ -6,14 +6,13 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:48:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/08 20:19:00 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/09 10:12:04 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-void	*ft_calloc(t_size_t count, t_size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	void	*result;
 
