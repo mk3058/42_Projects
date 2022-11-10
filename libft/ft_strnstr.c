@@ -38,7 +38,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 static int	check(const char *start_add, const char *needle, size_t len)
 {
 	size_t	i;
-	int		flag;
 
 	i = 0;
 	while (i <= len)
