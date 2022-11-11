@@ -6,12 +6,11 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:56:12 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/09 13:16:21 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/11 08:57:47 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	count_digit(long long n);
 
