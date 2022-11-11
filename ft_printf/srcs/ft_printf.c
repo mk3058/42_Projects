@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:38:28 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/11 12:59:15 by minkyuki         ###   ########.fr       */
+/*   Created: 2022/11/11 13:00:25 by minkyuki          #+#    #+#             */
+/*   Updated: 2022/11/11 20:38:28 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_printf(const char *format, ...)
 {
-	size_t	i;
+	int		length;
+	va_list	va;
 
-	i = ft_strlen(s);
-	write(fd, s, i);
+	va_start(va, format);
+	length = format_parser(format, va);
+	va_end(va);
+	return (length);
 }

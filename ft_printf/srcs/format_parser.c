@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   format_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:38:28 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/11 12:59:15 by minkyuki         ###   ########.fr       */
+/*   Created: 2022/11/11 13:59:48 by minkyuki          #+#    #+#             */
+/*   Updated: 2022/11/11 20:38:27 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	format_parser(const char *format, va_list va)
 {
-	size_t	i;
+	int	i;
+	int	length;
 
-	i = ft_strlen(s);
-	write(fd, s, i);
+	i = 0;
+	length = 0;
+	while (format[i])
+	{
+		if (format[i] == '%' && format[i + 1])
+			length += print_va(va, format[++i]);
+		else
+		{
+			ft_putchar_fd(format[i], 1);
+			length++;
+		}
+		i++;
+	}
+	return (length);
 }
