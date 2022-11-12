@@ -12,21 +12,44 @@
 
 #include "ft_printf.h"
 
+static int	print_buff(char *buff, int *buff_index);
+
 int	format_parser(const char *format, va_list va)
 {
-	int	i;
-	int	tmp;
-	int	length;
+	int		i;
+	int		tmp;
+	int		length;
+	int		buff_index;
+	char	buff[256];
 
-	i = 0;
+	i = -1;
 	length = 0;
-	while (format[i])
+	buff_index = 0;
+	ft_bzero(buff, 256);
+	while (format[++i])
 	{
 		if (format[i] == '%' && format[i + 1])
+		{
+			length += print_buff(buff, &buff_index);
 			length += print_va(va, format[++i]);
+		}
 		else
-			length += ft_putchar(format[i]);
-		i++;
+		{
+			buff[buff_index++] = format[i];
+			if (buff_index == 256)
+				length += print_buff(buff, &buff_index);
+		}
 	}
+	print_buff(buff, &buff_index);
+	return (length);
+}
+
+static int	print_buff(char *buff, int *buff_index)
+{
+	int	length;
+
+	length = ft_putstr(buff);
+	ft_bzero(buff, 256);
+	*buff_index = 0;
 	return (length);
 }
