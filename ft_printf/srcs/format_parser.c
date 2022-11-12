@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:59:48 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/11 20:38:27 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/12 09:12:47 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	format_parser(const char *format, va_list va)
 {
 	int	i;
+	int	tmp;
 	int	length;
 
 	i = 0;
@@ -24,10 +25,7 @@ int	format_parser(const char *format, va_list va)
 		if (format[i] == '%' && format[i + 1])
 			length += print_va(va, format[++i]);
 		else
-		{
-			ft_putchar_fd(format[i], 1);
-			length++;
-		}
+			length += ft_putchar(format[i]);
 		i++;
 	}
 	return (length);

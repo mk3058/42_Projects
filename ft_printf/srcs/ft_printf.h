@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:57:08 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/11 20:39:18 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/12 09:12:18 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		integer_to_hex(unsigned int num, char specifier);
 int		print_signed_int(int n);
 int		print_unsigned_int(unsigned int n);
 void	ft_bzero(void *s, size_t n);
-void	ft_putchar_fd(char c, int fd);
+int		ft_putchar(char c);
 size_t	ft_strlen(const char *s);
 
 #endif

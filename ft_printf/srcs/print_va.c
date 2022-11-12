@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:21:44 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/11 20:38:20 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/12 09:11:34 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int	print_va(va_list va, char specifier)
 {
 	if (specifier == 'c')
-	{
-		ft_putchar_fd(va_arg(va, int), 1);
-		return (1);
-	}
+		return (ft_putchar(va_arg(va, int)));
 	else if (specifier == 'd' || specifier == 'i')
 		return (print_signed_int(va_arg(va, int)));
 	else if (specifier == 's')
@@ -30,10 +27,7 @@ int	print_va(va_list va, char specifier)
 	else if (specifier == 'x' || specifier == 'X')
 		return (integer_to_hex(va_arg(va, int), specifier));
 	else if (specifier == '%')
-	{
-		write(1, "%%", 1);
-		return (1);
-	}
+		return (ft_putchar('%'));
 	else
 		return (0);
 }
