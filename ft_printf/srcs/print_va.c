@@ -6,13 +6,13 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:21:44 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/12 09:11:34 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/13 13:29:08 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_va(va_list va, char specifier)
+int	print_va(va_list va, char specifier, char *field)
 {
 	if (specifier == 'c')
 		return (ft_putchar(va_arg(va, int)));

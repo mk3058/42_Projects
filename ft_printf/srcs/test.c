@@ -3,11 +3,17 @@
 
 int main()
 {
-    int my_len = 0;
-    int or_len = 0;
+    char *test = "test";
 
-    or_len = printf(" %s %c %p %s %d\n", "test", 'v', &my_len, "test", 123);
-    my_len = ft_printf(" %s %c %p %s %d\n", "test", 'v', &my_len, "test", 123);
-    //my_len = ft_printf("   %c\n", 'T');
-    printf("\n\n%d %d\n", or_len, my_len);
+    ft_printf("%-10.5s", "testtesttesttesttest");
+
+    /*printf("%#c\n", 'k');
+    printf("%#s\n", "testtesttest");
+    printf("%#p\n", test);
+    printf("%#d\n", 123);
+    printf("%#i\n", 123);
+    printf("%#u\n", (unsigned int)123);
+    printf("%#x\n", 423523831);
+    printf("%#X\n", 423523831);
+    printf("%#%\n");*/
 }

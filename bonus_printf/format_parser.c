@@ -6,15 +6,14 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:59:48 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/13 13:47:40 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:21:14 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	add_to_buff(char c, char *buff, int *index);
 static int	print_buff(char *buff, int *buff_index);
-static char	*get_field(const char *format, int *index);
-static int	is_specifier(char c);
 
 int	format_parser(const char *format, va_list va)
 {
@@ -32,33 +31,23 @@ int	format_parser(const char *format, va_list va)
 	{
 		if (format[i] == '%' && format[i + 1])
 		{
-			field = get_field(format, &field);
+			field_parser(format, &i, &field);
 			length += print_buff(buff, &buff_index);
-			length += print_va(va, format[i], field);
-			free(field.flag);
+			length += print_va(va, &field);
 		}
 		else
-		{
-			buff[buff_index++] = format[i];
-			if (buff_index == 256)
-				length += print_buff(buff, &buff_index);
-		}
+			length += add_to_buff(format[i], buff, &buff_index);
 	}
 	length += print_buff(buff, &buff_index);
 	return (length);
 }
 
-static char	*field_parser(const char *format, int *index, t_field *field)
+static int	add_to_buff(char c, char *buff, int *index)
 {
-	int	length;
-
-	
-}
-
-static int	is_specifier(char c)
-{
-	if (ft_strchr("cdispuxX%%", c))
-		return (1);
+	buff[*index] = c;
+	*index = *index + 1;
+	if (*index == 256)
+		return (print_buff(buff, index));
 	return (0);
 }
 
