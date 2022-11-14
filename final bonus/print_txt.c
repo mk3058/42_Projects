@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   print_txt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:14:32 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/14 12:38:44 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/13 21:15:56 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+
 int	ft_putstr(char *s)
 {
 	int	i;

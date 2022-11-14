@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:56:12 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/14 20:22:05 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/11 08:57:47 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char	*my_itoa(long long n, t_field *field)
+static int	count_digit(long long n);
+
+char	*ft_itoa(int n)
 {
 	char		*result;
 	int			size;
@@ -21,11 +23,10 @@ char	*my_itoa(long long n, t_field *field)
 
 	i = 0;
 	num = n;
-	size = ft_numlen(n, field);
+	size = count_digit(num);
 	result = (char *)ft_calloc(size + 1, sizeof(char));
 	if (result == 0)
 		return (0);
-	ft_memset(result, '0', size);
 	if (num < 0)
 	{
 		result[0] = '-';
@@ -39,4 +40,24 @@ char	*my_itoa(long long n, t_field *field)
 		size--;
 	}
 	return (result);
+}
+
+static int	count_digit(long long n)
+{
+	int	cnt;
+
+	cnt = 0;
+	if (n == 0)
+		cnt = 1;
+	else if (n < 0)
+	{
+		cnt++;
+		n *= -1;
+	}
+	while (n > 0)
+	{
+		cnt++;
+		n /= 10;
+	}
+	return (cnt);
 }

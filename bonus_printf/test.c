@@ -7,26 +7,23 @@ int main()
     int m;
     int o;
 
-/*    m = ft_printf("%-10c\n", 'Y');
-    o = printf("%-10c\n", 'Y');
-    printf("\n%d %d\n", m, o); 
+//width, precision 둘 다 사용 가능한 경우
+    //width > precision
+    o = printf("%1s", "test");
+    printf("\n%d\n", o);
     
-    printf("\n");
-    m = ft_printf("%d\n", 1234567);
-    o = printf("%d\n", 1234567);
-    printf("\n%d %d\n", m, o); 
-    
-    printf("\n");
-    m = ft_printf("%i\n", 1234567);
-    o = printf("%i\n", 1234567);
-    printf("\n%d %d\n", m, o); 
+    o = printf("%5d", -1234);
+    printf("\n%d\n", o);
 
-    printf("\n");
-    m = ft_printf("%10s\n", test);
-    o = printf("%10s\n", test);
-    printf("\n%d %d\n", m, o);  */
+    o = printf("%1i", 1234);
+    printf("\n%d\n", o);
 
-    m = ft_printf(" %X \n", -1);
-    o = printf(" %X \n", -1);
-    printf("\n%d %d\n", m, o);
+    o = printf("%1u", (unsigned int)1234);
+    printf("\n%d\n", o);
+
+    o = printf("%1x", 374619);
+    printf("\n%d\n", o);
+
+    o = printf("%1X", 374619);
+    printf("\n%d\n", o);
 }

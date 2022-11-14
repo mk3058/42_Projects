@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 13:57:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/14 20:17:28 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/15 00:39:45 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,11 @@ int	find_len(va_list va, t_field *field)
 	else if (specifier == 'd' || specifier == 'i')
 		return (ft_numlen(va_arg(va, int), field));
 	else if (specifier == 's')
-	{	
-		str = va_arg(va, char *);
-		if (!str)
-			return (ft_strlen("(null)"));
-		return (ft_strlen(str));
-	}
+		return (my_strlen(va_arg(va, char *), field -> precision));
 	else if (specifier == 'p')
 		return (ft_hexlen((size_t)va_arg(va, void *), field));
 	else if (specifier == 'u')
-		return (ft_numlen(va_arg(va, unsigned int), field));
+		return (ft_numlen(va_arg(va, unsigned int), field) - 1);
 	else if (specifier == 'x' || specifier == 'X')
 		return (ft_hexlen((size_t)va_arg(va, int), field));
 	else
@@ -43,7 +38,7 @@ int	ft_hexlen(size_t input, t_field *field)
 {
 	int	length;
 
-	length = 0;
+	length = 2;
 	if (input == 0)
 		length += 1;
 	if (field -> specifier == 'x' || field -> specifier == 'X')
@@ -53,37 +48,32 @@ int	ft_hexlen(size_t input, t_field *field)
 		input /= 16;
 		length++;
 	}
-	if (field -> precision > length)
-		length = field -> precision;
-	if (field -> flag_sharp || field -> specifier == 'p')
-		length += 2;
 	return (length);
 }
 
 int	ft_numlen(long long n, t_field *field)
 {
 	int	cnt;
-	int num_len;
 
-	cnt = 0;
-	num_len = 0;
+	cnt = 1;
 	if (n == 0)
 		cnt = 1;
 	else if (n < 0)
-	{
-		cnt++;
 		n *= -1;
-	}
-	else if (field -> flag_blank || field -> flag_plus)
-		cnt++;
 	while (n > 0)
 	{
-		num_len++;
+		cnt++;
 		n /= 10;
 	}
-	if (field -> precision > num_len)
-		cnt += field -> precision;
-	else
-		cnt += num_len;
 	return (cnt);
+}
+
+int	my_strlen(char *str, int precision)
+{
+	if (!str)
+		str = "(null)";
+	if (precision > ft_strlen(str))
+		return (ft_strlen(str));
+	else
+		return (precision);
 }
