@@ -33,7 +33,7 @@ int	format_parser(const char *format, va_list va)
 		{
 			field_parser(format, &i, &field);
 			length += print_buff(buff, &buff_index);
-			length += print_va(va, &field);
+			length += print_va(&va, &field);
 		}
 		else
 			length += add_to_buff(format[i], buff, &buff_index);

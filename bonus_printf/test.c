@@ -7,7 +7,7 @@ int main()
     int m;
     int o;
 
-    m = ft_printf("%-10c\n", 'Y');
+/*    m = ft_printf("%-10c\n", 'Y');
     o = printf("%-10c\n", 'Y');
     printf("\n%d %d\n", m, o); 
     
@@ -24,5 +24,9 @@ int main()
     printf("\n");
     m = ft_printf("%10s\n", test);
     o = printf("%10s\n", test);
-    printf("\n%d %d\n", m, o); 
+    printf("\n%d %d\n", m, o);  */
+
+    m = ft_printf(" %X \n", -1);
+    o = printf(" %X \n", -1);
+    printf("\n%d %d\n", m, o);
 }
