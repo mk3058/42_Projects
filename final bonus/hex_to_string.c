@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   hex_to_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 09:35:36 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/15 00:10:56 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/15 11:53:50 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h> ///////////////////
+
 static char *convert_hex(size_t num, char *base, t_field *field);
 static int  add_prefix(char *result, t_field *field);
+static void to_precision(char *result, char *hex_str, t_field *field);
 
 int addr_to_str(char *result, t_field *field, void *input)
 {
@@ -38,17 +39,30 @@ int integer_to_str(char *result, t_field *field, unsigned int input)
 		hex_str = convert_hex((unsigned int)input, "0123456789abcdef", field);
 	    if (hex_str == 0)
             return (-1);
-        str_to_str(result, field, hex_str);
 	}
 	else
 	{
 		hex_str = convert_hex((unsigned int)input, "0123456789ABCDEF", field);
 	    if (hex_str == 0)
             return (-1);
-        str_to_str(result, field, hex_str);
 	}
+    to_precision(result, hex_str, field);
     free(hex_str);
 	return (1);
+}
+
+static void to_precision(char *result, char *hex_str, t_field *field)
+{
+    int diff;
+
+    diff = 0;
+    result[0] = hex_str[0];
+    result[1] = hex_str[1];
+    if (field -> precision > -1)
+        diff = ft_strlen(result) - ft_strlen(hex_str) + 2;
+    else
+        diff = 2;
+    ft_memcpy(result + diff, hex_str + 2, ft_strlen(hex_str) - 2);
 }
 
 static char *convert_hex(size_t num, char *base, t_field *field)

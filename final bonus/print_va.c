@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_va.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:21:44 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/15 01:17:32 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:24:37 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,29 @@
 
 static char	*allocate_mem_pre(t_field *field, va_list va);
 static char	*allocate_mem(t_field *field, va_list va);
+void		set_pointer(char *(*allocate_func[2])(t_field *field, va_list va));
 
-int	print_va(va_list *va, t_field *field)
+int	print_va(va_list va, t_field *field)
 {
-	char	*result;
-	int		valid_width;
-	int		err;
-	int		length;
+	char		*(*allocate_func[2])(t_field *field, va_list va);
+	char		*result;
+	int			err;
+	va_list		cpy;
 
+	va_copy(cpy, va);
+	set_pointer(allocate_func);
+	result = allocate_func[(field -> precision) > -1](field, cpy);
+	if (result == 0)
+		return (-1);
 	if (field -> precision > -1)
-	{
-		result = allocate_mem_pre(field, *va);
-		if (result == 0)
-			return (-1);
 		err = precision_wrapper(result, field, va);
-	}
 	else
-	{
-		result = allocate_mem(field, *va);
-		if (result == 0)
-			return (-1);
 		err = set_mem(result, field, va);
-	}
 	if (err)
 		return (-1);
-	/*length = ft_putstr(result);
-	if (field -> specifier == 'c' && length == 0)
-	{
-		write(1, "\0", 1);
-		length = 1;
-	}*/
-	printf("===res : %s===\n", result);
+	print_width(field, result);
 	free(result);
-	return (length);
+	return (0); //길이 반환 필요
 }
 
 static char	*allocate_mem_pre(t_field *field, va_list va)
@@ -56,22 +46,20 @@ static char	*allocate_mem_pre(t_field *field, va_list va)
 	int		size;
 
 	result = 0;
-	str_len = find_len(va, field); //부호 자리, prefix 자리가 이미 포함됨
+	str_len = find_len(va, field); //부호 자리, prefix 자리 포함
 	if (field -> precision > str_len)
 	{
-		if (field -> specifier ==  ///////precision 대입할때도 부호, prefix 자리 만들어야함
-		result = ft_calloc(field -> precision + 1, sizeof(char));
-		if (result == 0)
-			return (0);
-		ft_memset(result, '0', field -> precision);
+		str_len = field -> precision;
+		if (field -> specifier == 'x' || field -> specifier == 'X')
+			str_len += 2;
+		else if (field -> specifier == 'd' || field -> specifier == 'i')
+			str_len += 1;
 	}
-	else
-	{
-		result = ft_calloc(str_len + 1, sizeof(char));
-		if (result == 0)
+	result = ft_calloc(str_len + 1, sizeof(char));
+	if (result == 0)
 			return (0);
-		ft_memset(result, '0', str_len);
-	}
+	ft_memset(result, '0', str_len);
+	va_end(va);
 	return (result);
 }
 
@@ -83,31 +71,38 @@ static char	*allocate_mem(t_field *field, va_list va)
 	result = 0;
 	str_len = find_len(va, field); //부호 자리, prefix 자리가 이미 포함됨
 	result = ft_calloc(str_len + 1, sizeof(char));
+	va_end(va);
 	return (result);
 }
 
-int	set_mem(char *result, t_field *field, va_list *va)
+int	set_mem(char *result, t_field *field, va_list va)
 {
 	int	err;
 
 	err = 0;
 	if (field -> specifier == 'c')
-		err = char_to_str(result, field, va_arg(*va, int));
+		err = char_to_str(result, field, va_arg(va, int));
 	else if (field -> specifier == 'd' || field -> specifier == 'i')
-		err = nbr_to_str(result, field, va_arg(*va, int));
+		err = nbr_to_str(result, field, va_arg(va, int));
 	else if (field -> specifier == 's')
-		err = str_to_str(result, field, va_arg(*va, char *));
+		err = str_to_str(result, field, va_arg(va, char *));
 	else if (field -> specifier == 'p')
-		err = addr_to_str(result, field, va_arg(*va, void *));
+		err = addr_to_str(result, field, va_arg(va, void *));
 	else if (field -> specifier == 'u')
-		err = nbr_to_str(result, field, va_arg(*va, unsigned int));
+		err = nbr_to_str(result, field, va_arg(va, unsigned int));
 	else if (field -> specifier == 'x' || field -> specifier == 'X')
-		err = integer_to_str(result, field, va_arg(*va, unsigned int));
+		err = integer_to_str(result, field, va_arg(va, unsigned int));
 	else if (field -> specifier == '%')
 		err = char_to_str(result, field, '%');
 	if (err != 1)
 		return (1);
 	return (0);
+}
+
+void	set_pointer(char *(*allocate_func[2])(t_field *field, va_list va))
+{
+	allocate_func[0] = allocate_mem;
+	allocate_func[1] = allocate_mem_pre;
 }
 
 	/*size = find_len(va, field);

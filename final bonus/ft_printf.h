@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:57:08 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/15 00:40:02 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/15 13:24:07 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_field
 
 void	field_parser(const char *format, int *index, t_field *field);
 int		ft_putstr(char *s);
-int		print_va(va_list *va, t_field *field);
+int	print_va(va_list va, t_field *field);
 int		format_parser(const char *format, va_list va);
 int		ft_printf(const char *format, ...);
 int		addr_to_hex(void *addr);
@@ -56,8 +56,9 @@ int addr_to_str(char *result, t_field *field, void *input);
 int integer_to_str(char *result, t_field *field, unsigned int input);
 int    nbr_to_str(char *result, t_field *field, long long input);
 int	ft_numlen(long long n, t_field *field);
-int precision_wrapper(char *result, t_field *field, va_list *va);
-int	set_mem(char *result, t_field *field, va_list *va);
+int precision_wrapper(char *result, t_field *field, va_list va);
+int	set_mem(char *result, t_field *field, va_list va);
 int	my_strlen(char *str, int precision);
+void	print_width(t_field *field, char *result);
 
 #endif
