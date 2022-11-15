@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_length.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 13:57:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/15 00:39:45 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:47:36 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_numlen(long long n, t_field *field)
 
 	cnt = 1;
 	if (n == 0)
-		cnt = 1;
+		cnt += 1;
 	else if (n < 0)
 		n *= -1;
 	while (n > 0)

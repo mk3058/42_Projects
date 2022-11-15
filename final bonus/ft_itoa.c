@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:56:12 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/14 23:58:46 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:16:44 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	count_digit(long long n)
 
 	cnt = 1;
 	if (n == 0)
-		cnt = 1;
+		cnt += 1;
 	else if (n < 0)
 		n *= -1;
 	while (n > 0)

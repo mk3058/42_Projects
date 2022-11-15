@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:57:08 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/15 13:24:07 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:37:30 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ int precision_wrapper(char *result, t_field *field, va_list va);
 int	set_mem(char *result, t_field *field, va_list va);
 int	my_strlen(char *str, int precision);
 void	print_width(t_field *field, char *result);
+void		set_pointer(char *(*allocate_func[2])(t_field *field, va_list va));
 
 #endif

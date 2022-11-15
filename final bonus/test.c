@@ -1,5 +1,5 @@
 #include "ft_printf.h"
-
+#include <limits.h>
 void test_adr(char *res);
 
 int main()
@@ -130,7 +130,88 @@ int main()
     printf("%%\n", test);
     printf("========================\n"); */ //precision 적용되지 않는 지정자도 잘 변환되는지 확인
 
+    /*ft_printf("%10d||", -123);
+    printf("\n");
+    printf("%10d||", -123);
+    printf("\n\n");
+
     ft_printf("%10d||", 123);
     printf("\n");
     printf("%10d||", 123);
+    printf("\n\n");
+
+    ft_printf("%-10d||", -123);
+    printf("\n");
+    printf("%-10d||", -123);
+    printf("\n\n");
+
+    ft_printf("%-10d||", 123);
+    printf("\n");
+    printf("%-10d||", 123);
+    printf("\n\n");
+
+    ft_printf("% 10d||", -123);
+    printf("\n");
+    printf("% 10d||", -123);
+    printf("\n\n");
+    
+    ft_printf("% 10d||", 123);
+    printf("\n");
+    printf("% 10d||", 123);
+    printf("\n\n");
+
+    ft_printf("%- 10d||", -123);
+    printf("\n");
+    printf("%- 10d||", -123);
+    printf("\n\n");
+    
+    ft_printf("%- 10d||", 123);
+    printf("\n");
+    printf("%- 10d||", 123);
+    printf("\n\n"); */
+/*
+    ft_printf("%10.3d||", -123);
+    printf("\n");
+    printf("%10.3d||", -123);
+    printf("\n\n");
+
+    ft_printf("%10.3d||", 123);
+    printf("\n");
+    printf("%10.3d||", 123);
+    printf("\n\n");
+
+    ft_printf("%-10.3d||", -123);
+    printf("\n");
+    printf("%-10.3d||", -123);
+    printf("\n\n");
+
+    ft_printf("%-10.3d||", 123);
+    printf("\n");
+    printf("%-10.3d||", 123);
+    printf("\n\n");
+
+    ft_printf("% 10.3d||", -123);
+    printf("\n");
+    printf("% 10.3d||", -123);
+    printf("\n\n");
+    
+    ft_printf("% 10.3d||", 123);
+    printf("\n");
+    printf("% 10.3d||", 123);
+    printf("\n\n");
+
+    ft_printf("%- 10.3d||", -123);
+    printf("\n");
+    printf("%- 10.3d||", -123);
+    printf("\n\n");
+    
+    ft_printf("%- 10.3d||", 123);
+    printf("\n");
+    printf("%- 10.3d||", 123);
+    printf("\n\n"); */
+
+    m = ft_printf("%-5.0i", 0);
+    printf("\n");
+    o = printf("%-5.0i", 0);
+    printf("\n%d %d\n", m, o);
 }
