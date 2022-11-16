@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:35:16 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/15 16:48:00 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:31:56 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*allocate_mem_pre(t_field *field, va_list va)
 
 	result = 0;
 	str_len = find_len(va, field);
-	if (field -> precision > str_len)
+	if (field -> precision > str_len - prefix_len(field))
 	{
 		str_len = field -> precision;
 		if (field -> specifier == 'x' || field -> specifier == 'X')
