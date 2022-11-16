@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 09:35:36 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/16 10:32:06 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:11:55 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,13 @@ int integer_to_str(char *result, t_field *field, unsigned int input)
 
 	specifier = field -> specifier;
 	if (specifier == 'x')
-	{
 		hex_str = convert_hex((unsigned int)input, "0123456789abcdef", field);
-	    if (hex_str == 0)
-            return (-1);
-	}
-	else
-	{
+	else if (specifier == 'X')
 		hex_str = convert_hex((unsigned int)input, "0123456789ABCDEF", field);
-	    if (hex_str == 0)
-            return (-1);
-	}
+    if (hex_str == 0)
+        return (-1);
+    if (field -> precision == 0 && input == 0)
+        ft_memset(result, 0, ft_strlen(result));
     to_precision(result, hex_str, field);
     free(hex_str);
 	return (1);

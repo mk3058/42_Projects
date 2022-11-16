@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 09:25:57 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/15 17:13:25 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:04:54 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@ int nbr_to_str(char *result, t_field *field, long long input)
     int     diff;
     int     nbr_index;
 
-    if (field -> precision == 0 && input == 0)
-    {
-        ft_memset(result, 0, 2);
-        return (1);
-    }
     nbr_str = my_itoa(input);
     diff = 0;
     nbr_index = 0;
@@ -36,5 +31,13 @@ int nbr_to_str(char *result, t_field *field, long long input)
         diff = 1;
     ft_memcpy(result + diff, nbr_str + 1, ft_strlen(nbr_str) - 1);
     free(nbr_str);
+    if (field -> precision == 0 && input == 0)
+    {
+        if (field -> specifier != 'u')
+            result[1] = 0;
+        else
+            result[0] = 0;
+        return (1);
+    }
     return (1);
 }

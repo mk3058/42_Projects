@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:57:08 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 13:17:02 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:57:51 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	print_width(t_field *field, char *result);
 void		set_pointer(char *(*allocate_func[2])(t_field *field, va_list va));
 int	prefix_len(t_field *field);
 int	w_prefix_len(t_field *field, char *result);
+int	is_x_zero(char *result);
 
 #endif
