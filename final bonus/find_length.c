@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 13:57:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 10:27:11 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 12:52:57 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	ft_hexlen(size_t input, t_field *field)
 		input /= 16;
 		length++;
 	}
+	if (input == 0)
 	return (length);
 }
 

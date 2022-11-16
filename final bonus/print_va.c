@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:21:44 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 10:35:32 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:18:52 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,7 @@ int	get_return_size(char *result, t_field *field)
 	strlen = ft_strlen(result);
 	if (field -> specifier == 'c' && strlen == 0)
 		strlen = 1;
-	if (result[0] == '+' && !(field -> flag_plus || field -> flag_blank))
-		strlen--;
-	else if (result[0] == '0' && (result[1] == 'x' || result[1] == 'X'))
-		if (!(field -> flag_sharp) && field -> specifier != 'p')
-			strlen -= 2;
+	strlen -= (prefix_len(field) - w_prefix_len(field, result));
 	if (field -> width > strlen)
 		return (field -> width);
 	else

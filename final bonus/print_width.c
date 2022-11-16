@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:02:26 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 10:30:54 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:15:59 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	print_space_or_zero(t_field *field, char *result, int prefix);
 static void	print_res(t_field *field, char *result);
 static int	print_prefix(t_field *field, char *result);
-static int	w_prefix_len(t_field *field, char *result);
 
 void	print_width(t_field *field, char *result)
 {
@@ -112,10 +111,18 @@ static int	print_prefix(t_field *field, char *result) //출력한 prefix 길이 
 	char	sp;
 
 	sp = field -> specifier;
-	if (sp == 'p' || ((sp == 'x' || sp == 'X') && field -> flag_sharp))
+	if (sp == 'p')
 	{
 		write(1, result, 2);
 		return (2);
+	}
+	else if ((sp == 'x' || sp == 'X') && field -> flag_sharp)
+	{
+		if (!(ft_strlen(result) == 3 && result[2] == '0'))
+		{
+			write(1, result, 2);
+			return (2);
+		}
 	}
 	else if (sp == 'd' || sp == 'i')
 	{
@@ -149,13 +156,18 @@ int	prefix_len(t_field *field)
 	return (0);
 }
 
-static int	w_prefix_len(t_field *field, char *result)
+int	w_prefix_len(t_field *field, char *result)
 {
 	char	sp;
 
 	sp = field -> specifier;
-	if (sp == 'p' || ((sp == 'x' || sp == 'X') && field -> flag_sharp))
+	if (sp == 'p')
 		return (2);
+	else if ((sp == 'x' || sp == 'X') && field -> flag_sharp)
+	{
+		if (!(ft_strlen(result) == 3 && result[2] == '0'))
+			return (2);
+	}
 	else if (sp == 'd' || sp == 'i')
 	{
 		if (result[0] == '-')
