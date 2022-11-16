@@ -2,8 +2,8 @@ CC = cc
 CFALGS = -Wall -Wextra -Werror
 INC = -I ./libft/libft.h -I ./printf.h
 NAME = libftprintf.a
-SRCS = field_parser.c find_length.c format_parser.c ft_printf.c hex_to_string.c nbr_to_string.c txt_to_string.c print_txt.c print_va.c ft_itoa.c \
-print_width.c allocate_memory.c input_check.c util_func.c \
+SRCS = field_parser.c find_length.c format_parser.c ft_printf.c hex_to_string.c nbr_to_string.c txt_to_string.c print_va.c itoa.c \
+print_result.c allocate_memory.c util_func.c \
 ./libft/ft_bzero.c ./libft/ft_atoi.c ./libft/ft_calloc.c ./libft/ft_isdigit.c ./libft/ft_strchr.c ./libft/ft_strlen.c ./libft/ft_memcpy.c ./libft/ft_memset.c
 OBJS = $(SRCS:.c=.o)
 

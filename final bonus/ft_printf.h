@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:57:08 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 18:55:21 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:30:23 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ int		addr_to_hex(void *addr);
 int		integer_to_hex(unsigned int num, t_field *field);
 int		print_int(long long n, t_field *field);
 void	ft_bzero(void *s, size_t n);
-int		ft_putchar(char c);
 size_t	ft_strlen(const char *s);
 char	*my_itoa(long long n);
 int		print_signed_int(int n);
 int		print_unsigned_int(unsigned int n);
-int		ft_putstr_n(char *s, int n);
 int		find_len(va_list va, t_field *field);
 int		ft_hexlen(size_t input, t_field *field);
 int		str_to_str(char *result, t_field *field, char *input);

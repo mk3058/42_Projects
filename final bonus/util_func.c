@@ -6,11 +6,22 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:53:33 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 18:28:24 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:31:34 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	ft_putstr(char *s)
+{
+	int	i;
+
+	if (s == 0)
+		return (ft_putstr("(null)"));
+	i = ft_strlen(s);
+	write(1, s, i);
+	return (i);
+}
 
 int	prefix_len(t_field *field)
 {
@@ -59,4 +70,16 @@ int	is_x_zero(char *result)
 		i++;
 	}
 	return (1);
+}
+
+void	precision_input_zero(t_field *field, char *result, long long input)
+{
+	char	specifier;
+
+	specifier = field -> specifier;
+	if (field -> precision == 0 && input == 0)
+	{
+		if (ft_strchr("Xxdiu", specifier) != 0)
+			result[prefix_len(field)] = 0;
+	}
 }
