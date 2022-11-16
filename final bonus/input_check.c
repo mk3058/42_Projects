@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 13:00:25 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 18:45:59 by minkyuki         ###   ########.fr       */
+/*   Created: 2022/11/16 17:12:54 by minkyuki          #+#    #+#             */
+/*   Updated: 2022/11/16 18:05:25 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	precision_input_zero(t_field *field, char *result, long long input)
 {
-	int		length;
-	va_list	va;
+	char	specifier;
 
-	va_start(va, format);
-	length = format_parser(format, va);
-	va_end(va);
-	if (length == -1)
-		return (-1);
-	return (length);
+	specifier = field -> specifier;
+	if (field -> precision == 0 && input == 0)
+	{
+		if (ft_strchr("Xxdiu", specifier) != 0)
+			result[prefix_len(field)] = 0;
+	}
 }

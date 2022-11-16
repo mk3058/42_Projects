@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:21:44 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 14:59:02 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:54:36 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	print_va(va_list va, t_field *field)
 	result = allocate_func[(field -> precision) > -1](field, cpy);
 	if (result == 0)
 		return (-1);
-	if (field -> precision > -1)
-		err = precision_wrapper(result, field, va);
-	else
-		err = set_mem(result, field, va);
+	err = set_mem(result, field, va);
 	if (err)
 		return (-1);
 	size = get_return_size(result, field);
@@ -45,7 +42,7 @@ int	set_mem(char *result, t_field *field, va_list va)
 
 	err = 0;
 	if (field -> specifier == 'c')
-		err = char_to_str(result, field, va_arg(va, int));
+		err = char_to_str(result, va_arg(va, int));
 	else if (field -> specifier == 'd' || field -> specifier == 'i')
 		err = nbr_to_str(result, field, va_arg(va, int));
 	else if (field -> specifier == 's')
@@ -57,7 +54,7 @@ int	set_mem(char *result, t_field *field, va_list va)
 	else if (field -> specifier == 'x' || field -> specifier == 'X')
 		err = integer_to_str(result, field, va_arg(va, unsigned int));
 	else if (field -> specifier == '%')
-		err = char_to_str(result, field, '%');
+		err = char_to_str(result, '%');
 	if (err != 1)
 		return (1);
 	return (0);

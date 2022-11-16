@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 13:57:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/16 15:13:41 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 18:50:13 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 int	find_len(va_list va, t_field *field)
 {
 	char	specifier;
-	char	*str;
 
 	specifier = field -> specifier;
 	if (specifier == 'c' || specifier == '%')
 		return (1);
 	else if (specifier == 'd' || specifier == 'i')
-		return (ft_numlen(va_arg(va, int), field));
+		return (ft_numlen(va_arg(va, int)));
 	else if (specifier == 's')
 		return (my_strlen(va_arg(va, char *), field -> precision));
 	else if (specifier == 'p')
 		return (ft_hexlen((size_t)va_arg(va, void *), field));
 	else if (specifier == 'u')
-		return (ft_numlen(va_arg(va, unsigned int), field) - 1);
+		return (ft_numlen(va_arg(va, unsigned int)) - 1);
 	else if (specifier == 'x' || specifier == 'X')
 		return (ft_hexlen((size_t)va_arg(va, int), field));
 	else
@@ -51,7 +50,7 @@ int	ft_hexlen(size_t input, t_field *field)
 	return (length);
 }
 
-int	ft_numlen(long long n, t_field *field)
+int	ft_numlen(long long n)
 {
 	int	cnt;
 
@@ -72,7 +71,7 @@ int	my_strlen(char *str, int precision)
 {
 	if (!str)
 		str = "(null)";
-	if (precision > ft_strlen(str))
+	if ((size_t)precision > ft_strlen(str))
 		return (ft_strlen(str));
 	else
 		return (precision);
