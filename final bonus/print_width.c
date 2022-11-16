@@ -6,26 +6,28 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:02:26 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/15 17:15:07 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:16:37 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	print_space_or_zero(t_field *field, char *result, int prefix_len);
-static int	print_res(t_field *field, char *result);
+static int	print_space_or_zero(t_field *field, char *result, int prefix);
+static void	print_res(t_field *field, char *result);
 static int	print_prefix(t_field *field, char *result);
 static int	prefix_len(t_field *field, char *result);
+static int	w_prefix_len(t_field *field, char *result);
 
 void	print_width(t_field *field, char *result)
 {
 	char	str_len;
-	int		i;
+	int		printed_len;
 
-	i = 0;
-	str_len = ft_strlen(result);
+	printed_len = 0;
+	str_len = ft_strlen(result + prefix_len(field, result)) - w_prefix_len(field, result);
 	if (field -> width < str_len)
 	{
+		print_prefix(field, result);
 		print_res(field, result);
 		return ;
 	}
@@ -34,13 +36,15 @@ void	print_width(t_field *field, char *result)
 		field -> flag_zero = 0;
 		if (field -> flag_minus)
 		{
+			printed_len = print_prefix(field, result);
 			print_res(field, result);
-			print_space_or_zero(field, result, prefix_len(field, result));
+			print_space_or_zero(field, result, printed_len);
 		}
 		else
 		{
-			i = prefix_len(field, result);
-			print_space_or_zero(field, result, i);
+			printed_len = w_prefix_len(field, result);
+			print_space_or_zero(field, result, printed_len);
+			print_prefix(field, result);
 			print_res(field, result);
 		}
 	}
@@ -50,27 +54,29 @@ void	print_width(t_field *field, char *result)
 			field -> flag_zero = 0;
 		if (field -> flag_zero)
 		{
-			i = print_prefix(field, result);
-			print_space_or_zero(field, result, prefix_len(field, result));
-			ft_putstr(result + i);
+			print_prefix(field, result);
+			print_space_or_zero(field, result, w_prefix_len(field, result));
+			print_res(field, result);
 		}
 		else
 		{
 			if (field -> flag_minus)
 			{
+				print_prefix(field, result);
 				print_res(field, result);
-				print_space_or_zero(field, result, prefix_len(field, result));
+				print_space_or_zero(field, result, w_prefix_len(field, result));
 			}
 			else
 			{
-				print_space_or_zero(field, result, prefix_len(field, result));
+				print_space_or_zero(field, result, w_prefix_len(field, result));
+				print_prefix(field, result);
 				print_res(field, result);
 			}
 		}
 	}
 }
 
-static int	print_space_or_zero(t_field *field, char *result, int prefix_len)
+static int	print_space_or_zero(t_field *field, char *result, int prefix) //출력될 prefix 길이 필요
 {
 	int		diff;
 	int		i;
@@ -82,44 +88,27 @@ static int	print_space_or_zero(t_field *field, char *result, int prefix_len)
 		str_len = 1;
 	else if (ft_strchr("di", field -> specifier) && ft_strlen(result) == 0)
 		str_len = 1;
-	diff = field -> width - str_len - prefix_len;
-	if (ft_strchr("pxX", field -> specifier) != 0)
-		diff += 2;
-	else if (ft_strchr("di", field -> specifier) != 0)
-		diff += 1;
+	diff = field -> width - str_len - prefix + prefix_len(field, result);
 	i = -1;
 	c = ' ';
 	if (field -> flag_zero && !(field -> flag_minus) && field -> precision < 0)
 		c = '0';
 	while (++i < diff)
 		write(1, &c, 1);
-	return (prefix_len);
+	return (prefix);
 }
 
-static int	print_res(t_field *field, char *result)
+static void	print_res(t_field *field, char *result) //prefix 제외한 결과만 출력 result 그대로 줘야함
 {
-	int	prefix_length;
-
-	prefix_length = prefix_len(field, result);
-	if (prefix_length > 0)
-		print_prefix(field, result);
-	else
-	{
-		if (ft_strchr("pxX", field -> specifier) != 0)
-			prefix_length = 2;
-		else if (ft_strchr("di", field -> specifier) != 0)
-			prefix_length = 1;
-	}
 	if (field -> specifier == 'c' && ft_strlen(result) == 0)
 	{
 		write(1, "\0", 1);
-		return (0);
-	}
-	ft_putstr(result + prefix_length);
-	return (prefix_length);
+		return ;
+	}	
+	ft_putstr(result + prefix_len(field, result));
 }
 
-static int	print_prefix(t_field *field, char *result)
+static int	print_prefix(t_field *field, char *result) //출력한 prefix 길이 반환
 {
 	char	sp;
 
@@ -132,20 +121,36 @@ static int	print_prefix(t_field *field, char *result)
 	else if (sp == 'd' || sp == 'i')
 	{
 		if (result[0] == '-')
+		{
 			write(1, result, 1);
+			return (1);
+		}
 		else if (result[0] == '+')
 		{
 			if (field -> flag_plus)
 				write (1, result, 1);
 			else if (field -> flag_blank)
 				write(1, " ", 1);
+			if (field -> flag_plus || field -> flag_blank)
+				return (1);
 		}
-		return (1);
 	}
 	return (0);
 }
 
 static int	prefix_len(t_field *field, char *result)
+{
+	char	sp;
+
+	sp = field -> specifier;
+	if (sp == 'p' || (sp == 'x' || sp == 'X'))
+		return (2);
+	else if (sp == 'd' || sp == 'i')
+		return (1);
+	return (0);
+}
+
+static int	w_prefix_len(t_field *field, char *result)
 {
 	char	sp;
 
@@ -157,12 +162,8 @@ static int	prefix_len(t_field *field, char *result)
 		if (result[0] == '-')
 			return (1);
 		else if (result[0] == '+')
-		{
-			if (field -> flag_plus)
+			if (field -> flag_plus || field -> flag_blank)
 				return (1);
-			else if (field -> flag_blank)
-				return (1);
-		}
 	}
 	return (0);
 }

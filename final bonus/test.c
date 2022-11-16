@@ -210,8 +210,8 @@ int main()
     printf("%- 10.3d||", 123);
     printf("\n\n"); */
 
-    m = ft_printf("%-5.0i", 0);
+    m = ft_printf("%5x", 52625);
     printf("\n");
-    o = printf("%-5.0i", 0);
+    o = printf("%5x", 52625);
     printf("\n%d %d\n", m, o);
 }
