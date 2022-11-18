@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:57:08 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/12 09:12:18 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:43:13 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 
 int		ft_putstr(char *s);
-int		print_va(va_list *va, char specifier);
+int		print_va(va_list va, char specifier);
 int		format_parser(const char *format, va_list va);
 int		ft_printf(const char *format, ...);
 int		addr_to_hex(void *addr);
