@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:41:37 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/18 17:06:33 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/18 17:47:16 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 {
 	static char	*text;
 	char		*result;
-	char		buff[BUFF_SIZE];
+	char		buff[BUFF_SIZE + 1];
 	int			newline_index;
 	int			read_size;
 
@@ -28,8 +28,8 @@ char	*get_next_line(int fd)
 	newline_index = 0;
 	while (!find_newline(text, &newline_index) && read_size == BUFF_SIZE)
 	{
-		ft_bzero(buff, BUFF_SIZE);
-		read_size = read(fd, buff, BUFF_SIZE - 1);
+		ft_bzero(buff, BUFF_SIZE + 1);
+		read_size = read(fd, buff, BUFF_SIZE);
 		text = ft_strjoin(text, buff);
 	}
 	if (ft_strlen(text) == 0)
