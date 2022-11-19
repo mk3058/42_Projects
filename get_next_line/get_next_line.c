@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:22:52 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/19 23:28:52 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/11/19 23:55:33 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_next_line(int fd)
 	{
 		ft_bzero(buf, BUFFER_SIZE + 1);
 		read_size = read(fd, buf, BUFFER_SIZE);
-		if (!read_size && !ft_strlen(cur_file -> content))
+		if (read_size <= 0 && ! ft_strlen(cur_file -> content))
 		{
 			ft_lstdelone(file_list, cur_file);
 			return (0);
