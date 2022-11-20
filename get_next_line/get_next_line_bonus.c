@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:22:52 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/20 14:28:28 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/20 14:30:06 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-static char	*get_line(char *content, int rd_size);
-static void	*ft_memcpy(void *dst, const void *src, size_t n);
-static void	ft_lstdelone(t_list **file_list, t_list *lst);
+char	*get_line(char *content, int rd_size);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	ft_lstdelone(t_list **file_list, t_list *lst);
 
 char	*get_next_line(int fd)
 {
@@ -42,7 +42,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-static char	*get_line(char *content, int rd_size)
+char	*get_line(char *content, int rd_size)
 {
 	int		i;
 	int		line_size;
@@ -71,7 +71,7 @@ static char	*get_line(char *content, int rd_size)
 	return (line);
 }
 
-static void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
 
@@ -86,7 +86,7 @@ static void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-static void	ft_lstdelone(t_list **file_list, t_list *lst)
+void	ft_lstdelone(t_list **file_list, t_list *lst)
 {
 	t_list	*pre;
 	t_list	*tmp;
