@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:22:52 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/20 14:28:28 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:18:47 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*get_next_line(int fd)
 	int				rd_size;
 
 	cur_file = get_list(&file_list, fd);
+	if (cur_file == 0)
+		return (NULL);
 	rd_size = BUFFER_SIZE;
 	line = cur_file -> content;
 	while (line == cur_file -> content)
