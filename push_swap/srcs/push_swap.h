@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:45:28 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/28 17:25:35 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:45:43 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,8 @@
 # include "./libft/libft.h"
 # include <stdlib.h> /////////////
 # include <stdio.h> /////////////////////////
+
+void	print_err(void);
+void	arguments_check(int argc, char **argv);
 
 #endif

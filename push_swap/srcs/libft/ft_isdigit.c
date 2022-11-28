@@ -6,15 +6,22 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:36:54 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/07 14:11:26 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:18:03 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+int	ft_isdigit(char *c)
 {
-	if ('0' <= c && c <= '9')
-		return (1);
-	return (0);
+	int	i;
+
+	i = -1;
+	printf("%s\n", c);
+	while (c[++i])
+	{
+		if (c[i] < '0' || c[i] > '9')
+			return (0);
+	}
+	return (1);
 }
