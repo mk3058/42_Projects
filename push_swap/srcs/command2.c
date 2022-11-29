@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   command2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 16:45:28 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 12:18:52 by minkyuki         ###   ########.fr       */
+/*   Created: 2022/11/29 13:10:36 by minkyuki          #+#    #+#             */
+/*   Updated: 2022/11/29 13:15:19 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include "deque.h"
-# include "./libft/libft.h"
-# include <stdlib.h> /////////////
-# include <stdio.h> /////////////////////////
+void	ra(t_deque *a, t_deque *b)
+{
+	
+}
 
-void	print_err(void);
-void	arguments_check(int argc, char **argv);
+void	rb(t_deque *a, t_deque *b)
+{
+	
+}
 
-#endif
+void	rr(t_deque *a, t_deque *b)
+{
+	
+}
+void	rra(t_deque *a, t_deque *b)
+{
+	
+}
+
+void	rrb(t_deque *a, t_deque *b)
+{
+	
+}

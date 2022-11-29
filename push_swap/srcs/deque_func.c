@@ -6,13 +6,13 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/28 17:20:01 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:53:40 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "deque.h"
 
-void	append_head(t_deque *deque, t_node *node)
+void	push_head(t_deque *deque, t_node *node)
 {
 	if (!deque || !node)
 		return ;
@@ -29,7 +29,7 @@ void	append_head(t_deque *deque, t_node *node)
 	}
 }
 
-void	append_tail(t_deque *deque, t_node *node)
+void	push_tail(t_deque *deque, t_node *node)
 {
 	if (!deque || !node)
 		return ;
@@ -72,4 +72,13 @@ int	pop_tail(t_deque *deque)
 	deque -> tail = cur -> prev;
 	free(cur);
 	return (data);
+}
+
+void	swap_data(t_node *a, t_node *b)
+{
+	int	tmp;
+
+	tmp = a -> data;
+	a -> data = b -> data;
+	b -> data = tmp;
 }

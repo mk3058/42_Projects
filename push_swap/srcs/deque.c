@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:28:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/28 16:32:51 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:02:02 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,19 @@ void	free_deque(t_deque *deque)
 		deque -> head = tmp;
 	}
 	free(deque);
+}
+
+int	deque_size(t_deque *deque)
+{
+	int		i;
+	t_node	tmp;
+
+	i = 0;
+	tmp = deque -> head;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp -> next;
+	}
+	return (i);
 }

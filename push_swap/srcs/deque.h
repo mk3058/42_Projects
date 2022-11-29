@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:24:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/28 16:24:06 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:02:20 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ typedef struct s_deque
 
 t_deque	*create_deque(void);
 t_node	*create_node(int data);
-void	append_head(t_deque *deque, t_node *node);
-void	append_tail(t_deque *deque, t_node *node);
+void	push_head(t_deque *deque, t_node *node);
+void	push_tail(t_deque *deque, t_node *node);
 int		pop_head(t_deque *deque);
 int		pop_tail(t_deque *deque);
 void	free_deque(t_deque *deque);
+void	swap_data(t_node *a, t_node *b);
+int		deque_size(t_deque *deque);
 
 #endif

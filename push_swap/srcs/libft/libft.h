@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:30:55 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/28 18:43:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:38:15 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_list
 }	t_list;
 
 int		ft_isalpha(int c);
-int		ft_isdigit(char *c);
+int		ft_isdigit(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isalnum(int c);
@@ -41,7 +41,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-long long	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
