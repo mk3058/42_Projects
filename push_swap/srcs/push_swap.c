@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:40:50 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 11:49:36 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:46:34 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@ int	main(int argc, char **argv)
 {
 	t_deque	*a;
 	t_deque	*b;
-	int		i;
 
-	arguments_check(argc, argv);
 	a = create_deque();
 	b = create_deque();
-	i = 0;
-	while (++i < argc)
-		push_tail(a, create_node(ft_atoi(argv[i])));
+	get_arguments(argc, argv, a, b);
 
 	while(a -> head)
 	{

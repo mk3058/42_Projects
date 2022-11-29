@@ -1,40 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:02:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 13:15:17 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:46:08 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
 
-void	arguments_check(int argc, char **argv, t_deque *a, t_deque *b)
+static long long	my_atoi(const char *str, t_deque *a, t_deque *b);
+static int			dup_check(t_deque *a);
+
+void	get_arguments(int argc, char **argv, t_deque *a, t_deque *b)
 {
 	int			i;
 	long long	num;
+	char		**res;
 
 	i = 0;
 	if (argc > 2)
 	{
 		while (++i < argc)
-		{
-			
-		}
+			push_tail(a, create_node(my_atoi(argv[i], a, b)));
 	}
 	else if (argc == 2)
 	{
-
+		res = ft_split(argv[1], ' ');
+		while (res[i])
+		{
+			push_tail(a, create_node(my_atoi(res[i], a, b)));
+			i++;
+		}
+		dealloc(res, i);
 	}
 	else
-		print_err();
+		exit_err(a, b);
+	if (dup_check(a))
+		exit_err(a, b);
 }
 
-static long long	ft_atoi(const char *str, t_deque *a, t_deque *b)
+static int	dup_check(t_deque *a)
+{
+	t_node	*tmp1;
+	t_node	*tmp2;
+
+	tmp1 = a -> head;
+	while (tmp1)
+	{
+		tmp2 = tmp1 -> next;
+		while (tmp2)
+		{
+			if ((tmp1 -> data) == (tmp2 -> data))
+				return (1);
+			tmp2 = tmp2 -> next;
+		}
+		tmp1 = tmp1 -> next;
+	}
+	return (0);
+}
+
+static long long	my_atoi(const char *str, t_deque *a, t_deque *b)
 {
 	int			sign;
 	int			i;
