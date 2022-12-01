@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command2.c                                         :+:      :+:    :+:   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 13:10:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 13:15:19 by minkyuki         ###   ########.fr       */
+/*   Created: 2022/12/01 12:18:21 by minkyuki          #+#    #+#             */
+/*   Updated: 2022/12/01 12:18:40 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_deque *a, t_deque *b)
+void	exit_err(t_deque *a, t_deque *b)
 {
-	
-}
-
-void	rb(t_deque *a, t_deque *b)
-{
-	
-}
-
-void	rr(t_deque *a, t_deque *b)
-{
-	
-}
-void	rra(t_deque *a, t_deque *b)
-{
-	
-}
-
-void	rrb(t_deque *a, t_deque *b)
-{
-	
+	ft_putstr_fd("Error\n", 1);
+	if (a && b)
+	{
+		free_deque(a);
+		free_deque(b);
+	}
+	exit(EXIT_FAILURE);
 }

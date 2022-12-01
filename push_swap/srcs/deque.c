@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:28:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 18:27:50 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:14:35 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_node	*create_node(int data)
 	new_node -> data = data;
 	new_node -> next = NULL;
 	new_node -> prev = NULL;
+	new_node -> cnt = 0;
 	if (!new_node)
 		return (NULL);
 	return (new_node);

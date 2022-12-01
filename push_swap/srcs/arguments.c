@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:02:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 18:46:08 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/01 15:39:49 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,26 @@
 
 static long long	my_atoi(const char *str, t_deque *a, t_deque *b);
 static int			dup_check(t_deque *a);
+static int			mark_cnt(t_deque *a);
 
 void	get_arguments(int argc, char **argv, t_deque *a, t_deque *b)
 {
-	int			i;
-	long long	num;
-	char		**res;
+	int	i;
 
-	i = 0;
-	if (argc > 2)
+	i = -1;
+	if (argc == 2)
+		argv = ft_split(argv[1], ' ');
+	else if (argc > 2)
+		argv = argv + 1;
+	if (argc > 1)
 	{
-		while (++i < argc)
+		while (argv[++i])
 			push_tail(a, create_node(my_atoi(argv[i], a, b)));
+		if (argc == 2)
+			dealloc(argv, i);
 	}
-	else if (argc == 2)
-	{
-		res = ft_split(argv[1], ' ');
-		while (res[i])
-		{
-			push_tail(a, create_node(my_atoi(res[i], a, b)));
-			i++;
-		}
-		dealloc(res, i);
-	}
-	else
+	if (argc < 2 || mark_cnt(a))
 		exit_err(a, b);
-	if (dup_check(a))
-		exit_err(a, b);
-}
-
-static int	dup_check(t_deque *a)
-{
-	t_node	*tmp1;
-	t_node	*tmp2;
-
-	tmp1 = a -> head;
-	while (tmp1)
-	{
-		tmp2 = tmp1 -> next;
-		while (tmp2)
-		{
-			if ((tmp1 -> data) == (tmp2 -> data))
-				return (1);
-			tmp2 = tmp2 -> next;
-		}
-		tmp1 = tmp1 -> next;
-	}
-	return (0);
 }
 
 static long long	my_atoi(const char *str, t_deque *a, t_deque *b)
@@ -92,13 +65,31 @@ static long long	my_atoi(const char *str, t_deque *a, t_deque *b)
 	return (result * sign);
 }
 
-void	exit_err(t_deque *a, t_deque *b)
+static int	mark_cnt(t_deque *a)
 {
-	ft_putstr_fd("Error\n", 1);
-	if (a && b)
+	t_node	*head;
+	t_node	*cur;
+	int		cnt;
+	int		dup;
+
+	cur = a -> head;
+	while (cur)
 	{
-		free_deque(a);
-		free_deque(b);
+		head = a -> head;
+		cnt = 1;
+		dup = 0;
+		while (head)
+		{
+			if (head -> data < cur -> data)
+				cnt++;
+			if (head -> data == cur -> data)
+				dup++;
+			head = head -> next;
+		}
+		if (dup != 1)
+			return (1);
+		cur -> cnt = cnt;
+		cur = cur -> next;
 	}
-	exit(EXIT_FAILURE);
+	return (0);
 }

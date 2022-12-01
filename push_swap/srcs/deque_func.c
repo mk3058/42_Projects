@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 18:27:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/01 17:21:59 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,19 @@ int	pop_head(t_deque *deque)
 
 	cur = deque -> head;
 	data = cur -> data;
-	if (cur -> next)
-		cur -> next -> prev = NULL;
-	deque -> head = cur -> next;
-	free(cur);
+	if (deque_size(deque) != 1)
+	{	
+		if (cur -> next)
+			cur -> next -> prev = NULL;
+		deque -> head = cur -> next;
+		free(cur);
+	}
+	else
+	{
+		free(cur);
+		deque -> head = NULL;
+		deque -> tail = NULL;
+	}
 	return (data);
 }
 
@@ -67,10 +76,19 @@ int	pop_tail(t_deque *deque)
 
 	cur = deque -> tail;
 	data = cur -> data;
-	if (cur -> prev)
-		cur -> prev -> next = NULL;
-	deque -> tail = cur -> prev;
-	free(cur);
+	if (deque_size(deque) != 1)
+	{
+		if (cur -> prev)
+			cur -> prev -> next = NULL;
+		deque -> tail = cur -> prev;
+		free(cur);
+	}
+	else
+	{
+		free(cur);
+		deque -> head = NULL;
+		deque -> tail = NULL;
+	}
 	return (data);
 }
 
@@ -81,4 +99,7 @@ void	swap_data(t_node *a, t_node *b)
 	tmp = a -> data;
 	a -> data = b -> data;
 	b -> data = tmp;
+	tmp = a -> cnt;
+	a -> cnt = b -> cnt;
+	b -> cnt = tmp;
 }

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:24:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 13:02:20 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/01 12:52:50 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_node
 {
 	int				data;
+	int				cnt;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;

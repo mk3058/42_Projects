@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:57:03 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/29 13:10:22 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:57:03 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,80 @@
 
 void	sa(t_deque *a, t_deque *b)
 {
+	int	cnt;
+
 	if (deque_size(a) > 1)
 	{
 		ft_putstr_fd("sa\n", 1);
 		swap_data(a -> head, a -> head -> next);
+		cnt = a -> head -> cnt;
+		a -> head -> cnt = a -> head -> next -> cnt;
+		a -> head -> next -> cnt = cnt;
 	}
 }
 
 void	sb(t_deque *a, t_deque *b)
 {
+	int	cnt;
+
 	if (deque_size(b) > 1)
 	{
 		ft_putstr_fd("sb\n", 1);
 		swap_data(b -> head, b -> head -> next);
+		cnt = b -> head -> cnt;
+		b -> head -> cnt = b -> head -> next -> cnt;
+		b -> head -> next -> cnt = cnt;
 	}
 }
 
 void	ss(t_deque *a, t_deque *b)
 {
+	int	cnt;
+
 	if (deque_size(a) > 1 && deque_size(b) > 1)
 	{
 		ft_putstr_fd("ss\n", 1);
 		swap_data(a -> head, a -> head -> next);
+		cnt = a -> head -> cnt;
+		a -> head -> cnt = a -> head -> next -> cnt;
+		a -> head -> next -> cnt = cnt;
 		swap_data(b -> head, b -> head -> next);
+		cnt = b -> head -> cnt;
+		b -> head -> cnt = b -> head -> next -> cnt;
+		b -> head -> next -> cnt = cnt;
 	}
 }
 
 void	pa(t_deque *a, t_deque *b)
 {
-	int	data;
+	t_node	*new_node;
+	int		data;
+	int		cnt;
 
 	if (deque_size(b) > 0)
 	{
 		ft_putstr_fd("pa\n", 1);
-		data = pop_haed(b);
-		push_head(a, create_node(data));
+		cnt = b -> head -> cnt;
+		data = pop_head(b);
+		new_node = create_node(data);
+		new_node -> cnt = cnt;
+		push_head(a, new_node);
 	}
 }
 
 void	pb(t_deque *a, t_deque *b)
 {
-	int	data;
+	t_node	*new_node;
+	int		data;
+	int		cnt;
 
 	if (deque_size(a) > 0)
 	{
 		ft_putstr_fd("pb\n", 1);
-		data = pop_haed(a);
-		push_head(b, create_node(data));
+		cnt = a -> head -> cnt;
+		data = pop_head(a);
+		new_node = create_node(data);
+		new_node -> cnt = cnt;
+		push_head(b, new_node);
 	}
 }
