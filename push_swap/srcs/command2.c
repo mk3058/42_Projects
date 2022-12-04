@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 13:10:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/01 15:30:45 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:40:02 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	rr(t_deque *a, t_deque *b)
 	int	cnt;
 
 	ft_putstr_fd("rr\n", 1);
-	ft_putstr_fd("ra\n", 1);
 	cnt = a -> head -> cnt;
 	data = pop_head(a);
 	push_tail(a, create_node(data));

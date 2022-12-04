@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:40:50 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/04 10:52:19 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/04 14:01:51 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@ int	main(int argc, char **argv)
 {
 	t_deque	*a;
 	t_deque	*b;
-	int	*req_cmd;
+	int		*target;
 
 	a = create_deque();
 	b = create_deque();
 	get_arguments(argc, argv, a, b);
 	devide(a, b);
-	req_cmd = count_cmd(a, b);
+	while (b -> head)
+	{
+		target = count_cmd(a, b);
+		sort(a, b, target);
+		free(target);
+	}
+	return (0);
 }
 
 static void	devide(t_deque *a, t_deque *b)
