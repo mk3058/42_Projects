@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:40:50 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/04 14:01:51 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:26:17 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	devide(t_deque *a, t_deque *b);
 static void	get_pivot(int *pivot, t_deque *a);
+static void	rotate(t_deque *a, t_deque *b);
 
 // input 중간에 문자열 있을 경우 처리 필요 1 2 3 "4 5" 6
 int	main(int argc, char **argv)
@@ -26,12 +27,15 @@ int	main(int argc, char **argv)
 	b = create_deque();
 	get_arguments(argc, argv, a, b);
 	devide(a, b);
+	pa(a, b);
 	while (b -> head)
 	{
 		target = count_cmd(a, b);
 		sort(a, b, target);
 		free(target);
 	}
+	rotate(a, b);
+	//print_deque(a);
 	return (0);
 }
 
@@ -71,4 +75,30 @@ static void	get_pivot(int *pivot, t_deque *a)
 	deq_size = deque_size(a);
 	pivot[0] = (int)((double)deq_size / 3 + 0.5);
 	pivot[1] = (int)(((double)deq_size / 3) * 2 + 0.5);
+}
+
+static void	rotate(t_deque *a, t_deque *b)
+{
+	int		ind;
+	int		deq_size;
+	t_node	*tmp;
+
+	ind = 0;
+	tmp = a -> head;
+	deq_size = deque_size(a);
+	while (tmp -> cnt != 1)
+	{
+		ind++;
+		tmp = tmp -> next;
+	}
+	if (ind <= deq_size / 2)
+	{
+		while (a -> head -> cnt != 1)
+			ra(a, b);
+	}
+	else
+	{
+		while (a -> head -> cnt != 1)
+			rra(a, b);
+	}
 }

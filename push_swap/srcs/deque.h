@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deque.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:24:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/01 12:52:50 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:55:37 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEQUE_H
 
 # include <stdlib.h>
+# include "./libft/libft.h"
 
 typedef struct s_node
 {
@@ -38,5 +39,6 @@ int		pop_tail(t_deque *deque);
 void	free_deque(t_deque *deque);
 void	swap_data(t_node *a, t_node *b);
 int		deque_size(t_deque *deque);
+void	print_deque(t_deque *deque);
 
 #endif

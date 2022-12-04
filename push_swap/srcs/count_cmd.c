@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 08:27:36 by minkyu            #+#    #+#             */
-/*   Updated: 2022/12/04 14:36:19 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:03:13 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,23 @@ int	*count_cmd(t_deque *a, t_deque *b)
 	int	min;
 	int	i;
 
-	i = -1;
+	i = 0;
 	b_size = deque_size(b);
 	cmd_num = malloc(sizeof(int) * b_size);
-	target = malloc(sizeof(int) * 2);
+	target = ft_calloc(2, sizeof(int));
 	if (!cmd_num)
 		return (NULL);
 	target[0] = req_cmd_a(a -> head, b -> head, deque_size(a), cmd_num);
 	req_cmd_b(a -> head, b -> head, b_size, cmd_num);
-	min = -1;
+	min = cmd_num[0];
 	while (++i < b_size)
+	{
 		if (min > cmd_num[i])
+		{
+			min = cmd_num[i];
 			target[1] = i;
+		}
+	}
 	free(cmd_num);
 	return (target);
 }

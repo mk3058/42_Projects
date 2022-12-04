@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:37:37 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/04 14:33:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:15:50 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,27 @@ void	sort(t_deque *a, t_deque *b, int *target)
 		rrr_first(a, b, target);
 	else
 		other(a, b, target);
+	pa(a, b);
 }
 
 static void	rr_first(t_deque *a, t_deque *b, int *target)
 {
-	while (target[0] >= 0 && target[1] >= 0)
+	while (target[0] > 0 && target[1] > 0)
 	{
 		rr(a, b);
 		target[0]--;
 		target[1]--;
 	}
-	while (target[0] >= 0)
+	while (target[0] > 0)
 	{
 		ra(a, b);
 		target[0]--;
 	}
-	while (target[1] >= 0)
+	while (target[1] > 0)
 	{
 		rb(a, b);
 		target[1]--;
 	}
-	pb(a, b);
 }
 
 static void	rrr_first(t_deque *a, t_deque *b, int *target)
@@ -75,7 +75,6 @@ static void	rrr_first(t_deque *a, t_deque *b, int *target)
 		rrb(a, b);
 		target[1]++;
 	}
-	pb(a, b);
 }
 
 static void	other(t_deque *a, t_deque *b, int *target)
@@ -87,7 +86,7 @@ static void	other(t_deque *a, t_deque *b, int *target)
 	b_size = deque_size(b);
 	if (target[0] <= (a_size / 2))
 	{
-		while (target[0]-- >= 0)
+		while (target[0]-- > 0)
 			ra(a, b);
 	}
 	else
@@ -97,7 +96,7 @@ static void	other(t_deque *a, t_deque *b, int *target)
 	}
 	if (target[1] <= (b_size / 2))
 	{
-		while (target[1]-- >= 0)
+		while (target[1]-- > 0)
 			rb(a, b);
 	}
 	else

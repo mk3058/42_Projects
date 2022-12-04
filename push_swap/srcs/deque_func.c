@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deque_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/01 17:21:59 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:13:07 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	pop_head(t_deque *deque)
 
 	cur = deque -> head;
 	data = cur -> data;
-	if (deque_size(deque) != 1)
+	if (deque_size(deque) > 1)
 	{	
 		if (cur -> next)
 			cur -> next -> prev = NULL;
@@ -76,7 +76,7 @@ int	pop_tail(t_deque *deque)
 
 	cur = deque -> tail;
 	data = cur -> data;
-	if (deque_size(deque) != 1)
+	if (deque_size(deque) > 1)
 	{
 		if (cur -> prev)
 			cur -> prev -> next = NULL;

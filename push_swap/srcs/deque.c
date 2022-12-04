@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deque.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:28:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/01 14:14:35 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:03:38 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,17 @@ int	deque_size(t_deque *deque)
 		tmp = tmp -> next;
 	}
 	return (i);
+}
+
+void	print_deque(t_deque *deque)
+{
+	t_node	*tmp;
+
+	tmp = deque -> head;
+	while (tmp)
+	{
+		ft_putstr_fd(ft_itoa(tmp -> data), 1);
+		ft_putstr_fd("\n", 1);
+		tmp = tmp -> next;
+	}
 }
