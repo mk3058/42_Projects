@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:45:28 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/04 14:33:12 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:31:31 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 # include <stdio.h> /////////////////////////
 
+void	alloc_check(t_deque *a, t_deque *b, void *alloc);
 void	sort(t_deque *a, t_deque *b, int *target);
 void	get_arguments(int argc, char **argv, t_deque *a, t_deque *b);
 void	exit_err(t_deque *a, t_deque *b);
@@ -33,6 +34,6 @@ void	rr(t_deque *a, t_deque *b);
 void	rra(t_deque *a, t_deque *b);
 void	rrb(t_deque *a, t_deque *b);
 void	rrr(t_deque *a, t_deque *b);
-int  *count_cmd(t_deque *a, t_deque *b);
+int		*count_cmd(t_deque *a, t_deque *b);
 
 #endif

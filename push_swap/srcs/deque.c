@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:28:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/04 18:03:38 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/05 17:15:54 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ int	deque_size(t_deque *deque)
 	return (i);
 }
 
+int	get_cnt(t_deque *deque, int index)
+{
+	int		data;
+	int		i;
+	t_node	*tmp;
+
+	i = -1;
+	tmp = deque -> head;
+	while (++i < index)
+		tmp = tmp -> next;
+	return (tmp -> cnt);
+}
+
+#include <stdio.h>
 void	print_deque(t_deque *deque)
 {
 	t_node	*tmp;
@@ -73,8 +87,7 @@ void	print_deque(t_deque *deque)
 	tmp = deque -> head;
 	while (tmp)
 	{
-		ft_putstr_fd(ft_itoa(tmp -> data), 1);
-		ft_putstr_fd("\n", 1);
+		printf("data : %d , cnt : %d\n", tmp -> data, tmp -> cnt);
 		tmp = tmp -> next;
 	}
 }

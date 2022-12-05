@@ -3,7 +3,7 @@ CC = cc
 CFALGS = -Wall -Wextra -Werror
 INC = -I ./libft/libft.h -I ./deque.h -I ./push_swap.c
 SRCS_MANDATORY = arguments.c command.c command2.c command3.c \
-deque.c deque_func.c error_handler.c push_swap.c sort.c
+deque.c deque_func.c error_handler.c push_swap.c sort.c count_cmd.c
 OBJS_MANDATORY = $(SRCS_MANDATORY:.c=.o)
 #SRCS_BONUS =
 #OBJS_BONUS = $(SRCS_BONUS:.c=.o)

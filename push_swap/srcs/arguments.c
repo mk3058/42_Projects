@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:02:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/01 15:39:49 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:58:09 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	get_arguments(int argc, char **argv, t_deque *a, t_deque *b)
 	int	i;
 
 	i = -1;
+	if (argc < 2)
+		exit(EXIT_FAILURE);
 	if (argc == 2)
 		argv = ft_split(argv[1], ' ');
 	else if (argc > 2)

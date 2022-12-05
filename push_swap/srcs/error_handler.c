@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 12:18:21 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/01 12:18:40 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:31:19 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,10 @@ void	exit_err(t_deque *a, t_deque *b)
 		free_deque(b);
 	}
 	exit(EXIT_FAILURE);
+}
+
+void	alloc_check(t_deque *a, t_deque *b, void *alloc)
+{
+	if (!alloc)
+		exit_err(a, b);
 }
