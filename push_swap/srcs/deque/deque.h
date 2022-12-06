@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:24:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/06 16:45:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:09:06 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DEQUE_H
 
 # include <stdlib.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_node
 {
