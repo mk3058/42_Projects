@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 17:49:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/06 18:24:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:10:51 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../deque/deque.h"
-# include "../get_next_line/get_next_line.h"
-# include "../push_swap.h"
+#include "../deque/deque.h"
+#include "../get_next_line/get_next_line.h"
+#include "../push_swap.h"
 
 static void	sort_cmd(t_deque *a, t_deque *b, char *cmd);
+static void	rm_nl(char *str);
 
 int	main(int argc, char **argv)
 {
@@ -28,7 +29,9 @@ int	main(int argc, char **argv)
 	cmd = get_next_line(0);
 	while (cmd)
 	{
+		rm_nl(cmd);
 		sort_cmd(a, b, cmd);
+		free(cmd);
 		cmd = get_next_line(0);
 	}
 	if (is_asc(a) && !deque_size(b))
@@ -64,4 +67,17 @@ static void	sort_cmd(t_deque *a, t_deque *b, char *cmd)
 		rrr(a, b);
 	else
 		exit_err(a, b);
+}
+
+static void	rm_nl(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			str[i] = 0;
+		i++;
+	}
 }
