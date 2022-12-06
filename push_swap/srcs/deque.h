@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deque.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:24:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/05 11:39:25 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/06 16:45:29 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		pop_tail(t_deque *deque);
 void	free_deque(t_deque *deque);
 void	swap_data(t_node *a, t_node *b);
 int		deque_size(t_deque *deque);
-void	print_deque(t_deque *deque);
 int		get_cnt(t_deque *deque, int index);
 
 #endif

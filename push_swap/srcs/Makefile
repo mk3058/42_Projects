@@ -3,7 +3,7 @@ CC = cc
 CFALGS = -Wall -Wextra -Werror
 INC = -I ./libft/libft.h -I ./deque.h -I ./push_swap.c
 SRCS_MANDATORY = arguments.c command.c command2.c command3.c \
-deque.c deque_func.c error_handler.c push_swap.c sort.c count_cmd.c
+deque.c deque_func.c error_handler.c push_swap.c sort.c count_cmd.c manual_sort.c func.c
 OBJS_MANDATORY = $(SRCS_MANDATORY:.c=.o)
 #SRCS_BONUS =
 #OBJS_BONUS = $(SRCS_BONUS:.c=.o)
@@ -33,10 +33,12 @@ ft :
 clean :
 	rm -f $(OBJS_MANDATORY)
 	rm -f $(OBJS_BONUS)
+	rm -f libft.a
 
 fclean : clean
 	rm -f all
 	rm -f bonus
+	rm -f libft.a
 	rm -f $(NAME)
 
 re : fclean all

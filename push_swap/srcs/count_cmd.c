@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 08:27:36 by minkyu            #+#    #+#             */
-/*   Updated: 2022/12/05 17:39:11 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:02:29 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	req_cmd_a(t_node *a_tmp, t_node *b_tmp, int a_size, int *cmd);
 static void	req_cmd_b(t_node *a_tmp, t_node *b_tmp, int a_size, int *cmd);
 static int	find_a_ind(t_deque *a, t_deque *b, int *target, int *cmd_num);
-static int	ft_abs(int num);
 
 int	*count_cmd(t_deque *a, t_deque *b)
 {
@@ -129,11 +128,4 @@ static int	find_a_ind(t_deque *a, t_deque *b, int *target, int *cmd_num)
 	}
 	free(cmd_num);
 	return (target_ind);
-}
-
-static int	ft_abs(int num)
-{
-	if (num < 0)
-		return (-1 * num);
-	return (num);
 }

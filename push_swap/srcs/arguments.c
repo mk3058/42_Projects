@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:02:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/05 17:58:09 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:13:34 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
 static long long	my_atoi(const char *str, t_deque *a, t_deque *b);
 static int			dup_check(t_deque *a);
@@ -19,24 +18,31 @@ static int			mark_cnt(t_deque *a);
 
 void	get_arguments(int argc, char **argv, t_deque *a, t_deque *b)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**num;
 
-	i = -1;
+	i = 0;
 	if (argc < 2)
-		exit(EXIT_FAILURE);
-	if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	else if (argc > 2)
-		argv = argv + 1;
-	if (argc > 1)
+		exit_free(a, b);
+	else
 	{
-		while (argv[++i])
-			push_tail(a, create_node(my_atoi(argv[i], a, b)));
-		if (argc == 2)
-			dealloc(argv, i);
+		while (++i < argc)
+		{
+			j = 0;
+			num = ft_split(argv[i], ' ');
+			while (num[j])
+			{
+				push_tail(a, create_node(my_atoi(num[j], a, b)));
+				j++;
+			}
+			dealloc(num, j);
+		}
+		if (!deque_size(a))
+			exit_free(a, b);
+		if (mark_cnt(a))
+			exit_err(a, b);
 	}
-	if (argc < 2 || mark_cnt(a))
-		exit_err(a, b);
 }
 
 static long long	my_atoi(const char *str, t_deque *a, t_deque *b)

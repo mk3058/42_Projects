@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deque.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:28:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/05 17:15:54 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/06 16:45:21 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,4 @@ int	get_cnt(t_deque *deque, int index)
 	while (++i < index)
 		tmp = tmp -> next;
 	return (tmp -> cnt);
-}
-
-#include <stdio.h>
-void	print_deque(t_deque *deque)
-{
-	t_node	*tmp;
-
-	tmp = deque -> head;
-	while (tmp)
-	{
-		printf("data : %d , cnt : %d\n", tmp -> data, tmp -> cnt);
-		tmp = tmp -> next;
-	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:40:50 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/05 18:09:41 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:00:55 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	devide(t_deque *a, t_deque *b);
 static void	get_pivot(int *pivot, t_deque *a);
 static void	rotate(t_deque *a, t_deque *b);
 
-// input 중간에 문자열 있을 경우 처리 필요 1 2 3 "4 5" 6
 int	main(int argc, char **argv)
 {
 	t_deque	*a;
@@ -26,16 +25,20 @@ int	main(int argc, char **argv)
 	a = create_deque();
 	b = create_deque();
 	get_arguments(argc, argv, a, b);
-	devide(a, b);
-	pa(a, b);
-	while (b -> head)
+	if (deque_size(a) <= 5 && !is_asc(a))
+		manual_sort(a, b);
+	else if (deque_size(a) > 5 && !is_asc(a))
 	{
-		target = count_cmd(a, b);
-		sort(a, b, target);
-		free(target);
+		devide(a, b);
+		pa(a, b);
+		while (b -> head)
+		{
+			target = count_cmd(a, b);
+			sort(a, b, target);
+			free(target);
+		}
+		rotate(a, b);
 	}
-	rotate(a, b);
-	print_deque(a); ////////////
 	free_deque(a);
 	free_deque(b);
 	return (0);
