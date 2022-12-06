@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 17:49:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/06 22:10:51 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/06 22:37:19 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	main(int argc, char **argv)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
+	free_deque(a);
+	free_deque(b);
 	return (0);
 }
 
