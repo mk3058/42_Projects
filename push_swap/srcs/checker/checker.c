@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 17:49:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/06 22:37:19 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/07 21:28:14 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 static void	sort_cmd(t_deque *a, t_deque *b, char *cmd);
 static void	rm_nl(char *str);
+static int	is_equal(char *str1, char *str2);
 
 int	main(int argc, char **argv)
 {
@@ -45,27 +46,27 @@ int	main(int argc, char **argv)
 
 static void	sort_cmd(t_deque *a, t_deque *b, char *cmd)
 {
-	if (!ft_strncmp(cmd, "sa", ft_strlen(cmd)))
+	if (is_equal(cmd, "sa"))
 		sa(a, b);
-	else if (!ft_strncmp(cmd, "sb", ft_strlen(cmd)))
+	else if (is_equal(cmd, "sb"))
 		sb(a, b);
-	else if (!ft_strncmp(cmd, "ss", ft_strlen(cmd)))
+	else if (is_equal(cmd, "ss"))
 		ss(a, b);
-	else if (!ft_strncmp(cmd, "pa", ft_strlen(cmd)))
+	else if (is_equal(cmd, "pa"))
 		pa(a, b);
-	else if (!ft_strncmp(cmd, "pb", ft_strlen(cmd)))
+	else if (is_equal(cmd, "pb"))
 		pb(a, b);
-	else if (!ft_strncmp(cmd, "ra", ft_strlen(cmd)))
+	else if (is_equal(cmd, "ra"))
 		ra(a, b);
-	else if (!ft_strncmp(cmd, "rb", ft_strlen(cmd)))
+	else if (is_equal(cmd, "rb"))
 		rb(a, b);
-	else if (!ft_strncmp(cmd, "rr", ft_strlen(cmd)))
+	else if (is_equal(cmd, "rr"))
 		rr(a, b);
-	else if (!ft_strncmp(cmd, "rra", ft_strlen(cmd)))
+	else if (is_equal(cmd, "rra"))
 		rra(a, b);
-	else if (!ft_strncmp(cmd, "rrb", ft_strlen(cmd)))
+	else if (is_equal(cmd, "rrb"))
 		rrb(a, b);
-	else if (!ft_strncmp(cmd, "rrr", ft_strlen(cmd)))
+	else if (is_equal(cmd, "rrr"))
 		rrr(a, b);
 	else
 		exit_err(a, b);
@@ -82,4 +83,21 @@ static void	rm_nl(char *str)
 			str[i] = 0;
 		i++;
 	}
+}
+
+static int	is_equal(char *str1, char *str2)
+{
+	int	i;
+	int	diff;
+
+	i = 0;
+	diff = 0;
+	while (str1[i] || str2[i])
+	{
+		diff = str1[i] - str2[i];
+		if (diff != 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }
