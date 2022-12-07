@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 12:36:56 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/06 22:16:17 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/07 20:39:33 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ static void	sort_three(t_deque *a, t_deque *b)
 	}
 	else
 	{
-		if (a -> head -> cnt < a -> head -> next -> cnt)
-			rra(a, b);
-		else
+		if (a -> head -> cnt > a -> head -> next -> cnt)
 		{
 			sa(a, b);
 			rra(a, b);
 		}
+		else
+			rra(a, b);
 	}
 }
 
