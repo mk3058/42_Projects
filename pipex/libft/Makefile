@@ -1,4 +1,4 @@
-CC = cc
+CC = gcc
 CFALGS = -Wall -Wextra -Werror
 INC = ./
 NAME = libft.a

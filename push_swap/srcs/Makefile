@@ -20,13 +20,13 @@ all : $(NAME)
 
 bonus : $(OBJS_BONUS)
 	make ft
-	gcc $(SRCS_BONUS) -L$(LIBFT_DIR) -lft -o my_checker
+	$(CC) $(CFLAGS) $(SRCS_BONUS) -L$(LIBFT_DIR) -lft -o my_checker
 	touch bonus
 	rm -f all
 
 $(NAME) : $(OBJS_MANDATORY)
 	make ft
-	gcc $(SRCS_MANDATORY) -L$(LIBFT_DIR) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(SRCS_MANDATORY) -L$(LIBFT_DIR) -lft -o $(NAME)
 	touch all
 	rm -f bonus
 
