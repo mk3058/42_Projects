@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/11 17:27:36 by minkyuki         ###   ########.fr       */
+/*   Created: 2022/11/19 21:21:55 by minkyu            #+#    #+#             */
+/*   Updated: 2022/11/20 14:28:43 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-# include "./ft_printf/ft_printf.h"
-# include "./libft/libft.h"
-# include <fcntl.h>
-# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
+# include <unistd.h>
 
-# define QUIET 0
-# define PRINT 1
+typedef struct s_file
+{
+	int				fd;
+	char			*content;
+	struct s_file	*next;
+}	t_list;
 
-char	*cmd_path(char	*cmd, char **envp);
-void	exit_err(int mode);
-void	arguments_check(int argc, char **argv);
+char	*get_next_line(int fd);
+t_list	*get_list(t_list **lst, int fd);
+void	ft_bzero(void *s, size_t n);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

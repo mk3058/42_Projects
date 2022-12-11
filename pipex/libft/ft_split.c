@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:48:50 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/18 19:33:05 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/11 16:55:59 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	count_word(char const *s, char c);
 static void	find_next(char const *s, char c, size_t *index, size_t *length);
-static void	dealloc(char **result, int cnt);
 
 char	**ft_split(char const *s, char c)
 {
@@ -83,7 +82,7 @@ static void	find_next(char const *s, char c, size_t *index, size_t *length)
 	}
 }
 
-static void	dealloc(char **result, int cnt)
+void	dealloc(char **result, int cnt)
 {
 	int	i;
 
