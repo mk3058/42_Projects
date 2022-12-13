@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/13 13:08:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:13:51 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 # define QUIET 0
 # define PRINT 1
 
-char	*find_cmd_path(char	*cmd, char **envp);
 void	exit_err(int mode);
+char	*find_cmd_path(char	*cmd, char **envp);
 void	arguments_check(int argc, char **argv);
+void	heredoc(char *limiter);
 
 #endif

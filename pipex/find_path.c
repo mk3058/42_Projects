@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/13 12:15:21 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:06:04 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*find_cmd_path(char	*cmd, char **envp)
 	i = -1;
 	env_path = parse_envp(envp);
 	cmd = ft_strdup(cmd);
-	*(ft_strchr(cmd, ' ')) = '\0';
+	if (ft_strchr(cmd, ' '))
+		*(ft_strchr(cmd, ' ')) = '\0';
 	while (env_path[++i])
 	{
 		file_path = ft_strjoin(env_path[i], cmd);
