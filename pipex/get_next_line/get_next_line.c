@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:22:52 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/21 12:19:11 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/11 23:09:05 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 256
+#endif
 
-char	*get_line(char *content, int rd_size);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	ft_lstdelone(t_list **file_list, t_list *lst);
+static char	*get_line(char *content, int rd_size);
+static void	*ft_memcpy(void *dst, const void *src, size_t n);
+static void	ft_lstdelone(t_gnl_list **file_list, t_gnl_list *lst);
 
 char	*get_next_line(int fd)
 {
-	static t_list	*file_list;
-	t_list			*cur_file;
-	char			buf[BUFFER_SIZE + 1];
-	char			*line;
-	int				rd_size;
+	static t_gnl_list	*file_list;
+	t_gnl_list			*cur_file;
+	char				buf[BUFFER_SIZE + 1];
+	char				*line;
+	int					rd_size;
 
 	cur_file = get_list(&file_list, fd);
 	if (cur_file == 0)
@@ -31,20 +34,20 @@ char	*get_next_line(int fd)
 	line = cur_file -> content;
 	while (line == cur_file -> content)
 	{
-		ft_bzero(buf, BUFFER_SIZE + 1);
+		gl_bzero(buf, BUFFER_SIZE + 1);
 		rd_size = read(fd, buf, BUFFER_SIZE);
-		if ((rd_size == 0 && !ft_strlen(cur_file -> content)) || rd_size < 0)
+		if ((rd_size == 0 && !gl_strlen(cur_file -> content)) || rd_size < 0)
 		{
 			ft_lstdelone(&file_list, cur_file);
 			return (NULL);
 		}
-		cur_file -> content = ft_strjoin(cur_file -> content, buf);
+		cur_file -> content = gl_strjoin(cur_file -> content, buf);
 		line = get_line(cur_file -> content, rd_size);
 	}
 	return (line);
 }
 
-char	*get_line(char *content, int rd_size)
+static char	*get_line(char *content, int rd_size)
 {
 	int		i;
 	int		line_size;
@@ -67,13 +70,13 @@ char	*get_line(char *content, int rd_size)
 	line = malloc(sizeof(char) * line_size + 1);
 	if (line == 0)
 		return (NULL);
-	ft_bzero(line, line_size + 1);
-	ft_strlcat(line, content, line_size + 1);
-	ft_memcpy(content, content + line_size, ft_strlen(content + line_size) + 1);
+	gl_bzero(line, line_size + 1);
+	gl_strlcat(line, content, line_size + 1);
+	ft_memcpy(content, content + line_size, gl_strlen(content + line_size) + 1);
 	return (line);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+static void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
 
@@ -88,10 +91,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-void	ft_lstdelone(t_list **file_list, t_list *lst)
+static void	ft_lstdelone(t_gnl_list **file_list, t_gnl_list *lst)
 {
-	t_list	*pre;
-	t_list	*tmp;
+	t_gnl_list	*pre;
+	t_gnl_list	*tmp;
 
 	if (!lst || !(*file_list))
 		return ;

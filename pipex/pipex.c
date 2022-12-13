@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/11 18:37:30 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:12:38 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	pid = 0;
 	arguments_check(argc, argv);
 	pipe(fd);
-	fork();
+	pid = fork();
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -46,5 +46,7 @@ void	execute_cmd(int argc, char **argv, char **envp, int cnt)
 
 	path = cmd_path(argv[cnt], envp);
 	arg = ft_split(argv[cnt], ' ');
-	execve(path, &arg[1], envp);
+	free(arg[0]);
+	arg[0] = ft_strdup(path);
+	execve(path, arg, envp);
 }

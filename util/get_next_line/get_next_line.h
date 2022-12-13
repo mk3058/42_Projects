@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/11 23:12:15 by minkyu           ###   ########.fr       */
+/*   Created: 2022/11/19 21:21:55 by minkyu            #+#    #+#             */
+/*   Updated: 2022/12/11 23:09:04 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include "./get_next_line/get_next_line.h"
-# include "./ft_printf/ft_printf.h"
-# include "./libft/libft.h"
-# include <fcntl.h>
-# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
+# include <unistd.h>
 
-# define QUIET 0
-# define PRINT 1
+typedef struct s_file
+{
+	int				fd;
+	char			*content;
+	struct s_file	*next;
+}	t_gnl_list;
 
-char	*cmd_path(char	*cmd, char **envp);
-void	exit_err(int mode);
-void	arguments_check(int argc, char **argv);
+char		*get_next_line(int fd);
+t_gnl_list	*get_list(t_gnl_list **lst, int fd);
+void		gl_bzero(void *s, size_t n);
+size_t		gl_strlen(const char *s);
+size_t		gl_strlcat(char *dst, const char *src, size_t dstsize);
+char		*gl_strjoin(char const *s1, char const *s2);
 
 #endif

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:26:58 by minkyu            #+#    #+#             */
-/*   Updated: 2022/11/20 12:10:26 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:09:05 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
-t_list	*get_list(t_list **lst, int fd)
+t_gnl_list	*get_list(t_gnl_list **lst, int fd)
 {
-	t_list	*tmp;
-	t_list	*new;
+	t_gnl_list	*tmp;
+	t_gnl_list	*new;
 
 	tmp = *lst;
 	while (tmp)
@@ -26,7 +26,7 @@ t_list	*get_list(t_list **lst, int fd)
 			break ;
 		tmp = tmp -> next;
 	}
-	new = (t_list *)malloc(sizeof(t_list));
+	new = (t_gnl_list *)malloc(sizeof(t_gnl_list));
 	if (new == 0)
 		return (0);
 	new -> fd = fd;
@@ -39,7 +39,7 @@ t_list	*get_list(t_list **lst, int fd)
 	return (new);
 }
 
-void	ft_bzero(void *s, size_t n)
+void	gl_bzero(void *s, size_t n)
 {
 	size_t	i;
 
@@ -51,7 +51,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-size_t	ft_strlen(const char *s)
+size_t	gl_strlen(const char *s)
 {
 	size_t	size;
 
@@ -63,7 +63,7 @@ size_t	ft_strlen(const char *s)
 	return (size);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t	gl_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	dst_length;
 	size_t	src_length;
@@ -71,8 +71,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 
 	if (!src)
 		return (0);
-	dst_length = (size_t)ft_strlen(dst);
-	src_length = (size_t)ft_strlen(src);
+	dst_length = (size_t)gl_strlen(dst);
+	src_length = (size_t)gl_strlen(src);
 	index = 0;
 	if (dstsize <= dst_length)
 		return (src_length + dstsize);
@@ -87,18 +87,18 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (dst_length + src_length);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gl_strjoin(char const *s1, char const *s2)
 {
 	size_t	tot_size;
 	char	*result;
 
-	tot_size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	tot_size = gl_strlen(s1) + gl_strlen(s2) + 1;
 	result = (char *)malloc(sizeof(char) * tot_size);
 	if (result == 0)
 		return (0);
-	ft_bzero(result, tot_size);
-	ft_strlcat(result, s1, tot_size);
-	ft_strlcat(result, s2, tot_size);
+	gl_bzero(result, tot_size);
+	gl_strlcat(result, s1, tot_size);
+	gl_strlcat(result, s2, tot_size);
 	free((void *)s1);
 	return (result);
 }
