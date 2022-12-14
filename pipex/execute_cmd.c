@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_path.c                                        :+:      :+:    :+:   */
+/*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 12:46:39 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:35:39 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,21 @@
 
 static char	**parse_envp(char **envp);
 static void	free_all(char *cmd, char **env_path);
+static char	*find_cmd_path(char	*cmd, char **envp);
 
-char	*find_cmd_path(char	*cmd, char **envp)
+void	execute_cmd(int argc, char **argv, char **envp, int cnt)
+{
+	char	*path;
+	char	**arg;
+
+	path = find_cmd_path(argv[cnt], envp);
+	arg = ft_split(argv[cnt], ' ');
+	free(arg[0]);
+	arg[0] = ft_strdup(path);
+	execve(path, arg, envp);
+}
+
+static char	*find_cmd_path(char	*cmd, char **envp)
 {
 	char	**env_path;
 	char	*file_path;
@@ -38,7 +51,7 @@ char	*find_cmd_path(char	*cmd, char **envp)
 			free(file_path);
 	}
 	free_all(cmd, env_path);
-	exit_err(PRINT);
+	exit_err("command not found", NULL, cmd);
 	return (NULL);
 }
 

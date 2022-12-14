@@ -6,19 +6,20 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:39:02 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 15:31:23 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:18:04 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	heredoc(char *limiter)
+void	heredoc(int *argc, char ***argv)
 {
 	int		fd;
 	char	*input;
+	char	*limiter;
 
 	fd = open(".heredoc_tmp", O_RDWR | O_TRUNC | O_CREAT, 777);
-	limiter = ft_strjoin(limiter, "\n");
+	limiter = ft_strjoin((*argv)[2], "\n");
 	while (1)
 	{
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
@@ -26,9 +27,14 @@ void	heredoc(char *limiter)
 		if (is_equal(limiter, input))
 			break ;
 		ft_putstr_fd(input, fd);
+		free(input);
 	}
 	free(limiter);
+	free(input);
 	close(fd);
+	*argc = *argc -1;
+	(*argv)[2] = ".heredoc_tmp";
+	(*argv) = (*argv) + 1;
 }
 
 int	is_equal(char *str1, char *str2)

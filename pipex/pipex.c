@@ -6,16 +6,16 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 15:36:56 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:15:17 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void		execute_cmd(int argc, char **argv, char **envp, int cnt);
 static void	set_fd(int argc, char **argv, int **fd, int child_cnt);
 static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd);
 static void	close_fd(int **fd, int proc_cnt, int child_cnt);
+static void	clean(int **fd, int proc_cnt);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -27,18 +27,14 @@ int	main(int argc, char **argv, char **envp)
 	child_cnt = -1;
 	arguments_check(argc, argv);
 	if (is_equal(argv[1], "here_doc"))
-	{
-		heredoc(argv[2]);
-		argc -= 1;
-		argv[2] = ".heredoc_tmp";
-		argv = argv + 1;
-	}
+		heredoc(&argc, &argv);
 	fd = malloc(sizeof(int *) * (argc - 4));
 	pid = fork_proc(argc - 3, &child_cnt, -1, fd);
 	if (pid != 0)
 	{
 		close_fd(fd, argc - 3, -1);
-		waitpid(pid, &statloc, WNOHANG);
+		waitpid(pid, &statloc, 0);
+		clean(fd, argc - 3);
 	}
 	else
 	{
@@ -62,6 +58,7 @@ static void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 	else if (child_cnt == proc_cnt - 1)
 	{
 		dup2(fd[child_cnt - 1][0], STDIN_FILENO);
+		//파일 출력 설정//////////////////////////////////////
 	}
 	else
 	{
@@ -110,14 +107,13 @@ static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
 	return (fork_proc(cmd_cnt, child_cnt, pid, fd));
 }
 
-void	execute_cmd(int argc, char **argv, char **envp, int cnt)
+static void	clean(int **fd, int proc_cnt)
 {
-	char	*path;
-	char	**arg;
+	int	i;
 
-	path = find_cmd_path(argv[cnt], envp);
-	arg = ft_split(argv[cnt], ' ');
-	free(arg[0]);
-	arg[0] = ft_strdup(path);
-	execve(path, arg, envp);
+	i = -1;
+	while (++i < proc_cnt - 1)
+		free(fd[i]);
+	free(fd);
+	unlink(".heredoc_tmp");
 }

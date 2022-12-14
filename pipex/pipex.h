@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 15:02:35 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:33:36 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define PRINT 1
 # define FEWARG 2
 
-void	exit_err(int mode);
-char	*find_cmd_path(char	*cmd, char **envp);
+void	exit_err(char *err_message, char *prefix, char *postfix);
+void	execute_cmd(int argc, char **argv, char **envp, int cnt);
 void	arguments_check(int argc, char **argv);
-void	heredoc(char *limiter);
+void	heredoc(int *argc, char ***argv);
 int		is_equal(char *str1, char *str2);
 
 #endif
