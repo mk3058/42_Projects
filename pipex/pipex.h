@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/13 16:13:51 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:33:09 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	exit_err(int mode);
 char	*find_cmd_path(char	*cmd, char **envp);
 void	arguments_check(int argc, char **argv);
 void	heredoc(char *limiter);
+int		is_equal(char *str1, char *str2);
 
 #endif

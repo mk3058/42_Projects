@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/13 15:06:04 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:46:39 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	**parse_envp(char **envp)
 	i = 0;
 	while (ft_strncmp(envp[i], "PATH", 4))
 		i++;
-	env_path = ft_split(envp[i], ':');
+	env_path = ft_split(envp[i] + 5, ':');
 	i = -1;
 	while (env_path[++i])
 	{

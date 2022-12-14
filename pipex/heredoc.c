@@ -6,13 +6,11 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:39:02 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/13 16:13:58 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:37:11 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-static int	is_equal(char *str1, char *str2);
 
 void	heredoc(char *limiter)
 {
@@ -33,7 +31,7 @@ void	heredoc(char *limiter)
 	close(fd);
 }
 
-static int	is_equal(char *str1, char *str2)
+int	is_equal(char *str1, char *str2)
 {
 	int	i;
 	int	diff;
