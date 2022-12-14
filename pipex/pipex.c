@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 14:36:49 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:36:56 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int	main(int argc, char **argv, char **envp)
 
 	child_cnt = -1;
 	arguments_check(argc, argv);
+	if (is_equal(argv[1], "here_doc"))
+	{
+		heredoc(argv[2]);
+		argc -= 1;
+		argv[2] = ".heredoc_tmp";
+		argv = argv + 1;
+	}
 	fd = malloc(sizeof(int *) * (argc - 4));
 	pid = fork_proc(argc - 3, &child_cnt, -1, fd);
 	if (pid != 0)
@@ -45,10 +52,7 @@ static void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 	int	file_fd;
 	int	proc_cnt;
 
-//	if (is_equal(argv[1], "here_doc"))
-//		file_fd = open(".heredoc_tmp", O_RDONLY);
-//	else
-		file_fd = open(argv[1], O_RDONLY);
+	file_fd = open(argv[1], O_RDONLY);
 	proc_cnt = argc - 3;
 	if (child_cnt == 0)
 	{

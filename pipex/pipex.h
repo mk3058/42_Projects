@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 14:33:09 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:02:35 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # define QUIET 0
 # define PRINT 1
+# define FEWARG 2
 
 void	exit_err(int mode);
 char	*find_cmd_path(char	*cmd, char **envp);

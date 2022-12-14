@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:39:02 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 14:37:11 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:31:23 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	heredoc(char *limiter)
 	int		fd;
 	char	*input;
 
-	fd = open(".heredoc_tmp", O_RDWR | O_CREAT | O_TRUNC, 777);
+	fd = open(".heredoc_tmp", O_RDWR | O_TRUNC | O_CREAT, 777);
 	limiter = ft_strjoin(limiter, "\n");
 	while (1)
 	{
