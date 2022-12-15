@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 15:22:37 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:25:57 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	**parse_envp(char **envp);
 static void	free_all(char *cmd, char **env_path);
 static char	*find_cmd_path(char	*cmd, char **envp);
 
-void	execute_cmd(int argc, char **argv, char **envp, int cnt)
+void	execute_cmd(int argc, char **argv, char **envp, int cnt, int **fd)
 {
 	char	*path;
 	char	**arg;
@@ -25,7 +25,9 @@ void	execute_cmd(int argc, char **argv, char **envp, int cnt)
 	arg = ft_split(argv[cnt], ' ');
 	free(arg[0]);
 	arg[0] = ft_strdup(path);
-	execve(path, arg, envp);
+	set_fd(argc, argv, fd, cnt - 2);
+	if (execve(path, arg, envp) == -1)
+		exit_err(strerror(errno), NULL, NULL);
 }
 
 static char	*find_cmd_path(char	*cmd, char **envp)
@@ -35,8 +37,10 @@ static char	*find_cmd_path(char	*cmd, char **envp)
 	int		i;
 
 	i = -1;
-	env_path = parse_envp(envp);
 	cmd = ft_strdup(cmd);
+	if (access(cmd, R_OK | X_OK) == 0)
+		return (cmd);
+	env_path = parse_envp(envp);
 	if (ft_strchr(cmd, ' '))
 		*(ft_strchr(cmd, ' ')) = '\0';
 	while (env_path[++i])
@@ -44,7 +48,6 @@ static char	*find_cmd_path(char	*cmd, char **envp)
 		file_path = ft_strjoin(env_path[i], cmd);
 		if (access(file_path, R_OK | X_OK) == 0)
 		{
-			printf("%s\n", file_path);
 			free_all(cmd, env_path);
 			return (file_path);
 		}

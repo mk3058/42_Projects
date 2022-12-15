@@ -10,8 +10,8 @@ LIBFT_LIB = libft.a
 
 SRCS_MANDATORY = $(GNL) pipex.c error_handler.c execute_cmd.c heredoc.c file_out.c
 OBJS_MANDATORY = $(SRCS_MANDATORY:.c=.o)
-#SRCS_BONUS = $(GNL)
-#OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+#SRCS_BONUS = 
+#OBJS_BONUS = 
 
 
 all : $(NAME)

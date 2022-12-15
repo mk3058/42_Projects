@@ -6,13 +6,12 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 15:20:27 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:31:14 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	set_fd(int argc, char **argv, int **fd, int child_cnt);
 static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd);
 static void	close_fd(int **fd, int proc_cnt, int child_cnt);
 static void	clean(int **fd, int proc_cnt);
@@ -33,32 +32,35 @@ int	main(int argc, char **argv, char **envp)
 	if (pid != 0)
 	{
 		close_fd(fd, argc - 3, -1);
-		waitpid(pid, &statloc, WNOHANG);
+		waitpid(pid, &statloc, 0);
 		clean(fd, argc - 3);
 	}
 	else
 	{
-		set_fd(argc, argv, fd, child_cnt);
-		execute_cmd(argc, argv, envp, child_cnt + 2);
+		execute_cmd(argc, argv, envp, child_cnt + 2, fd);
 	}
 }
 
-static void	set_fd(int argc, char **argv, int **fd, int child_cnt)
+void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 {
-	int	file_fd;
+	int	infile_fd;
+	int	outfile_fd;
 	int	proc_cnt;
 
-	file_fd = open(argv[1], O_RDONLY);
+	infile_fd = open(argv[1], O_RDONLY);
+	outfile_fd = get_write_fd(argc, argv);
+	if (infile_fd == -1 || outfile_fd == -1)
+		exit_err(strerror(errno), NULL, NULL);
 	proc_cnt = argc - 3;
 	if (child_cnt == 0)
 	{
-		dup2(file_fd, STDIN_FILENO);
+		dup2(infile_fd, STDIN_FILENO);
 		dup2(fd[child_cnt][1], STDOUT_FILENO);
 	}
 	else if (child_cnt == proc_cnt - 1)
 	{
 		dup2(fd[child_cnt - 1][0], STDIN_FILENO);
-		dup2(get_write_fd(argc, argv), STDOUT_FILENO);
+		dup2(outfile_fd, STDOUT_FILENO);
 	}
 	else
 	{
