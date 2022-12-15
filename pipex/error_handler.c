@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 16:38:51 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:09:48 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ void	exit_err(char *err_message, char *prefix, char *postfix)
 void	arguments_check(int argc, char **argv)
 {
 	int	req_arg;
+	int	i;
 
-	if (is_equal(argv[1], "here_doc"))
-		req_arg = 6;
-	else
+	i = -1;
+	req_arg = 5;
+	if (argc > 1 && is_equal(argv[1], "here_doc"))
+		req_arg++;
+	else if (argc > 1 && !is_equal(argv[1], "here_doc"))
 	{
-		req_arg = 5;
 		if (access(argv[1], R_OK) < 0)
 			exit_err(NULL, NULL, NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 16:15:17 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:20:27 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	if (pid != 0)
 	{
 		close_fd(fd, argc - 3, -1);
-		waitpid(pid, &statloc, 0);
+		waitpid(pid, &statloc, WNOHANG);
 		clean(fd, argc - 3);
 	}
 	else
@@ -58,7 +58,7 @@ static void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 	else if (child_cnt == proc_cnt - 1)
 	{
 		dup2(fd[child_cnt - 1][0], STDIN_FILENO);
-		//파일 출력 설정//////////////////////////////////////
+		dup2(get_write_fd(argc, argv), STDOUT_FILENO);
 	}
 	else
 	{
@@ -90,6 +90,7 @@ static void	close_fd(int **fd, int proc_cnt, int child_cnt)
 static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
 {
 	int	i;
+	int	statloc;
 
 	i = -1;
 	if (*child_cnt >= cmd_cnt - 1 || pid == 0)
@@ -104,6 +105,7 @@ static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
 	}
 	pid = fork();
 	*child_cnt = *child_cnt + 1;
+	waitpid(pid, &statloc, WNOHANG);
 	return (fork_proc(cmd_cnt, child_cnt, pid, fd));
 }
 

@@ -15,26 +15,26 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 all : $(NAME)
 
 bonus : $(OBJS_BONUS)
-	rm -f all
-	touch bonus
-	ar rc $(NAME) $(OBJS_BONUS)
+	@rm -f all
+	@touch bonus
+	@ar rc $(NAME) $(OBJS_BONUS)
 
 $(NAME) : $(OBJS)
-	rm -f bonus
-	touch all
-	ar rc $(NAME) $(OBJS)
+	@rm -f bonus
+	@touch all
+	@ar rc $(NAME) $(OBJS)
 
 .c.o :
-	$(CC) $(CFLAGS) -c -I $(INC) -o $@ $<
+	@$(CC) $(CFLAGS) -c -I $(INC) -o $@ $<
 
 clean :
-	rm -f $(OBJS)
-	rm -f $(OBJS_BONUS)
+	@rm -f $(OBJS)
+	@rm -f $(OBJS_BONUS)
 
 fclean : clean
-	rm -f $(NAME)
-	rm -f all
-	rm -f bonus
+	@rm -f $(NAME)
+	@rm -f all
+	@rm -f bonus
 
 re : fclean all
 

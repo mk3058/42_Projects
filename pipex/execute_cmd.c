@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/14 16:35:39 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:22:37 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static char	*find_cmd_path(char	*cmd, char **envp)
 		file_path = ft_strjoin(env_path[i], cmd);
 		if (access(file_path, R_OK | X_OK) == 0)
 		{
+			printf("%s\n", file_path);
 			free_all(cmd, env_path);
 			return (file_path);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 11:57:08 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/11/17 17:38:24 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/15 14:01:09 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	set_pointer(char *(*allocate_func[2])(t_field *field, va_list va));
 int		prefix_len(t_field *field);
 int		w_prefix_len(t_field *field, char *result);
 int		is_x_zero(char *result);
-
 void	precision_input_zero(t_field *field, char *result, long long input);
 
 #endif
