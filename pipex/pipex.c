@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 16:31:14 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:21:39 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		clean(fd, argc - 3);
 	}
 	else
-	{
-		execute_cmd(argc, argv, envp, child_cnt + 2, fd);
-	}
+		execute_cmd(argv, envp, child_cnt + 2, fd);
 }
 
 void	set_fd(int argc, char **argv, int **fd, int child_cnt)

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 16:25:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:21:03 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ static char	**parse_envp(char **envp);
 static void	free_all(char *cmd, char **env_path);
 static char	*find_cmd_path(char	*cmd, char **envp);
 
-void	execute_cmd(int argc, char **argv, char **envp, int cnt, int **fd)
+void	execute_cmd(char **argv, char **envp, int cnt, int **fd)
 {
 	char	*path;
 	char	**arg;
+	int		argc;
 
+	argc = 0;
+	while (argv[argc])
+		argc++;
 	path = find_cmd_path(argv[cnt], envp);
 	arg = ft_split(argv[cnt], ' ');
 	free(arg[0]);
