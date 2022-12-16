@@ -8,7 +8,7 @@ FTPRINTF_LIB = libftprintf.a
 LIBFT_DIR = ./libft
 LIBFT_LIB = libft.a
 
-SRCS_MANDATORY = $(GNL) pipex.c error_handler.c execute_cmd.c heredoc.c file_out.c
+SRCS_MANDATORY = $(GNL) pipex.c error_handler.c execute_cmd.c heredoc.c open_file.c
 OBJS_MANDATORY = $(SRCS_MANDATORY:.c=.o)
 #SRCS_BONUS = 
 #OBJS_BONUS = 

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 19:21:03 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/16 20:55:01 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 static char	**parse_envp(char **envp);
+static char	*parse_cmd(char *cmd);
 static void	free_all(char *cmd, char **env_path);
 static char	*find_cmd_path(char	*cmd, char **envp);
 
@@ -38,27 +39,26 @@ static char	*find_cmd_path(char	*cmd, char **envp)
 {
 	char	**env_path;
 	char	*file_path;
+	char	*cmd_tmp;
 	int		i;
 
 	i = -1;
-	cmd = ft_strdup(cmd);
-	if (access(cmd, R_OK | X_OK) == 0)
-		return (cmd);
+	cmd_tmp = parse_cmd(cmd);
+	if (access(cmd_tmp, R_OK | X_OK) == 0)
+		return (cmd_tmp);
 	env_path = parse_envp(envp);
-	if (ft_strchr(cmd, ' '))
-		*(ft_strchr(cmd, ' ')) = '\0';
 	while (env_path[++i])
 	{
-		file_path = ft_strjoin(env_path[i], cmd);
+		file_path = ft_strjoin(env_path[i], cmd_tmp);
 		if (access(file_path, R_OK | X_OK) == 0)
 		{
-			free_all(cmd, env_path);
+			free_all(cmd_tmp, env_path);
 			return (file_path);
 		}
 		else
 			free(file_path);
 	}
-	free_all(cmd, env_path);
+	free_all(cmd_tmp, env_path);
 	exit_err("command not found", NULL, cmd);
 	return (NULL);
 }
@@ -81,6 +81,24 @@ static char	**parse_envp(char **envp)
 		free(tmp);
 	}
 	return (env_path);
+}
+
+static char	*parse_cmd(char *cmd)
+{
+	char	*cmd_tmp;
+	int		i;
+
+	i = -1;
+	cmd_tmp = ft_strdup(cmd);
+	while (cmd_tmp[++i])
+	{
+		if (cmd_tmp[i] == ' ')
+		{
+			cmd_tmp[i] = '\0';
+			break ;
+		}
+	}
+	return (cmd_tmp);
 }
 
 static void	free_all(char *cmd, char **env_path)

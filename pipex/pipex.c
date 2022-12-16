@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 19:21:39 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/16 20:20:07 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv, char **envp)
 		close_fd(fd, argc - 3, -1);
 		waitpid(pid, &statloc, 0);
 		clean(fd, argc - 3);
+		return (WEXITSTATUS(statloc));
 	}
 	else
 		execute_cmd(argv, envp, child_cnt + 2, fd);
@@ -41,24 +42,21 @@ int	main(int argc, char **argv, char **envp)
 
 void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 {
-	int	infile_fd;
-	int	outfile_fd;
+	int	file_fd;
 	int	proc_cnt;
 
-	infile_fd = open(argv[1], O_RDONLY);
-	outfile_fd = get_write_fd(argc, argv);
-	if (infile_fd == -1 || outfile_fd == -1)
-		exit_err(strerror(errno), NULL, NULL);
 	proc_cnt = argc - 3;
 	if (child_cnt == 0)
 	{
-		dup2(infile_fd, STDIN_FILENO);
+		file_fd = get_infile_fd(argc, argv);
+		dup2(file_fd, STDIN_FILENO);
 		dup2(fd[child_cnt][1], STDOUT_FILENO);
 	}
 	else if (child_cnt == proc_cnt - 1)
 	{
+		file_fd = get_outfile_fd(argc, argv);
 		dup2(fd[child_cnt - 1][0], STDIN_FILENO);
-		dup2(outfile_fd, STDOUT_FILENO);
+		dup2(file_fd, STDOUT_FILENO);
 	}
 	else
 	{

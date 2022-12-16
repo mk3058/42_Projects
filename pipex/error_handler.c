@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 16:33:21 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/16 20:19:55 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	arguments_check(int argc, char **argv)
 	else if (argc > 1 && !is_equal(argv[1], "here_doc"))
 	{
 		if (access(argv[1], R_OK) < 0)
-			exit_err(NULL, NULL, NULL);
+			exit_err(NULL, NULL, argv[1]);
 	}
 	if (argc < req_arg)
 		exit_err(strerror(EINVAL), NULL, NULL);

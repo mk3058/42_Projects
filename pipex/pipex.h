@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/15 19:21:19 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/16 20:24:32 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	set_fd(int argc, char **argv, int **fd, int child_cnt);
 void	arguments_check(int argc, char **argv);
 void	heredoc(int *argc, char ***argv);
 int		is_equal(char *str1, char *str2);
-int		get_write_fd(int argc, char **argv);
+int		get_infile_fd(int argc, char **argv);
+int		get_outfile_fd(int argc, char **argv);
 
 #endif
