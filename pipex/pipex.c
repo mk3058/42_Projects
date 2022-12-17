@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/16 20:20:07 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/17 10:33:16 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,36 @@ int	main(int argc, char **argv, char **envp)
 		execute_cmd(argv, envp, child_cnt + 2, fd);
 }
 
+static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
+{
+	int	i;
+	int	return_val;
+
+	i = -1;
+	if (*child_cnt >= cmd_cnt - 1 || pid == 0)
+		return (pid);
+	if (pid == -1)
+	{
+		while (++i < cmd_cnt - 1)
+		{
+			fd[i] = malloc(sizeof(int) * 2);
+			pipe(fd[i]);
+		}
+	}
+	if (pid > 0)
+		waitpid(pid, NULL, WNOHANG);
+	*child_cnt = *child_cnt + 1;
+	pid = fork();
+	return (fork_proc(cmd_cnt, child_cnt, pid, fd));
+}
+
 void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 {
 	int	file_fd;
 	int	proc_cnt;
 
 	proc_cnt = argc - 3;
+	close_fd(fd, proc_cnt, child_cnt);
 	if (child_cnt == 0)
 	{
 		file_fd = get_infile_fd(argc, argv);
@@ -63,7 +87,6 @@ void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 		dup2(fd[child_cnt - 1][0], STDIN_FILENO);
 		dup2(fd[child_cnt][1], STDOUT_FILENO);
 	}
-	close_fd(fd, proc_cnt, child_cnt);
 }
 
 static void	close_fd(int **fd, int proc_cnt, int child_cnt)
@@ -83,28 +106,6 @@ static void	close_fd(int **fd, int proc_cnt, int child_cnt)
 			close(fd[i][1]);
 		}
 	}
-}
-
-static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
-{
-	int	i;
-	int	statloc;
-
-	i = -1;
-	if (*child_cnt >= cmd_cnt - 1 || pid == 0)
-		return (pid);
-	if (pid == -1)
-	{
-		while (++i < cmd_cnt - 1)
-		{
-			fd[i] = malloc(sizeof(int) * 2);
-			pipe(fd[i]);
-		}
-	}
-	pid = fork();
-	*child_cnt = *child_cnt + 1;
-	waitpid(pid, &statloc, WNOHANG);
-	return (fork_proc(cmd_cnt, child_cnt, pid, fd));
 }
 
 static void	clean(int **fd, int proc_cnt)
