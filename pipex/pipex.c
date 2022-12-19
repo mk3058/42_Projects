@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/17 10:33:16 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:00:12 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
 	return (fork_proc(cmd_cnt, child_cnt, pid, fd));
 }
 
-void	set_fd(int argc, char **argv, int **fd, int child_cnt)
+int	set_fd(int argc, char **argv, int **fd, int child_cnt)
 {
 	int	file_fd;
 	int	proc_cnt;
+	int	std_out;
 
 	proc_cnt = argc - 3;
+	std_out = dup(STDOUT_FILENO);
 	close_fd(fd, proc_cnt, child_cnt);
 	if (child_cnt == 0)
 	{
@@ -87,6 +89,7 @@ void	set_fd(int argc, char **argv, int **fd, int child_cnt)
 		dup2(fd[child_cnt - 1][0], STDIN_FILENO);
 		dup2(fd[child_cnt][1], STDOUT_FILENO);
 	}
+	return (std_out);
 }
 
 static void	close_fd(int **fd, int proc_cnt, int child_cnt)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:59:46 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/17 10:18:17 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/19 13:01:01 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	execute_cmd(char **argv, char **envp, int cnt, int **fd)
 	char	*path;
 	char	**arg;
 	int		argc;
+	int		std_out;
 
 	argc = 0;
 	while (argv[argc])
@@ -30,9 +31,12 @@ void	execute_cmd(char **argv, char **envp, int cnt, int **fd)
 	arg = ft_split(argv[cnt], ' ');
 	free(arg[0]);
 	arg[0] = ft_strdup(path);
-	set_fd(argc, argv, fd, cnt - 2);
+	std_out = set_fd(argc, argv, fd, cnt - 2);
 	if (execve(path, arg, envp) == -1)
+	{
+		dup2(std_out, STDOUT_FILENO);
 		exit_err(strerror(errno), NULL, NULL);
+	}
 }
 
 static char	*find_cmd_path(char	*cmd, char **envp)
