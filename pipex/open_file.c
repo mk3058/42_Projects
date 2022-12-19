@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:15:34 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/16 22:29:42 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/19 16:17:06 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ int	get_infile_fd(int argc, char **argv)
 	int	fd;
 
 	if (argc > 1)
+	{
+		if (access(argv[1], R_OK) < 0)
+			exit_err(NULL, NULL, argv[1]);
 		fd = open(argv[1], O_RDONLY);
+	}
 	if (fd < 0)
 		exit_err(NULL, NULL, argv[1]);
 	return (fd);
