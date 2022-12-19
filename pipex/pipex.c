@@ -6,13 +6,13 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/19 13:19:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:13:51 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd);
+static int	fork_proc(int cmd_cnt, int *child_cnt, int *pid, int **fd);
 static void	close_fd(int **fd, int proc_cnt, int child_cnt);
 static void	clean(int **fd, int proc_cnt);
 
@@ -21,18 +21,21 @@ int	main(int argc, char **argv, char **envp)
 	int		**fd;
 	int		statloc;
 	int		child_cnt;
-	pid_t	pid;
+	pid_t	*pid;
+	int		i;
 
 	child_cnt = -1;
+	i = -1;
 	arguments_check(argc, argv);
 	if (is_equal(argv[1], "here_doc"))
 		heredoc(&argc, &argv);
 	fd = malloc(sizeof(int *) * (argc - 4));
-	pid = fork_proc(argc - 3, &child_cnt, -1, fd);
-	if (pid != 0)
+	pid = malloc(sizeof(int *) * (argc - 3));
+	if (fork_proc(argc - 3, &child_cnt, pid, fd) != 0)
 	{
 		close_fd(fd, argc - 3, -1);
-		waitpid(pid, &statloc, 0);
+		while (++i < argc - 3)
+			waitpid(pid[i], &statloc, 0);
 		clean(fd, argc - 3);
 		return (WEXITSTATUS(statloc));
 	}
@@ -40,15 +43,14 @@ int	main(int argc, char **argv, char **envp)
 		execute_cmd(argv, envp, child_cnt + 2, fd);
 }
 
-static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
+static int	fork_proc(int cmd_cnt, int *child_cnt, int *pid, int **fd)
 {
 	int	i;
-	int	return_val;
 
 	i = -1;
-	if (*child_cnt >= cmd_cnt - 1 || pid == 0)
-		return (pid);
-	if (pid == -1)
+	if (*child_cnt >= cmd_cnt - 1 || (*child_cnt >= 0 && pid[*child_cnt] == 0))
+		return (pid[*child_cnt]);
+	if (*child_cnt == -1)
 	{
 		while (++i < cmd_cnt - 1)
 		{
@@ -56,10 +58,8 @@ static int	fork_proc(int cmd_cnt, int *child_cnt, int pid, int **fd)
 			pipe(fd[i]);
 		}
 	}
-	if (pid > 0)
-		waitpid(pid, NULL, WNOHANG);
 	*child_cnt = *child_cnt + 1;
-	pid = fork();
+	pid[*child_cnt] = fork();
 	return (fork_proc(cmd_cnt, child_cnt, pid, fd));
 }
 
