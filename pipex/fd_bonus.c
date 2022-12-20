@@ -6,13 +6,13 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 17:36:19 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/19 17:42:02 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:11:03 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	**set_pipe(int argc, char **argv)
+int	**set_pipe(int argc)
 {
 	int	**fd;
 	int	i;

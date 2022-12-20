@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:15:34 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/19 17:42:03 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:11:33 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	get_infile_fd(int argc, char **argv)
 {
 	int	fd;
 
+	fd = -1;
 	if (argc > 1)
 	{
 		if (access(argv[1], R_OK) < 0)

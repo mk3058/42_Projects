@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/19 17:42:04 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:11:16 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	arguments_check(argc, argv);
 	if (is_equal(argv[1], "here_doc"))
 		heredoc(&argc, &argv);
-	fd = set_pipe(argc, argv);
+	fd = set_pipe(argc);
 	pid = malloc(sizeof(int *) * (argc - 3));
 	if (fork_proc(argc - 3, &child_cnt, pid, fd) != 0)
 	{

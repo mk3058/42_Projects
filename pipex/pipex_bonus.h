@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/19 17:41:59 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:10:57 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	arguments_check(int argc, char **argv);
 void	execute_cmd(char **argv, char **envp, int cnt, int **fd);
 void	heredoc(int *argc, char ***argv);
 int		is_equal(char *str1, char *str2);
-int		**set_pipe(int argc, char **argv);
+int		**set_pipe(int argc);
 int		set_fd(int argc, char **argv, int **fd, int child_cnt);
 void	close_fd(int **fd, int proc_cnt, int child_cnt);
 int		get_infile_fd(int argc, char **argv);
