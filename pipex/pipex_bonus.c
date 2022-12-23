@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:38 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/20 14:11:16 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/23 10:27:22 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ int	main(int argc, char **argv, char **envp)
 
 static int	fork_proc(int cmd_cnt, int *child_cnt, int *pid, int **fd)
 {
-	int	i;
-
-	i = -1;
 	if (*child_cnt >= cmd_cnt - 1 || (*child_cnt >= 0 && pid[*child_cnt] == 0))
 		return (pid[*child_cnt]);
 	*child_cnt = *child_cnt + 1;

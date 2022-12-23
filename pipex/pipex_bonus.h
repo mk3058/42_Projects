@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:19:36 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/20 14:10:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/23 10:28:33 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <errno.h>
 # include <string.h>
 
