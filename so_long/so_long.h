@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:44:33 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/29 20:26:01 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/30 00:34:12 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ typedef struct s_window
 void	exit_err(char *err_message, char *prefix, char *postfix);
 void	arguments_check(int argc, char **argv);
 char	**map_parser(char *map_path);
+void	print_map(char **map, t_window win);
 
 #endif
