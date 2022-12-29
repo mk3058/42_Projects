@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/29 19:28:48 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/29 19:33:57 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static void	map_checker(char **map)
 		{
 			while (map[i][++j])
 				if (map[i][j] != '1')
-					exit_err("Error\n", NULL, "Invalid map format!");
+					exit_err("Error\n", NULL, "Map must be closed by walls!");
 		}
 		else
 			if (map[i][0] != '1' || map[i][map_width - 1] != '1')
-				exit_err("Error\n", NULL, "Invalid map format!");
+				exit_err("Error\n", NULL, "Map must be closed by walls!");
 	}
 	component_check(map);
 }
