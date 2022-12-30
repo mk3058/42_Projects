@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/30 11:23:32 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:25:57 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	set_win_size(char **map, t_window *win);
 int	main(int argc, char **argv)
 {
 	t_window	win;
+	t_asset		*a;
+	t_player	*p;
 	char		**map;
 
 	arguments_check(argc, argv);
@@ -24,7 +26,7 @@ int	main(int argc, char **argv)
 	set_win_size(map, &win);
 	win.mlx_ptr = mlx_init();
 	win.win_ptr = mlx_new_window(win.mlx_ptr, win.x, win.y, "!~~ so_long ~~!");
-	print_map(map, win);
+	init_game(map, &a, &p, win);
 	mlx_loop(win.mlx_ptr);
 }
 

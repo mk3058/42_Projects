@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:44:33 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/30 14:27:03 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:01:20 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,21 @@
 # define ITEM 2
 # define EXIT 3
 
-# define SET 0
-# define FREE 1
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
-
 typedef struct s_asset
 {
 	void	*img;
 	int		wd;
 	int		hi;
 }	t_asset;
+
+typedef struct s_player
+{
+	void	*img;
+	int		wd;
+	int		hi;
+	int		x;
+	int		y;
+}	t_player;
 
 typedef struct s_window
 {
@@ -61,6 +58,6 @@ typedef struct s_window
 void	exit_err(char *err_message, char *prefix, char *postfix);
 void	arguments_check(int argc, char **argv);
 char	**map_parser(char *map_path);
-void	print_map(char **map, t_window win);
+void	init_game(char **map, t_asset **a, t_player **p, t_window win);
 
 #endif
