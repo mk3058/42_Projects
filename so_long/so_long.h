@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:44:33 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/30 00:34:12 by minkyu           ###   ########.fr       */
+/*   Updated: 2022/12/30 14:27:03 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define ITEM_CNT 1
 # define START_POINT_CNT 2
 
+# define TILE 0
+# define WALL 1
+# define ITEM 2
+# define EXIT 3
+
+# define SET 0
+# define FREE 1
+
 typedef struct s_data
 {
 	void	*img;
@@ -37,10 +45,7 @@ typedef struct s_data
 
 typedef struct s_asset
 {
-	void	*tile;
-	void	*wall;
-	void	*item;
-	void	*door;
+	void	*img;
 	int		wd;
 	int		hi;
 }	t_asset;

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/29 19:33:57 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:16:28 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	get_map_height(char *map_path);
 static void	map_checker(char **map);
 static void	component_check(char **map);
+static void	count_component(char **map, int *req_com);
 
 char	**map_parser(char *map_path)
 {
@@ -87,6 +88,21 @@ static void	component_check(char **map)
 	int	j;
 
 	req_com = ft_calloc(3, sizeof(int));
+	count_component(map, req_com);
+	if (!req_com[START_POINT_CNT] || !req_com[EXIT_CNT] || !req_com[ITEM_CNT])
+		exit_err("Error\n", NULL, "Map must contain at least one E, C, P!!");
+	if (req_com[START_POINT_CNT] != 1)
+		exit_err("Error\n", NULL, "Duplicates character P!");
+	if (req_com[EXIT_CNT] != 1)
+		exit_err("Error\n", NULL, "Duplicates character E!");
+	free(req_com);
+}
+
+static void	count_component(char **map, int *req_com)
+{
+	int	i;
+	int	j;
+
 	j = -1;
 	while (map[++j])
 	{
@@ -103,9 +119,4 @@ static void	component_check(char **map)
 				exit_err("Error\n", NULL, "Map contains invalid arguments!");
 		}
 	}
-	if (!req_com[EXIT_CNT] || !req_com[ITEM_CNT] || !req_com[START_POINT_CNT])
-		exit_err("Error\n", NULL, "Map must contain at least one E, C, P!");
-	free(req_com);
 }
-
-
