@@ -6,16 +6,18 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 14:06:51 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 14:57:02 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 #define KEYPRESS 2
+#define REDCROSS 17
 
 static void	set_win_size(char **map, t_window *win);
 static void	init_data(t_data *d, t_asset *a, t_player *p, t_window *w);
+static int	close_program(t_data *d);
 
 int	main(int argc, char **argv)
 {
@@ -32,11 +34,10 @@ int	main(int argc, char **argv)
 	init_game(d.map, &a, &p, win);
 	init_data(&d, a, p, &win);
 	mlx_hook(win.win_ptr, KEYPRESS, 1L << 0, key_check, &d);
+	mlx_hook(win.win_ptr, REDCROSS, 1L << 0, close_program, &d);
 	mlx_loop_hook(win.mlx_ptr, render_img, &d);
 	mlx_loop(win.mlx_ptr);
 }
-
-
 
 static void	set_win_size(char **map, t_window *win)
 {
@@ -57,4 +58,11 @@ static void	init_data(t_data *d, t_asset *a, t_player *p, t_window *w)
 	d -> a = a;
 	d -> p = p;
 	d -> w = w;
+}
+
+static int	close_program(t_data *d)
+{
+	if (d != NULL)
+		exit(0);
+	return (0);
 }

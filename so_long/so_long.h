@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:44:33 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 14:10:20 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:28:52 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@
 # include <sys/errno.h>
 # include <fcntl.h>
 # include <string.h>
-
-# define EXIT_CNT 0
-# define ITEM_CNT 1
-# define START_POINT_CNT 2
+# include <stdio.h> ////////////////////
 
 # define TILE 0
 # define WALL 1

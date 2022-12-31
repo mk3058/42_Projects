@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 12:26:47 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 14:13:11 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:32:36 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	move_player(void *mlx, void *win, t_asset *a, t_data *d)
 		mlx_put_image_to_window(mlx, win, (a + TILE)-> img, p -> x, p -> y);
 	else
 	{
-		if (item_cnt == 7)
+		if (item_cnt == 4)
 		{
 			mlx_destroy_window(mlx, win);
 			exit(0);
@@ -91,7 +91,7 @@ static int	set_point(t_player *p, char **map, int *k)
 	{
 		p -> x = move_x;
 		p -> y = move_y;
-		ft_printf("Move count : %3d\n", ++move_cnt);
+		ft_printf("Move count :%4d\n", ++move_cnt);
 		if (map[(move_y) / 32][(move_x) / 32] == 'C')
 		{
 			map[(move_y) / 32][(move_x) / 32] = '0';

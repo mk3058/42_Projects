@@ -6,11 +6,15 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 14:16:48 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:36:07 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+#define EXIT_CNT 0
+#define ITEM_CNT 1
+#define START_POINT_CNT 2
 
 static int	get_map_height(char *map_path);
 static void	map_checker(char **map);
