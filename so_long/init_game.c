@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:56:34 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/30 17:23:25 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:02:17 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,8 @@ static void	init_asset(t_asset *a, t_player *p, void *mlx_ptr)
 {
 	char	*d[4];
 	char	*ply_d;
-	int		i;
 	t_asset	*c;
 
-	i = -1;
 	d[TILE] = "./asset/tile.xpm";
 	d[WALL] = "./asset/wall.xpm";
 	d[ITEM] = "./asset/item.xpm";

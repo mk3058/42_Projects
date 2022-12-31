@@ -32,7 +32,7 @@ ftprintf :
 	@make -C $(FTPRINTF_DIR)
 
 mlx :
-	@make -C$(MLX_DIR)
+	@make -C $(MLX_DIR)
 
 clean :
 	@make -C $(LIBFT_DIR) fclean
@@ -45,4 +45,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : clean fclean re ft ftprintf
+.PHONY : clean fclean re ft ftprintf mlx
