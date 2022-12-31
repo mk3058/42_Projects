@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 12:26:47 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 15:32:36 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 18:05:29 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 #define S 1
 #define D 2
 
-static int	set_point(t_player *p, char **map, int *k);
+static int	cnt_remain_item(char **map);
+static void	set_point(t_player *p, char **map, int *k);
 static void	move_player(void *mlx, void *win, t_asset *a, t_data *d);
 
 int	key_check(int keycode, t_data *data)
@@ -42,8 +43,12 @@ int	key_check(int keycode, t_data *data)
 int	render_img(t_data *d)
 {
 	int	i;
+	int	*k;
 
 	i = -1;
+	k = d -> key;
+	if (!k[UP] && !k[DOWN] && !k[LEFT] && !k[RIGHT])
+		return (0);
 	move_player(d -> w -> mlx_ptr, d -> w -> win_ptr, d -> a, d);
 	while (++i < 4)
 		(d -> key)[i] = 0;
@@ -52,7 +57,6 @@ int	render_img(t_data *d)
 
 static void	move_player(void *mlx, void *win, t_asset *a, t_data *d)
 {
-	static int	item_cnt;
 	char		**map;
 	t_player	*p;
 
@@ -61,19 +65,38 @@ static void	move_player(void *mlx, void *win, t_asset *a, t_data *d)
 	if (map[(p -> y) / 32][(p -> x) / 32] != 'E')
 		mlx_put_image_to_window(mlx, win, (a + TILE)-> img, p -> x, p -> y);
 	else
-	{
-		if (item_cnt == 4)
-		{
-			mlx_destroy_window(mlx, win);
-			exit(0);
-		}
 		mlx_put_image_to_window(mlx, win, (a + EXIT)-> img, p -> x, p -> y);
-	}
-	item_cnt += set_point(p, map, d -> key);
+	set_point(p, map, d -> key);
 	mlx_put_image_to_window(mlx, win, p -> img, p -> x, p -> y);
+	if (map[(p -> y) / 32][(p -> x) / 32] == 'E' && !cnt_remain_item(d -> map))
+	{
+		mlx_destroy_window(mlx, win);
+		exit(0);
+	}
 }
 
-static int	set_point(t_player *p, char **map, int *k)
+static int	cnt_remain_item(char **map)
+{
+	int	i;
+	int	j;
+	int	cnt;
+
+	i = 0;
+	j = 0;
+	cnt = 0;
+	while (map[++i] != NULL)
+	{
+		j = 0;
+		while ((map)[i][++j])
+		{
+			if ((map)[i][j] == 'C')
+				cnt++;
+		}
+	}
+	return (cnt);
+}
+
+static void	set_point(t_player *p, char **map, int *k)
 {
 	static int	move_cnt;
 	int			move_to;
@@ -82,7 +105,7 @@ static int	set_point(t_player *p, char **map, int *k)
 
 	move_to = k[UP] * 1 + k[DOWN] * 2 + k[LEFT] * 3 + k[RIGHT] * 4;
 	if (move_to-- == 0)
-		return (0);
+		return ;
 	move_x = p -> x;
 	move_y = p -> y;
 	move_x = (move_x) - ((move_to == LEFT) * 32) + ((move_to == RIGHT) * 32);
@@ -95,8 +118,8 @@ static int	set_point(t_player *p, char **map, int *k)
 		if (map[(move_y) / 32][(move_x) / 32] == 'C')
 		{
 			map[(move_y) / 32][(move_x) / 32] = '0';
-			return (1);
+			return ;
 		}
 	}
-	return (0);
+	return ;
 }
