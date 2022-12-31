@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:16:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/29 19:07:31 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 14:16:24 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	exit_err(char *err_message, char *prefix, char *postfix)
 
 void	arguments_check(int argc, char **argv)
 {
+	int	len;
+	
 	if (argc != 2)
 		exit_err(strerror(EINVAL), NULL, NULL);
+	len = ft_strlen(argv[1]);
+	if (ft_strncmp(&argv[1][len - 4], ".ber", 3))
+		exit_err("Error\n", NULL, "Map must be .ber file");
 }

@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/30 14:16:28 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 14:16:48 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	map_checker(char **map)
 	while (map[++i])
 	{
 		j = -1;
-		if (ft_strlen(map[i]) != map_width)
+		if ((int)ft_strlen(map[i]) != map_width)
 			exit_err("Error\n", NULL, "Map must be rectangular!");
 		if (i == 0 || map[i + 1] == (char *) '\0')
 		{
@@ -84,8 +84,6 @@ static void	map_checker(char **map)
 static void	component_check(char **map)
 {
 	int	*req_com;
-	int	i;
-	int	j;
 
 	req_com = ft_calloc(3, sizeof(int));
 	count_component(map, req_com);
