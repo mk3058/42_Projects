@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 12:26:47 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 18:05:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 18:38:34 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	key_check(int keycode, t_data *data)
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(data -> w -> mlx_ptr, data -> w -> win_ptr);
+		ft_printf("%s\n", "\033[0;31m===== FAILURE =====\n\033[0m");
 		exit(0);
 	}
 	else if (keycode == W)
@@ -70,6 +71,7 @@ static void	move_player(void *mlx, void *win, t_asset *a, t_data *d)
 	mlx_put_image_to_window(mlx, win, p -> img, p -> x, p -> y);
 	if (map[(p -> y) / 32][(p -> x) / 32] == 'E' && !cnt_remain_item(d -> map))
 	{
+		ft_printf("%s\n", "\033[0;32m===== CLEAR =====\n\033[0m");
 		mlx_destroy_window(mlx, win);
 		exit(0);
 	}

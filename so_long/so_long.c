@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:22 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 18:05:45 by minkyuki         ###   ########.fr       */
+/*   Updated: 2022/12/31 18:38:57 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	init_data(t_data *d, t_asset *a, t_player *p, t_window *w)
 
 static int	close_program(t_data *d)
 {
+	ft_printf("%s\n", "\033[0;31m===== FAILURE =====\n\033[0m");
 	if (d != NULL)
 		exit(0);
 	return (0);
