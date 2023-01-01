@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 12:26:47 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 18:38:34 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/01 10:02:59 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	move_player(void *mlx, void *win, t_asset *a, t_data *d)
 		mlx_put_image_to_window(mlx, win, (a + EXIT)-> img, p -> x, p -> y);
 	set_point(p, map, d -> key);
 	mlx_put_image_to_window(mlx, win, p -> img, p -> x, p -> y);
-	if (map[(p -> y) / 32][(p -> x) / 32] == 'E' && !cnt_remain_item(d -> map))
+	if (map[(p -> y) / 32][(p -> x) / 32] == 'E' && !cnt_remain_item(map))
 	{
 		ft_printf("%s\n", "\033[0;32m===== CLEAR =====\n\033[0m");
 		mlx_destroy_window(mlx, win);
@@ -118,10 +118,6 @@ static void	set_point(t_player *p, char **map, int *k)
 		p -> y = move_y;
 		ft_printf("Move count :%4d\n", ++move_cnt);
 		if (map[(move_y) / 32][(move_x) / 32] == 'C')
-		{
 			map[(move_y) / 32][(move_x) / 32] = '0';
-			return ;
-		}
 	}
-	return ;
 }
