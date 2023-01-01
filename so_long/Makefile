@@ -1,6 +1,6 @@
 NAME = so_long
 CC = CC
-CFLAGS = -g -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 GNL = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 FTPRINTF_DIR = ./ft_printf

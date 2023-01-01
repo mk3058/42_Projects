@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/01 20:55:36 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/01 21:34:44 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	**map_parser(char *map_path)
 	if (fd < 0)
 		exit_err(NULL, NULL, NULL);
 	map_height = get_map_height(map_path);
+	if (!map_height)
+		exit_err("Error\n", NULL, "Map is empty!");
 	map = ft_calloc(map_height + 1, sizeof(char *));
 	while (i < map_height)
 	{
