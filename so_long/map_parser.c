@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:40:23 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 15:36:07 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:55:36 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	**map_parser(char *map_path)
 		free(line);
 	}
 	map_checker(map);
+	path_checker(map, map_height);
 	close(fd);
 	return (map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:44:33 by minkyuki          #+#    #+#             */
-/*   Updated: 2022/12/31 18:05:56 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:58:19 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/errno.h>
 # include <fcntl.h>
 # include <string.h>
-//# include <stdio.h> ////////////////////
 
 # define TILE 0
 # define WALL 1
@@ -68,6 +67,7 @@ typedef struct s_data
 void	exit_err(char *err_message, char *prefix, char *postfix);
 void	arguments_check(int argc, char **argv);
 char	**map_parser(char *map_path);
+void	path_checker(char **map, int height);
 void	init_game(char **map, t_asset **a, t_player **p, t_window win);
 int		key_check(int keycode, t_data *data);
 int		render_img(t_data *d);

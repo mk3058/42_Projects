@@ -1,6 +1,6 @@
 NAME = so_long
 CC = CC
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -fsanitize=address -Wall -Wextra -Werror
 
 GNL = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
 FTPRINTF_DIR = ./ft_printf
@@ -10,7 +10,8 @@ LIBFT_LIB = libft.a
 MLX_DIR = ./mlx
 MLX_LIB = mlx -framework OpenGL -framework Appkit
 
-SRCS_MANDATORY = $(GNL) error_handler.c map_parser.c init_game.c so_long.c hook_handler.c
+SRCS_MANDATORY = $(GNL) error_handler.c map_parser.c init_game.c \
+so_long.c hook_handler.c path_check.c
 OBJS_MANDATORY = $(SRCS_MANDATORY:.c=.o)
 
 all : $(NAME)
