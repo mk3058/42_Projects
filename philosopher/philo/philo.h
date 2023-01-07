@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:43:00 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/05 20:25:11 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/07 14:59:05 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ typedef struct s_philo
 	int				num;
 	int				eat_cnt;
 	int				stat;
-	struct timeval	last_eat;
+	int				*fork;
 	struct s_arg	*arg;
+	struct timeval	last_eat;
 }	t_philo;
 
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

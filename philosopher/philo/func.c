@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:53:42 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/05 17:17:52 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/07 14:59:54 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,18 @@ int	ft_atoi(const char *str)
 	}
 	result *= sign;
 	return ((int)result);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*result;
+	int		i;
+
+	i = -1;
+	result = malloc(size * count);
+	if (result == 0)
+		return (0);
+	while (++i < size)
+		((char *)result)[i] = 0;
+	return (result);
 }
