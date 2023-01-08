@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:43:00 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/07 14:59:05 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/08 13:42:47 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 # define PHILO_H
 
 # include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
 
-# define EATING 1
-# define THINKING 2
-# define SLEEPING 3
+# define EATING 0
+# define FORK 1
+# define SLEEPING 2
+# define THINKING 3
+# define DEAD 4
+# define ALIVE 5
 
 typedef struct s_arg
 {
@@ -39,10 +43,12 @@ typedef struct s_philo
 	int				stat;
 	int				*fork;
 	struct s_arg	*arg;
+	struct timeval	start;
 	struct timeval	last_eat;
 }	t_philo;
 
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
+void	*monitor(void *philo);
 
 #endif
