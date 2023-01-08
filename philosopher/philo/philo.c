@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:42:50 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/08 13:45:29 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:13:43 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	*routine(void *philo)
 	struct timeval	cur;
 
 	p = philo;
+	if ((p->num + 1) % 2 == 0)
+		usleep(50);
 	gettimeofday(&p->start, NULL);
 	gettimeofday(&p->last_eat, NULL);
 	while (1)
@@ -68,14 +70,22 @@ void	*routine(void *philo)
 			return (NULL);
 		while (eat(p))
 		{
+			if (p->stat == DEAD)
+			return (NULL);
 			gettimeofday(&cur, NULL);
 			if (cur.tv_usec - p->last_eat.tv_usec > p->arg->time_to_die)
+			{
+				print_timestamp(p, DEAD);
 				p->stat = DEAD;
+			}
 			return (NULL);
 		}
+		if (p->stat == DEAD)
+			return (NULL);
 		print_timestamp(p, SLEEPING);
 		usleep(p->arg->time_to_sleep);
 		print_timestamp(p, THINKING);
+		usleep(200);
 	}
 }
 
@@ -102,7 +112,7 @@ int	eat(t_philo *p)
 
 void	print_timestamp(t_philo *p, int stat)
 {
-	double			diff;
+	suseconds_t		diff;
 	struct timeval	cur;
 	char			*str[5];
 
@@ -112,18 +122,14 @@ void	print_timestamp(t_philo *p, int stat)
 	str[THINKING] = "is thinking";
 	str[DEAD] = "died";
 	if (stat == EATING)
-	{
-		diff = (p->last_eat.tv_sec - p->start.tv_sec);
-		diff += (p->last_eat.tv_usec - p->start.tv_usec) / (double)1000000;
-	}
+		diff = (p->last_eat.tv_usec - p->start.tv_usec);
 	else
 	{
 		gettimeofday(&cur, NULL);
-		diff = (cur.tv_sec - p->start.tv_sec);
-		diff += (cur.tv_usec - p->start.tv_usec) / (double)1000000;
+		diff = (cur.tv_usec - p->start.tv_usec);
 	}
 	if (p->stat != DEAD)
-		printf("%f s %d %s\n", diff, p->num, str[stat]);
+		printf("%dms %d %s\n", diff, p->num + 1, str[stat]);
 }
 
 t_philo	*set_philo(int argc, char **argv)
