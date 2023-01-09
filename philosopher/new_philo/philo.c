@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:06:32 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/09 14:47:41 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/09 15:04:20 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	while (++cnt < philo->arg->number_of_philo)
 		if (pthread_create(thread + cnt, NULL, routine, (void *)(philo + cnt)))
 			return (1);
-	pthread_create(&thread[cnt], NULL, monitor, (void *)philo);
+	pthread_create(thread + cnt, NULL, monitor, (void *)philo);
 	cnt = -1;
 	while (++cnt < philo->arg->number_of_philo + 1)
 		pthread_join(thread[cnt], NULL);
