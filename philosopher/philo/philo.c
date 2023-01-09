@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:42:50 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/08 16:13:43 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:59:54 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	print_timestamp(t_philo *p, int stat);
 void	*routine(void *philo);
 int		eat(t_philo *p);
 void	free_all(t_philo *philo, pthread_t *thread);
+int		time_diff(struct timeval a, struct timeval b);
 
 int	main(int argc, char **argv)
 {
@@ -39,7 +40,7 @@ int	main(int argc, char **argv)
 		if (pthread_create(&thread[cnt], NULL, routine, (void *)(philo + cnt)))
 			return (1);
 	}
-	pthread_create(&thread[++cnt], NULL, monitor, (void *)philo);
+	pthread_create(&thread[cnt], NULL, monitor, (void *)philo);
 	cnt = -1;
 	while (++cnt < philo->arg->number_of_philo + 1)
 		pthread_join(thread[cnt], NULL);
@@ -73,10 +74,12 @@ void	*routine(void *philo)
 			if (p->stat == DEAD)
 			return (NULL);
 			gettimeofday(&cur, NULL);
-			if (cur.tv_usec - p->last_eat.tv_usec > p->arg->time_to_die)
+			if (time_diff(p->last_eat, cur) > p->arg->time_to_die)
 			{
 				print_timestamp(p, DEAD);
+				pthread_mutex_lock(&p->arg->mutex);
 				p->stat = DEAD;
+				pthread_mutex_unlock(&p->arg->mutex);
 			}
 			return (NULL);
 		}
@@ -122,14 +125,19 @@ void	print_timestamp(t_philo *p, int stat)
 	str[THINKING] = "is thinking";
 	str[DEAD] = "died";
 	if (stat == EATING)
-		diff = (p->last_eat.tv_usec - p->start.tv_usec);
+		diff = time_diff(p->start, p->last_eat);
 	else
 	{
 		gettimeofday(&cur, NULL);
-		diff = (cur.tv_usec - p->start.tv_usec);
+		diff = time_diff(p->start, cur);
 	}
 	if (p->stat != DEAD)
 		printf("%dms %d %s\n", diff, p->num + 1, str[stat]);
+}
+
+int	time_diff(struct timeval a, struct timeval b)
+{
+	return (((b.tv_sec - a.tv_sec) * 1000) + b.tv_usec - a.tv_usec);
 }
 
 t_philo	*set_philo(int argc, char **argv)
