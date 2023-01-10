@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:06:32 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/09 15:04:20 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/10 12:57:15 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 			return (1);
 	pthread_create(thread + cnt, NULL, monitor, (void *)philo);
 	cnt = -1;
-	while (++cnt < philo->arg->number_of_philo + 1)
+	while (++cnt < (philo->arg->number_of_philo) + 1)
 		pthread_join(thread[cnt], NULL);
 	free_all(philo, thread);
 }
@@ -70,4 +70,5 @@ static void	free_all(t_philo *philo, pthread_t *thread)
 	free(philo->arg);
 	free(philo);
 	free(thread);
+	pthread_mutex_destroy(&(philo->arg->mutex));
 }

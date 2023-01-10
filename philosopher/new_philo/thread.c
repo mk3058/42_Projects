@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 11:21:17 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/09 14:57:29 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/10 13:42:06 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	change_philo_stat(t_philo *philo, int stat, int cnt)
 	static int	flag;
 
 	i = -1;
+	if (philo->stat == DEAD)
+		return ;
 	pthread_mutex_lock(&philo->arg->mutex);
 	while (++i < cnt)
 		philo[i].stat = stat;
@@ -40,23 +42,23 @@ void	*routine(void *philo)
 	while (p->stat == -1)
 		;
 	if ((p->num + 1) % 2 == 0)
-		usleep(50);
+		usleep(10);
 	while (1)
 	{
-		if (p->stat == DEAD)
-			return (NULL);
 		while (eat(p))
 		{
 			gettimeofday(&cur, NULL);
 			if (time_diff(p->last_eat, cur) > p->arg->time_to_die)
 				change_philo_stat(p, DEAD, 1);
 		}
+		if (p->stat == DEAD)
+			return (NULL);
 		change_philo_stat(p, SLEEPING, 1);
 		usleep(p->arg->time_to_sleep);
 		change_philo_stat(p, THINKING, 1);
+		usleep(50);
 	}
 }
-//뭔가 이상한데? - 처음에 시간 검사 안하고 무조건 먹음, 먹는횟수 안들어왔을땐 처리 안됨, 조건 어떻게 들어올지 모르는데 usleep 써도 됨?
 
 static int	eat(t_philo *p)
 {
@@ -80,3 +82,5 @@ static int	eat(t_philo *p)
 	pthread_mutex_unlock(&p->arg->mutex);
 	return (1);
 }
+
+//처음에 시간 검사 안하고 무조건 먹음, 먹는횟수 안들어왔을땐 처리 안됨, 조건 어떻게 들어올지 모르는데 usleep 써도 됨?
