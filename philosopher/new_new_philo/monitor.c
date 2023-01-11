@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:03:16 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/11 16:28:59 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:07:06 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	*philo_monitor(void *philo)
 	gettimeofday(&cur, NULL);
 	p->arg->start_time = cur;
 	while (++i < p->arg->number_of_philo)
+	{
 		p[i].stat = ALIVE;
+	}
 	while (check_stat(p))
 		usleep(100);
 	return (NULL);
@@ -34,18 +36,28 @@ void	*philo_monitor(void *philo)
 static int	check_stat(t_philo *p)
 {
 	int	i;
+	int	cnt;
+	int	flag;
 
-	//printf("monitor\n");
 	i = -1;
+	cnt = 0;
+	flag = 0;
 	while (++i < p->arg->number_of_philo)
 	{
 		if (p[i].stat == DEAD)
 		{
-			i = -1;
-			while (++i < p->arg->number_of_philo)
-				p[i].stat = DEAD;
-			return (0);
+			flag = 1;
+			break ;
 		}
+		if (p[i].eat_cnt >= p->arg->must_eat)
+			cnt++;
+	}
+	if (flag || (p->arg->must_eat >= 0 && cnt >= p->arg->number_of_philo))
+	{
+		i = -1;
+		while (++i < p->arg->number_of_philo)
+			p[i].stat = DEAD;
+		return (0);
 	}
 	return (1);
 }

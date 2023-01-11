@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:53:42 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/11 16:08:10 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:17:54 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ void	print_timestamp(t_philo *p, int stat)
 
 int	time_diff(struct timeval a, struct timeval b)
 {
-	return (((b.tv_sec - a.tv_sec) * 1000) + b.tv_usec - a.tv_usec);
+	return ((((long)b.tv_sec - (long)a.tv_sec) * 1000) + b.tv_usec - a.tv_usec);
 }
