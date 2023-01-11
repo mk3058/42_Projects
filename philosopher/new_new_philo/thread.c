@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 23:27:10 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/11 18:34:00 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:53:04 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	*philo_routine(void *philo)
 	p = philo;
 	while (p->stat != ALIVE)
 		;
-	gettimeofday(&(p->last_eat), NULL);
 	while (1)
 	{
 		if (p->stat == DEAD)
@@ -43,7 +42,7 @@ static int	eat(t_philo *p)
 
 	get_fork(p->num, p->fork);
 	gettimeofday(&cur, NULL);
-	if (time_diff(p->last_eat, cur) > p->arg->time_to_die)
+	if (time_diff(p->last_eat, cur) >= p->arg->time_to_die)
 	{
 		p->stat = DEAD;
 		print_timestamp(p, DEAD);
@@ -55,7 +54,7 @@ static int	eat(t_philo *p)
 	usleep(p->arg->time_to_eat);
 	put_fork(p->num, p->fork);
 	(p->eat_cnt)++;
-	p->last_eat = cur;
+	gettimeofday(&p->last_eat, NULL);
 	return (ALIVE);
 }
 

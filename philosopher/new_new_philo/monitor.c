@@ -6,7 +6,7 @@
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:03:16 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/11 18:07:06 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:49:56 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	*philo_monitor(void *philo)
 	while (++i < p->arg->number_of_philo)
 	{
 		p[i].stat = ALIVE;
+		p[i].last_eat = cur;
 	}
 	while (check_stat(p))
 		usleep(100);
