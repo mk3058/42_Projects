@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:48:46 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/10 23:58:25 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:27:52 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	main(int argc, char **argv)
 	pthread_create(thread + cnt, NULL, philo_monitor, philo);
 	cnt = -1;
 	while (++cnt < philo->arg->number_of_philo + 1)
+	{
+		//printf("====%d\n", cnt); //////////////////////////////////////////////////////////
 		pthread_join(thread[cnt], NULL);
+	}
 	free_all(philo, thread);
 }
 
@@ -63,7 +66,7 @@ static t_arg	*get_arg(int argc, char **argv)
 {
 	t_arg	*arg;
 
-	arg = malloc(sizeof(arg));
+	arg = malloc(sizeof(t_arg));
 	arg->number_of_philo = ft_atoi(argv[1]);
 	arg->time_to_die = ft_atoi(argv[2]);
 	arg->time_to_eat = ft_atoi(argv[3]);

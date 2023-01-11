@@ -5,41 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 13:26:15 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/11 16:24:44 by minkyuki         ###   ########.fr       */
+/*   Created: 2023/01/11 15:03:16 by minkyuki          #+#    #+#             */
+/*   Updated: 2023/01/11 16:28:59 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*monitor(void *philo)
+static int	check_stat(t_philo *p);
+
+void	*philo_monitor(void *philo)
+{
+	int				i;
+	t_philo			*p;
+	struct timeval	cur;
+
+	i = -1;
+	p = philo;
+	gettimeofday(&cur, NULL);
+	p->arg->start_time = cur;
+	while (++i < p->arg->number_of_philo)
+		p[i].stat = ALIVE;
+	while (check_stat(p))
+		usleep(100);
+	return (NULL);
+}
+
+static int	check_stat(t_philo *p)
 {
 	int	i;
-	int	cnt;
-	int	flag;
-	t_philo *p;
 
-	p = philo;
-	flag = -1;
-	while (1)
+	//printf("monitor\n");
+	i = -1;
+	while (++i < p->arg->number_of_philo)
 	{
-		i = -1;
-		cnt = 0;
-		while (flag == -1 && ++i < p->arg->number_of_philo)
-		{
-			if (p[i].stat == DEAD)
-				flag = i;
-			if (p[i].eat_cnt >= p->arg->must_eat)
-				cnt++;
-		}
-		if (flag != -1 || cnt >= p->arg->number_of_philo)
+		if (p[i].stat == DEAD)
 		{
 			i = -1;
-//			pthread_mutex_lock(&p->arg->mutex);
 			while (++i < p->arg->number_of_philo)
 				p[i].stat = DEAD;
-//			pthread_mutex_unlock(&p->arg->mutex);
-			return (NULL);
+			return (0);
 		}
 	}
+	return (1);
 }

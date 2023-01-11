@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:48:55 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/10 23:49:40 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:09:47 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 typedef struct s_arg
 {
 	int				number_of_philo;
-	unsigned long	time_to_die;
-	unsigned long	time_to_eat;
-	unsigned long	time_to_sleep;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				must_eat;
 	struct timeval	start_time;
 }	t_arg;
@@ -61,5 +61,6 @@ int		argument_check(int argc, char **argv);
 void	*philo_routine(void *philo);
 void	print_timestamp(t_philo *p, int stat);
 int		time_diff(struct timeval a, struct timeval b);
+void	*philo_monitor(void *philo);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:53:42 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/10 23:49:22 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:08:10 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,13 @@ int	argument_check(int argc, char **argv)
 
 void	print_timestamp(t_philo *p, int stat)
 {
-	suseconds_t		diff;
+	int				diff;
 	struct timeval	cur;
 	char			*str[5];
+	static int		flag;
 
+	if (flag)
+		return ;
 	str[EATING] = "is eating";
 	str[FORK] = "has taken a fork";
 	str[SLEEPING] = "is sleeping";
@@ -94,6 +97,8 @@ void	print_timestamp(t_philo *p, int stat)
 	gettimeofday(&cur, NULL);
 	diff = time_diff(p->arg->start_time, cur);
 	printf("%dms %d %s\n", diff, p->num + 1, str[stat]);
+	if (stat == DEAD)
+		flag = 1;
 }
 
 int	time_diff(struct timeval a, struct timeval b)
