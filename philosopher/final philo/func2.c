@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:58:55 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 13:00:31 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:27:53 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_usleep(int ms)
 	gettimeofday(&cur_time, NULL);
 	while (time_diff(start_time, cur_time) <= ms)
 	{
-		usleep(100);
+		usleep(5);
 		gettimeofday(&cur_time, NULL);
 	}
 }

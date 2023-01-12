@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:53:42 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/12 12:59:21 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 13:16:59 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	argument_check(int argc, char **argv)
 		j = -1;
 		while (argv[i][++j])
 		{
-			if (!('0' <= argv[i][j] && argv[i][j] <= '9' || argv[i][j] == '+'))
+			if (('0' > argv[i][j] || argv[i][j] > '9') && argv[i][j] != '+')
 			{
 				printf("%s\n", "Invalid Arguments");
 				return (1);

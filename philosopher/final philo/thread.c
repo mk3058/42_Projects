@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:40:06 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 12:59:35 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:31:28 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,20 @@ void	*thread_routine(void *philo)
 {
 	while (((t_philo *)philo)->stat != ALIVE)
 		;
+	if (((t_philo *)philo)->arg->number_of_philo == 1)
+	{
+		while (!is_dead(philo))
+			;
+		return (NULL);
+	}
 	philo_life(philo);
 	return (NULL);
 }
 
 static void	philo_life(t_philo *philo)
 {
+	if (philo->num % 2)
+		ft_usleep(philo->arg->time_to_eat / 2);
 	while (philo->stat == ALIVE)
 	{
 		if (eat(philo) == DEAD)
@@ -36,6 +44,7 @@ static void	philo_life(t_philo *philo)
 		if (is_dead(philo))
 			return ;
 		print_timestamp(philo, THINKING);
+		ft_usleep(5);
 	}
 }
 
@@ -49,10 +58,10 @@ static int	eat(t_philo *philo)
 	}
 	print_timestamp(philo, FORK);
 	print_timestamp(philo, EATING);
+	gettimeofday(&philo->last_eat, NULL);
 	ft_usleep(philo->arg->time_to_eat);
 	put_fork(philo, philo->arg->fork);
 	(philo->eat_cnt)++;
-	gettimeofday(&philo->last_eat, NULL);
 	return (ALIVE);
 }
 
