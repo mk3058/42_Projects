@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:48:55 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/11 17:15:07 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:54:56 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_arg
 	int				time_to_sleep;
 	int				must_eat;
 	struct timeval	start_time;
+	pthread_mutex_t	print_mutex;
 }	t_arg;
 
 typedef struct s_philo

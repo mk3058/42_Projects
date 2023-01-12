@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:53:42 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/11 19:46:06 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:02:44 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_atoi(const char *str)
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*result;
-	int		i;
+	size_t	i;
 
 	i = -1;
 	result = malloc(size * count);
@@ -87,21 +87,26 @@ void	print_timestamp(t_philo *p, int stat)
 	char			*str[5];
 	static int		flag;
 
-	if (flag)
-		return ;
 	str[EATING] = "is eating";
 	str[FORK] = "has taken a fork";
 	str[SLEEPING] = "is sleeping";
 	str[THINKING] = "is thinking";
 	str[DEAD] = "died";
+	pthread_mutex_lock(&p->arg->print_mutex);
+	if (flag)
+	{
+		pthread_mutex_unlock(&p->arg->print_mutex);
+		return ;
+	}
 	gettimeofday(&cur, NULL);
 	diff = time_diff(p->arg->start_time, cur);
 	printf("%dms %d %s\n", diff, p->num + 1, str[stat]);
 	if (stat == DEAD)
 		flag = 1;
+	pthread_mutex_unlock(&p->arg->print_mutex);
 }
 
 int	time_diff(struct timeval a, struct timeval b)
 {
-	return ((((long)b.tv_sec - (long)a.tv_sec) * 1000) + b.tv_usec - a.tv_usec);
+	return (((b.tv_sec - a.tv_sec) * 1000) + ((b.tv_usec - a.tv_usec) / 1000));
 }

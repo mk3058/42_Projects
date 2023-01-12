@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 23:27:10 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/11 19:53:04 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:04:46 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static int	eat(t_philo *p);
-static void	get_fork(int philo_num, t_fork *f);
+static void	get_fork(t_philo *p, t_fork *f);
 static void	put_fork(int philo_num, t_fork *f);
 static int	pick_fork(int fork_num, t_fork *f);
 
@@ -31,7 +31,7 @@ void	*philo_routine(void *philo)
 		if (eat(p) == DEAD)
 			return (NULL);
 		print_timestamp(p, SLEEPING);
-		usleep(p->arg->time_to_sleep);
+		usleep(p->arg->time_to_sleep * 1000);
 		print_timestamp(p, THINKING);
 	}
 }
@@ -40,7 +40,7 @@ static int	eat(t_philo *p)
 {
 	struct timeval	cur;
 
-	get_fork(p->num, p->fork);
+	get_fork(p, p->fork);
 	gettimeofday(&cur, NULL);
 	if (time_diff(p->last_eat, cur) >= p->arg->time_to_die)
 	{
@@ -51,27 +51,27 @@ static int	eat(t_philo *p)
 	}
 	print_timestamp(p, FORK);
 	print_timestamp(p, EATING);
-	usleep(p->arg->time_to_eat);
+	usleep(p->arg->time_to_eat * 1000);
 	put_fork(p->num, p->fork);
 	(p->eat_cnt)++;
 	gettimeofday(&p->last_eat, NULL);
 	return (ALIVE);
 }
 
-static void	get_fork(int philo_num, t_fork *f)
+static void	get_fork(t_philo *p, t_fork *f)
 {
-	if (philo_num % 2)
+	if (p->num % 2)
 	{
-		while (pick_fork(philo_num, f))
+		while (pick_fork(p->num, f))
 			;
-		while (pick_fork((philo_num + 1) % 5, f))
+		while (pick_fork((p->num + 1) % p->arg->number_of_philo, f))
 			;
 	}
 	else
 	{
-		while (pick_fork((philo_num + 1) % 5, f))
+		while (pick_fork((p->num + 1) % p->arg->number_of_philo, f))
 			;
-		while (pick_fork(philo_num, f))
+		while (pick_fork(p->num, f))
 			;
 	}
 }

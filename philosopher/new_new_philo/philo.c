@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 22:48:46 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/11 18:20:46 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:12:16 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int	main(int argc, char **argv)
 	pthread_create(thread + cnt, NULL, philo_monitor, philo);
 	cnt = -1;
 	while (++cnt < philo->arg->number_of_philo + 1)
-	{
-		//printf("====%d\n", cnt); //////////////////////////////////////////////////////////
 		pthread_join(thread[cnt], NULL);
-	}
 	free_all(philo, thread);
 }
 
@@ -75,6 +72,7 @@ static t_arg	*get_arg(int argc, char **argv)
 		arg->must_eat = ft_atoi(argv[5]);
 	else
 		arg->must_eat = -1;
+	pthread_mutex_init(&arg->print_mutex, NULL);
 	return (arg);
 }
 
@@ -86,6 +84,7 @@ static void	free_all(t_philo *philo, pthread_t *thread)
 	i = -1;
 	number_of_philo = philo->arg->number_of_philo;
 	free(thread);
+	pthread_mutex_destroy(&philo->arg->print_mutex);
 	free(philo->arg);
 	while (++i < number_of_philo)
 		pthread_mutex_destroy(&(philo->fork[i].mutex));

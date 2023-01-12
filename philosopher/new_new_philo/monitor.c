@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:03:16 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/11 19:49:56 by minkyuki         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:17:40 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static int	check_stat(t_philo *p)
 		i = -1;
 		while (++i < p->arg->number_of_philo)
 			p[i].stat = DEAD;
+		if (p->arg->must_eat >= 0 && cnt >= p->arg->number_of_philo)
+			printf("Philo's are full!\n");
 		return (0);
 	}
 	return (1);
