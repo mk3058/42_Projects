@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:13:23 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 13:00:19 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 19:28:35 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static t_philo	*get_philo(int argc, char **argv)
 		philo[i].num = i;
 		philo[i].eat_cnt = 0;
 		philo[i].stat = -1;
+		pthread_mutex_init(&philo[i].last_eat_mutex, NULL);
 	}
 	return (philo);
 }

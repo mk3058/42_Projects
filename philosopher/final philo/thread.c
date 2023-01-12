@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:40:06 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 14:43:09 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 19:35:52 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	philo_life(t_philo *philo)
 		if (is_dead(philo))
 			return ;
 		print_timestamp(philo, THINKING);
-		ft_usleep(5);
+		if (philo->arg->number_of_philo % 2)
+			ft_usleep(50);
 	}
 }
 
@@ -51,7 +52,9 @@ static void	eat(t_philo *philo)
 	get_fork(philo, philo->arg->fork);
 	print_timestamp(philo, FORK);
 	print_timestamp(philo, EATING);
+	pthread_mutex_lock(&philo->last_eat_mutex);
 	gettimeofday(&philo->last_eat, NULL);
+	pthread_mutex_unlock(&philo->last_eat_mutex);
 	ft_usleep(philo->arg->time_to_eat);
 	put_fork(philo, philo->arg->fork);
 	(philo->eat_cnt)++;

@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:13:18 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 14:41:44 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 19:28:03 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	int				eat_cnt;
 	int				stat;
 	t_timeval		last_eat;
+	pthread_mutex_t	last_eat_mutex;
 	t_arg			*arg;
 }	t_philo;
 
