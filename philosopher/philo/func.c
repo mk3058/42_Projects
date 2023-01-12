@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:53:42 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/07 14:59:54 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 21:19:54 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_atoi(const char *str)
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*result;
-	int		i;
+	size_t	i;
 
 	i = -1;
 	result = malloc(size * count);
@@ -52,4 +52,62 @@ void	*ft_calloc(size_t count, size_t size)
 	while (++i < size)
 		((char *)result)[i] = 0;
 	return (result);
+}
+
+int	argument_check(int argc, char **argv)
+{
+	int	i;
+	int	j;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	if (argc != 5 && argc != 6)
+	{
+		printf("%s\n", "Invalid Arguments");
+		return (1);
+	}
+	while (++i < argc)
+	{
+		j = -1;
+		while (argv[i][++j])
+			if (('0' > argv[i][j] || argv[i][j] > '9') && argv[i][j] != '+')
+				flag = 1;
+		if (argv[i][0] == '0' && argv[i][1] == '\0')
+				flag = 1;
+	}
+	if (flag)
+		printf("Invalid Arguments\n");
+	return (flag);
+}
+
+void	print_timestamp(t_philo *p, int stat)
+{
+	int				diff;
+	t_timeval		cur;
+	char			*str[5];
+	static int		flag;
+
+	str[EATING] = "is eating";
+	str[FORK] = "has taken a fork";
+	str[SLEEPING] = "is sleeping";
+	str[THINKING] = "is thinking";
+	str[DEAD] = "\033[0;31mdied\033[0;30m";
+	pthread_mutex_lock(&p->arg->print_mutex);
+	if (flag)
+	{
+		pthread_mutex_unlock(&p->arg->print_mutex);
+		return ;
+	}
+	gettimeofday(&cur, NULL);
+	diff = time_diff(p->arg->start_time, cur);
+	printf("%dms %d %s\n", diff, p->num + 1, str[stat]);
+	if (stat == DEAD)
+		flag = 1;
+	pthread_mutex_unlock(&p->arg->print_mutex);
+}
+
+int	time_diff(t_timeval a, t_timeval b)
+{
+	return ((b.tv_sec - a.tv_sec) * 1000 + (b.tv_usec - a.tv_usec) / 1000);
 }

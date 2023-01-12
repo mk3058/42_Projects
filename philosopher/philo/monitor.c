@@ -3,43 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 13:26:15 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/11 16:24:44 by minkyuki         ###   ########.fr       */
+/*   Created: 2023/01/12 12:16:22 by minkyu            #+#    #+#             */
+/*   Updated: 2023/01/12 19:51:14 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*monitor(void *philo)
-{
-	int	i;
-	int	cnt;
-	int	flag;
-	t_philo *p;
+static void	*check_stat(t_philo *philo, int cnt_flag);
+static void	kill_all_philo(t_philo *philo);
 
-	p = philo;
-	flag = -1;
+void	*philo_monitor(void *philo)
+{
+	t_timeval	start_time;
+	int			i;
+
+	i = -1;
+	gettimeofday(&start_time, NULL);
+	((t_philo *)philo)->arg->start_time = start_time;
+	while (++i < ((t_philo *)philo)->arg->number_of_philo)
+	{
+		((t_philo *)philo)[i].last_eat = start_time;
+		((t_philo *)philo)[i].stat = ALIVE;
+	}
+	return (check_stat(philo, (((t_philo *)philo)->arg->must_eat > -1)));
+}
+
+static void	*check_stat(t_philo *philo, int cnt_flag)
+{
+	int			i;
+	int			cnt;
+
 	while (1)
 	{
 		i = -1;
 		cnt = 0;
-		while (flag == -1 && ++i < p->arg->number_of_philo)
+		while (++i < philo->arg->number_of_philo)
 		{
-			if (p[i].stat == DEAD)
-				flag = i;
-			if (p[i].eat_cnt >= p->arg->must_eat)
+			if (is_dead(philo + i))
+			{
+				kill_all_philo(philo);
+				put_fork(philo + i, philo->arg->fork);
+				return (NULL);
+			}
+			if (cnt_flag && philo[i].eat_cnt >= philo->arg->must_eat)
 				cnt++;
 		}
-		if (flag != -1 || cnt >= p->arg->number_of_philo)
+		if (cnt_flag && cnt >= philo->arg->number_of_philo)
 		{
-			i = -1;
-//			pthread_mutex_lock(&p->arg->mutex);
-			while (++i < p->arg->number_of_philo)
-				p[i].stat = DEAD;
-//			pthread_mutex_unlock(&p->arg->mutex);
-			return (NULL);
+			kill_all_philo(philo);
+			return (philo);
 		}
 	}
+	return (NULL);
+}
+
+static void	kill_all_philo(t_philo *philo)
+{
+	int	i;
+
+	i = -1;
+	while (++i < philo->arg->number_of_philo)
+		philo[i].stat = DEAD;
 }
