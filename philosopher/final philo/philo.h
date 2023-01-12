@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:13:18 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 13:01:04 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:41:44 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	*thread_routine(void *philo);
 void	*philo_monitor(void *philo);
 void	ft_usleep(int ms);
 int		is_dead(t_philo *philo);
+void	put_fork(t_philo *philo, pthread_mutex_t *fork);
 
 #endif

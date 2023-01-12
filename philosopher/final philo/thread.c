@@ -6,16 +6,15 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:40:06 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 14:31:28 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:43:09 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	philo_life(t_philo *philo);
-static int	eat(t_philo *philo);
+static void	eat(t_philo *philo);
 static void	get_fork(t_philo *philo, pthread_mutex_t *fork);
-static void	put_fork(t_philo *philo, pthread_mutex_t *fork);
 
 void	*thread_routine(void *philo)
 {
@@ -37,8 +36,7 @@ static void	philo_life(t_philo *philo)
 		ft_usleep(philo->arg->time_to_eat / 2);
 	while (philo->stat == ALIVE)
 	{
-		if (eat(philo) == DEAD)
-			return ;
+		eat(philo);
 		print_timestamp(philo, SLEEPING);
 		ft_usleep(philo->arg->time_to_sleep);
 		if (is_dead(philo))
@@ -48,21 +46,15 @@ static void	philo_life(t_philo *philo)
 	}
 }
 
-static int	eat(t_philo *philo)
+static void	eat(t_philo *philo)
 {
 	get_fork(philo, philo->arg->fork);
-	if (is_dead(philo))
-	{
-		put_fork(philo, philo->arg->fork);
-		return (DEAD);
-	}
 	print_timestamp(philo, FORK);
 	print_timestamp(philo, EATING);
 	gettimeofday(&philo->last_eat, NULL);
 	ft_usleep(philo->arg->time_to_eat);
 	put_fork(philo, philo->arg->fork);
 	(philo->eat_cnt)++;
-	return (ALIVE);
 }
 
 static void	get_fork(t_philo *philo, pthread_mutex_t *fork)
@@ -82,7 +74,7 @@ static void	get_fork(t_philo *philo, pthread_mutex_t *fork)
 	}
 }
 
-static void	put_fork(t_philo *philo, pthread_mutex_t *fork)
+void	put_fork(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	tot_philo_num;
 
