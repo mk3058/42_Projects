@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:40:06 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 19:35:52 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 19:56:25 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	*thread_routine(void *philo)
 
 static void	philo_life(t_philo *philo)
 {
+	t_timeval	cur;
+	int			remain;
+
 	if (philo->num % 2)
 		ft_usleep(philo->arg->time_to_eat / 2);
 	while (philo->stat == ALIVE)
@@ -43,7 +46,11 @@ static void	philo_life(t_philo *philo)
 			return ;
 		print_timestamp(philo, THINKING);
 		if (philo->arg->number_of_philo % 2)
-			ft_usleep(50);
+		{
+			gettimeofday(&cur, NULL);
+			remain = philo->arg->time_to_die - time_diff(philo->last_eat, cur);
+			ft_usleep(remain / 2);
+		}
 	}
 }
 

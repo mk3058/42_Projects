@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:58:55 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 19:30:38 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 19:59:08 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	is_dead(t_philo *philo)
 	pthread_mutex_lock(&philo->last_eat_mutex);
 	if (time_diff(philo->last_eat, cur) >= philo->arg->time_to_die)
 	{
-		philo->stat = DEAD;
 		print_timestamp(philo, DEAD);
 		pthread_mutex_unlock(&philo->last_eat_mutex);
 		return (1);

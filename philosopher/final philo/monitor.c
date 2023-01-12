@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:16:22 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 14:41:10 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 19:51:14 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ static void	*check_stat(t_philo *philo, int cnt_flag)
 {
 	int			i;
 	int			cnt;
-	t_timeval	cur;
 
 	while (1)
 	{
 		i = -1;
 		cnt = 0;
-		gettimeofday(&cur, NULL);
 		while (++i < philo->arg->number_of_philo)
 		{
 			if (is_dead(philo + i))
