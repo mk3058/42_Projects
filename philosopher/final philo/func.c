@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:53:42 by minkyuki          #+#    #+#             */
-/*   Updated: 2023/01/12 12:46:13 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 12:59:21 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	print_timestamp(t_philo *p, int stat)
 	str[FORK] = "has taken a fork";
 	str[SLEEPING] = "is sleeping";
 	str[THINKING] = "is thinking";
-	str[DEAD] = "died";
+	str[DEAD] = "\033[0;31mdied\033[0;30m";
 	pthread_mutex_lock(&p->arg->print_mutex);
 	if (flag)
 	{
@@ -109,18 +109,4 @@ void	print_timestamp(t_philo *p, int stat)
 int	time_diff(t_timeval a, t_timeval b)
 {
 	return ((b.tv_sec - a.tv_sec) * 1000 + (b.tv_usec - a.tv_usec) / 1000);
-}
-
-void	ft_usleep(int ms)
-{
-	t_timeval	start_time;
-	t_timeval	cur_time;
-	
-	gettimeofday(&start_time, NULL);
-	gettimeofday(&cur_time, NULL);
-	while (time_diff(start_time, cur_time) <= ms)
-	{
-		usleep(100);
-		gettimeofday(&cur_time, NULL);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:40:06 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 12:42:44 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 12:59:35 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	philo_life(t_philo *philo);
 static int	eat(t_philo *philo);
 static void	get_fork(t_philo *philo, pthread_mutex_t *fork);
 static void	put_fork(t_philo *philo, pthread_mutex_t *fork);
-static int	is_dead(t_philo *philo);
-
 
 void	*thread_routine(void *philo)
 {
@@ -61,7 +59,7 @@ static int	eat(t_philo *philo)
 static void	get_fork(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	tot_philo_num;
-	
+
 	tot_philo_num = philo->arg->number_of_philo;
 	if (philo->num % 2 == 0)
 	{
@@ -78,7 +76,7 @@ static void	get_fork(t_philo *philo, pthread_mutex_t *fork)
 static void	put_fork(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	tot_philo_num;
-	
+
 	tot_philo_num = philo->arg->number_of_philo;
 	if (philo->num % 2 == 0)
 	{
@@ -90,18 +88,4 @@ static void	put_fork(t_philo *philo, pthread_mutex_t *fork)
 		pthread_mutex_unlock(&fork[(philo->num + 1) % tot_philo_num]);
 		pthread_mutex_unlock(&fork[philo->num]);
 	}
-}
-
-static int	is_dead(t_philo *philo)
-{
-	t_timeval	cur;
-
-	gettimeofday(&cur, NULL);
-	if (time_diff(philo->last_eat, cur) >= philo->arg->time_to_die)
-	{
-		philo->stat = DEAD;
-		print_timestamp(philo, DEAD);
-		return (1);
-	}
-	return (0);
 }

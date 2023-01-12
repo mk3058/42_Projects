@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:13:23 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 12:51:58 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 13:00:19 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_philo	*get_philo(int argc, char **argv)
 	t_philo	*philo;
 	t_arg	*arg;
 	int		i;
-	
+
 	i = -1;
 	arg = get_arg(argc, argv);
 	if (!arg)
@@ -107,6 +107,7 @@ static void	free_all(t_philo *philo, pthread_t *thread)
 	pthread_mutex_destroy(&philo->arg->print_mutex);
 	while (++i < number_of_philo)
 		pthread_mutex_destroy(&philo->arg->fork[i]);
+	free(philo->arg->fork);
 	free(philo->arg);
 	free(philo);
 }

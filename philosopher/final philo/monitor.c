@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:16:22 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 12:49:14 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 13:00:09 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	*check_stat(t_philo *philo, int cnt_flag)
 {
 	int	i;
 	int	cnt;
-	
+
 	while (1)
 	{
 		i = -1;

@@ -6,7 +6,7 @@
 /*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:13:18 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 12:42:12 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/12 13:01:04 by minkyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define DEAD 4
 # define ALIVE 5
 
-typedef struct timeval t_timeval;
+typedef struct timeval	t_timeval;
 
-typedef struct	s_arg
+typedef struct s_arg
 {
 	int				number_of_philo;
 	int				time_to_die;
@@ -57,5 +57,6 @@ void	print_timestamp(t_philo *p, int stat);
 void	*thread_routine(void *philo);
 void	*philo_monitor(void *philo);
 void	ft_usleep(int ms);
+int		is_dead(t_philo *philo);
 
 #endif
