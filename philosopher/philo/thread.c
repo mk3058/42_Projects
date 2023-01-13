@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyu <minkyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: minkyuki <minkyuki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 11:40:06 by minkyu            #+#    #+#             */
-/*   Updated: 2023/01/12 19:56:25 by minkyu           ###   ########.fr       */
+/*   Updated: 2023/01/13 12:14:32 by minkyuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static void	philo_life(t_philo *philo)
 		eat(philo);
 		print_timestamp(philo, SLEEPING);
 		ft_usleep(philo->arg->time_to_sleep);
-		if (is_dead(philo))
-			return ;
 		print_timestamp(philo, THINKING);
 		if (philo->arg->number_of_philo % 2)
 		{
