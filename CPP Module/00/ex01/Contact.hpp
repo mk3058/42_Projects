@@ -10,11 +10,10 @@ private:
 	std::string last_name;
 	std::string nick_name;
 	std::string phone_number;
+	std::string darkest_secret;
 public:
-	void setFirstName(std::string first_name);
-	void setLastName(std::string last_name);
-	void setNickName(std::string nick_name);
-	void setPhoneNumber(std::string phone_number);
+	void setInfo();
+	void printInfo();
 };
 
 #endif

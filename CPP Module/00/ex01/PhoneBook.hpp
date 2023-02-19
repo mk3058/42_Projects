@@ -6,12 +6,13 @@
 class PhoneBook
 {
 private:
-	Contact contact[8];
+	Contact	contacts[8];
 	int idx;
 public:
-	void set_contact(Contact contact);
-	Contact get_contact(int idx);
-	void print_contacts();
+	PhoneBook();
+	void setContact();
+	Contact getContact(int idx);
+	void printAllContacts();
 };
 
 #endif
