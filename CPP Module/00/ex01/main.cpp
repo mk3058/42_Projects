@@ -1,94 +1,63 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
-#include <iostream>
 #include <string>
-#include <iomanip>
-
-const std::string get_input(std::string message) {
-	
-	std::string input;
-
-	do
-	{
-		std::cout << message;
-		std::cin >> input;
-	} while (input.length() == 0);
-	return (input);
-}
+#include <iostream>
 
 void Contact::setInfo() {
-
-	this->first_name = get_input("성을 입력하세요 : ");
-	this->last_name = get_input("이름을 입력하세요 : ");
-	this->nick_name = get_input("별명을 입력하세요 : ");
-	this->phone_number = get_input("전화번호를 입력하세요 : ");
-	this->darkest_secret = get_input("비밀을 입력하세요 : ");
+	first_name = getInput("First Name : ");
+	last_name = getInput("Last Name : ");
+	nick_name = getInput("Nick Name : ");
+	phone_number = getInput("Phone Number : ");
+	darkest_secret = getInput("Darkest Secret : ");
 }
 
-void Contact::printInfo() {
-	std::cout << std::setw(10) << this->first_name << "|" \
-			  << std::setw(10) << this->last_name << "|" \
-			  << std::setw(10) << this->nick_name\
-			  << std::endl;
+std::string Contact::getFirstName() {
+	return (first_name);
 }
 
-PhoneBook::PhoneBook() {
-	this->idx = 0;
+std::string Contact::getLastName() {
+	return (last_name);
 }
 
-void PhoneBook::setContact() {
+std::string Contact::getNickName() {
+	return (nick_name);
+}
 
-	contacts[this->idx].setInfo();
-	idx++;
-	idx = idx % 8;
+std::string Contact::getPhoneNumber() {
+	return (phone_number);
+}
+
+std::string Contact::getDatkestSecret() {
+	return (darkest_secret);
+}
+
+void PhoneBook::setContact(Contact contact) {
+	
+	int idx = saved % 8;
+
+	contacts[idx] = contact;
 }
 
 Contact PhoneBook::getContact(int idx) {
-	
-	return (this->contacts[idx]);
+
+	if (!(0 <= idx && idx <= 7))
+		std::cout << "getContact : index out of bounds!" << std::endl;
+	else
+		return (contacts[idx]);
 }
 
-void PhoneBook::printAllContacts()
+std::string getInput(std::string message)
 {
-	std::cout << std::setw(10) << "Index" << "|";
-	std::cout << std::setw(10) << "First Name" << "|";
-	std::cout << std::setw(10) << "Last Name" << "|";
-	std::cout << std::setw(10) << "Nick Name";
-	std::cout << std::endl << "----------------------------------------" << std::endl;
+	std::string input;
 
-	for(int i = 0; i < this->idx; i++)
-	{
-		std::cout << std::setw(10) << i << "|";
-		this->contacts[i].printInfo();
-	}
+	do {
+		std::cout << message;
+		std::cin >> input;
+	} while (input.size() == 0);
+
+	return (input);
 }
-
 
 int main() {
-
-	PhoneBook phoneBook;
-	std::string command;
-
-	while (true)
-	{
-		std::string input;
-
-		std::cout << "커맨드를 입력하세요(ADD, SEARCH, EXIT) : ";
-		std::cin >> command;
-		if (command == "ADD" || command == "add")
-		{
-			phoneBook.setContact();
-		}
-		else if (command == "SEARCH" || command == "search")
-		{
-			phoneBook.printAllContacts();
-		}
-		else if (command == "EXIT" || command == "exit")
-		{
-			break;
-		}
-		else
-			std::cout << "Wrong command!" << std::endl;
-	}
+	
 }
-
