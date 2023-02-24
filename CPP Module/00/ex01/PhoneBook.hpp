@@ -9,11 +9,14 @@ class PhoneBook
 		Contact contacts[8];
 		int	saved;
 
+		std::string setWidth(std::string str);
+
 	public:
 		PhoneBook();
 		void setContact(Contact contact);
+		int getSaveCnt();
 		Contact getContact(int idx);
-		void print();
+		void printAll();
 };
 
 #endif

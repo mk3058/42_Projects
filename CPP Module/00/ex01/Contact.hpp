@@ -1,7 +1,8 @@
 #ifndef Contact_HPP
 # define Contact_HPP
 
-#include <string>
+# include <string>
+# include <iostream>
 
 class Contact
 {
@@ -13,6 +14,7 @@ class Contact
 		std::string darkest_secret;
 	public:
 		void setInfo();
+		void printInfo();
 		std::string getFirstName();
 		std::string getLastName();
 		std::string getNickName();
