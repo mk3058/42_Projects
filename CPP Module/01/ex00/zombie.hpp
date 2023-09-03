@@ -12,9 +12,6 @@ class Zombie {
   Zombie(std::string name);
   ~Zombie();
   void announce();
-
- protected:
-  Zombie();
 };
 
 Zombie *newZombie(std::string name);
