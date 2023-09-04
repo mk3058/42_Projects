@@ -31,8 +31,8 @@ void Harl::complain(std::string level) {
   void (Harl::*func[4])() = {&Harl::debug, &Harl::info, &Harl::warning,
                              &Harl::error};
 
-  for (int i = 0; i < 5; i++) {
-    if (i == 5) {
+  for (int i = 0; i <= 4; i++) {
+    if (i == 4) {
       std::cout << "Invalid Argument " + level << std::endl;
       return;
     }
@@ -44,7 +44,7 @@ void Harl::harlFilter(std::string level) {
   std::string cmd[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
   int i = 0;
 
-  for (i = 0; i < 5; i++) {
+  for (i = 0; i < 4; i++) {
     if (level == cmd[i]) break;
   }
 
