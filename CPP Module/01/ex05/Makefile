@@ -3,7 +3,7 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror --std=c++98
 
 # Binary name
-BINARY_NAME ?= phonebook
+BINARY_NAME ?= ex05
 
 # Exclude sources
 exclude_srcs ?=
