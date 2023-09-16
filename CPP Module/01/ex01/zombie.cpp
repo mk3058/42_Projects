@@ -1,4 +1,4 @@
-#include "zombie.hpp"
+#include "Zombie.hpp"
 
 Zombie::Zombie() {
   std::cout << "Default Constructor Called!" << std::endl;
@@ -21,12 +21,4 @@ void Zombie::announce() {
 void Zombie::setName(std::string name) {
   std::cout << "name setter called!" << std::endl;
   this->name = name;
-}
-
-Zombie *newZombie(std::string name) { return new Zombie(name); }
-
-void randomChump(std::string name) {
-  Zombie zombie(name);
-
-  zombie.announce();
 }

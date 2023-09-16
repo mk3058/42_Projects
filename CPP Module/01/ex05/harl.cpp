@@ -1,4 +1,4 @@
-#include "harl.hpp"
+#include "Harl.hpp"
 
 void Harl::debug() {
   std::cout
@@ -32,10 +32,14 @@ void Harl::complain(std::string level) {
                              &Harl::error};
 
   for (int i = 0; i < 5; i++) {
-    if (i == 5) {
+    if (i == 4) {
       std::cout << "Invalid Argument " + level << std::endl;
       return;
     }
-    if (level == cmd[i]) (this->*func[i])();
+
+    if (level == cmd[i]) {
+      (this->*func[i])();
+      break;
+    }
   }
 }
