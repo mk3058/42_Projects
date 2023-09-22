@@ -1,4 +1,4 @@
-#include "weapon.hpp"
+#include "Weapon.hpp"
 
 Weapon::Weapon(){};
 

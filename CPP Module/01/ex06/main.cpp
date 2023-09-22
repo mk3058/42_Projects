@@ -1,8 +1,11 @@
-#include "harl.hpp"
+#include "Harl.hpp"
 
-int main() {
+int main(int argc, char **argv) {
   Harl harl;
 
-  harl.harlFilter("WARNING");
-  harl.harlFilter("OTHER");
+  if (argc != 2) {
+    std::cout << "Invalid number of arguments" << std::endl;
+    return (0);
+  }
+  harl.harlFilter(argv[1]);
 }

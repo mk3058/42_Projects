@@ -1,15 +1,6 @@
-#include "human.hpp"
+#include "HumanB.hpp"
 
 #define null 0
-
-HumanA::HumanA(std::string name, Weapon &weapon) : weapon(weapon) {
-  this->name = name;
-}
-
-void HumanA::attack() {
-  std::cout << this->name << " attacks with their " << this->weapon.getType()
-            << std::endl;
-}
 
 HumanB::HumanB(std::string name) {
   this->name = name;
@@ -17,7 +8,7 @@ HumanB::HumanB(std::string name) {
 }
 
 void HumanB::attack() {
-  if (!(this->weapon) != null) {
+  if ((!(this->weapon)) != null) {
     std::cout << this->name << " has nothing!" << std::endl;
     return;
   }
