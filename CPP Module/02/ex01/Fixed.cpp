@@ -47,24 +47,3 @@ float Fixed::toFloat() const {
 }
 
 int Fixed::toInt() const { return (this->num / (1 << this->width)); }
-
-bool Fixed::operator>(const Fixed &rval) const {
-    
-}
-bool Fixed::operator<(const Fixed &rval) const;
-bool Fixed::operator>=(const Fixed &rval) const;
-bool Fixed::operator<=(const Fixed &rval) const;
-bool Fixed::operator==(const Fixed &rval) const;
-bool Fixed::operator!=(const Fixed &rval) const;
-Fixed &Fixed::operator+(const Fixed &rval);
-Fixed &Fixed::operator-(const Fixed &rval);
-Fixed &Fixed::operator*(const Fixed &rval);
-Fixed &Fixed::operator/(const Fixed &rval);
-Fixed &Fixed::operator++();
-Fixed &Fixed::operator++(int n);
-Fixed &Fixed::operator--();
-Fixed &Fixed::operator--(int n);
-const Fixed &Fixed::min(Fixed &a, Fixed &b);
-const Fixed &Fixed::min(const Fixed &a, const Fixed &b);
-const Fixed &Fixed::max(Fixed &a, Fixed &b);
-const Fixed &Fixed::max(const Fixed &a, const Fixed &b);

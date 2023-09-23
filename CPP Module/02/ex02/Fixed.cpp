@@ -69,23 +69,20 @@ bool Fixed::operator!=(const Fixed &rval) const {
     return (this->toFloat() != rval.toFloat());
 }
 
-Fixed &Fixed::operator+(const Fixed &rval) {
-    this->num += rval.getRawBits();
-    return (*this);
+Fixed Fixed::operator+(const Fixed &rval) const {
+    return (Fixed(this->toFloat() + rval.toFloat()));
 }
 
-Fixed &Fixed::operator-(const Fixed &rval) {
-    this->num -= rval.getRawBits();
-    return (*this);
+Fixed Fixed::operator-(const Fixed &rval) const {
+    return (Fixed(this->toFloat() - rval.toFloat()));
 }
 
-Fixed &Fixed::operator*(const Fixed &rval) {
-    this->num = this->toFloat() * rval.toFloat() * (1 << 8);
-    return (*this);
+Fixed Fixed::operator*(const Fixed &rval) const {
+    return (Fixed(this->toFloat() * rval.toFloat()));
 }
-Fixed &Fixed::operator/(const Fixed &rval) {
-    this->num = rval.toFloat() * rval.toFloat() * (1 << 8);
-    return (*this);
+
+Fixed Fixed::operator/(const Fixed &rval) const {
+    return (Fixed(this->toFloat() / rval.toFloat()));
 }
 
 Fixed &Fixed::operator++() {
@@ -95,7 +92,7 @@ Fixed &Fixed::operator++() {
 
 Fixed Fixed::operator++(int n) {
     Fixed tmp;
-    (void) n;
+    (void)n;
 
     tmp.setRawBits(++this->num);
     return (tmp);
@@ -108,7 +105,7 @@ Fixed &Fixed::operator--() {
 
 Fixed Fixed::operator--(int n) {
     Fixed tmp;
-    (void) n;
+    (void)n;
 
     tmp.setRawBits(--this->num);
     return (tmp);
