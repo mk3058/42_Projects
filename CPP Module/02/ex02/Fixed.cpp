@@ -1,39 +1,23 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() {
-    std::cout << "Default Constructor Called" << std::endl;
-    this->num = 0;
-}
+Fixed::Fixed() { this->num = 0; }
 
-Fixed::Fixed(const int num) {
-    std::cout << "Int constructor called" << std::endl;
-    this->num = num * (1 << this->width);
-}
+Fixed::Fixed(const int num) { this->num = num * (1 << this->width); }
 
-Fixed::Fixed(const float num) {
-    std::cout << "Float constructor called" << std::endl;
-    this->num = roundf(num * (1 << this->width));
-}
+Fixed::Fixed(const float num) { this->num = roundf(num * (1 << this->width)); }
 
-Fixed::Fixed(const Fixed &ref) {
-    std::cout << "Copy constructor called" << std::endl;
-    *this = ref;
-}
+Fixed::Fixed(const Fixed &ref) { *this = ref; }
 
 Fixed &Fixed::operator=(const Fixed &ref) {
-    std::cout << "Copy Assignment Operator called" << std::endl;
     if (this != &ref) {
         this->num = ref.getRawBits();
     }
     return (*this);
 }
 
-Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
+Fixed::~Fixed() {}
 
-int Fixed::getRawBits() const {
-    std::cout << "getRawBits member function called" << std::endl;
-    return (this->num);
-}
+int Fixed::getRawBits() const { return (this->num); }
 
 void Fixed::setRawBits(int const raw) { this->num = raw; }
 
@@ -82,6 +66,8 @@ Fixed Fixed::operator*(const Fixed &rval) const {
 }
 
 Fixed Fixed::operator/(const Fixed &rval) const {
+    if (rval.toFloat() == 0.0f)
+        throw std::runtime_error("Divider Cannot be Zero!");
     return (Fixed(this->toFloat() / rval.toFloat()));
 }
 
@@ -91,10 +77,10 @@ Fixed &Fixed::operator++() {
 } // prefix
 
 Fixed Fixed::operator++(int n) {
-    Fixed tmp;
     (void)n;
+    Fixed tmp = *this;
 
-    tmp.setRawBits(++this->num);
+    ++this->num;
     return (tmp);
 } // postfix
 
@@ -104,10 +90,10 @@ Fixed &Fixed::operator--() {
 }
 
 Fixed Fixed::operator--(int n) {
-    Fixed tmp;
     (void)n;
+    Fixed tmp = *this;
 
-    tmp.setRawBits(--this->num);
+    --this->num;
     return (tmp);
 }
 

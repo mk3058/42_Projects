@@ -66,6 +66,8 @@ Fixed Fixed::operator*(const Fixed &rval) const {
 }
 
 Fixed Fixed::operator/(const Fixed &rval) const {
+    if (rval.toFloat() == 0.0f)
+        throw std::runtime_error("Divider Cannot be Zero!");
     return (Fixed(this->toFloat() / rval.toFloat()));
 }
 
@@ -75,10 +77,10 @@ Fixed &Fixed::operator++() {
 } // prefix
 
 Fixed Fixed::operator++(int n) {
-    Fixed tmp;
     (void)n;
+    Fixed tmp = *this;
 
-    tmp.setRawBits(++this->num);
+    ++this->num;
     return (tmp);
 } // postfix
 
@@ -88,10 +90,10 @@ Fixed &Fixed::operator--() {
 }
 
 Fixed Fixed::operator--(int n) {
-    Fixed tmp;
     (void)n;
+    Fixed tmp = *this;
 
-    tmp.setRawBits(--this->num);
+    --this->num;
     return (tmp);
 }
 

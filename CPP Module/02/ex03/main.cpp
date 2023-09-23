@@ -6,6 +6,7 @@ int main(void) {
     Point a(0, 0);
     Point b(10.0, 0);
     Point c(5.0, 10);
+    
     Point inside(5, 1);
     Point outside(11, 1);
     Point onVertex(0, 0);
