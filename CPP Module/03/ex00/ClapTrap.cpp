@@ -74,6 +74,10 @@ std::string ClapTrap::getName() { return this->name; }
 int ClapTrap::getAttackDamage() { return this->attackDamage; }
 
 void ClapTrap::setAttackDamage(int attackDamage) {
+    if (attackDamage < 0) {
+        std::cout << "attack damage cannot be negative!" << std::endl;
+        return;
+    }
     this->attackDamage = attackDamage;
 }
 
