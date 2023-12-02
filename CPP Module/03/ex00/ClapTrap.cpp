@@ -1,5 +1,9 @@
 #include "ClapTrap.hpp"
 
+const int initialHitPoints = 10;
+const int initialEnergyPoints = 10;
+const int initialAttackDamage = 0;
+
 ClapTrap::ClapTrap(std::string name)
     : name(name), hitPoints(initialHitPoints),
       energyPoints(initialEnergyPoints), attackDamage(initialAttackDamage) {
@@ -14,6 +18,11 @@ ClapTrap::ClapTrap(const ClapTrap &rval)
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &rval) {
+
+    if (this == &rval) {
+        return *this;
+    }
+
     this->name = rval.name;
     this->hitPoints = rval.hitPoints;
     this->energyPoints = rval.energyPoints;

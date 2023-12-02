@@ -4,10 +4,6 @@
 #include <iostream>
 #include <string>
 
-const int initialHitPoints = 10;
-const int initialEnergyPoints = 10;
-const int initialAttackDamage = 0;
-
 class ClapTrap {
   private:
     std::string name;
