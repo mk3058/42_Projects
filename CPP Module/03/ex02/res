@@ -1,0 +1,114 @@
+ClapTrap 'A' constructor called!
+FragTrap 'A' constructor called!
+ClapTrap 'B' constructor called!
+FragTrap 'B' constructor called!
+
+< A's status >
+hitPoints: 100
+energyPoints: 100
+attackDamage: 3
+
+
+< B's status >
+hitPoints: 100
+energyPoints: 100
+attackDamage: 30
+
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+
+< A's status >
+hitPoints: 100
+energyPoints: 97
+attackDamage: 3
+
+
+< B's status >
+hitPoints: 91
+energyPoints: 100
+attackDamage: 30
+
+ClapTrap B repaired! Current hitPoint is 95
+
+< A's status >
+hitPoints: 100
+energyPoints: 97
+attackDamage: 3
+
+
+< B's status >
+hitPoints: 95
+energyPoints: 99
+attackDamage: 30
+
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap A attacks B, causing 3 points of damage!
+ClapTrap 'B' take 3 of damage!
+ClapTrap B repaired! Current hitPoint is 75
+
+< A's status >
+hitPoints: 100
+energyPoints: 87
+attackDamage: 3
+
+
+< B's status >
+hitPoints: 75
+energyPoints: 98
+attackDamage: 30
+
+ClapTrap 'C' constructor called!
+FragTrap 'C' constructor called!
+
+< C's status >
+hitPoints: 100
+energyPoints: 100
+attackDamage: 30
+
+ClapTrap 'C' constructor called!
+FragTrap 'C' copy constructor called!
+
+< C's status >
+hitPoints: 100
+energyPoints: 100
+attackDamage: 100000
+
+ClapTrap 'E' constructor called!
+FragTrap 'E' constructor called!
+
+< C's status >
+hitPoints: 100
+energyPoints: 100
+attackDamage: 100000
+
+FragTrap 'C' destructor called!
+ClapTrap 'C' destructor called!
+FragTrap 'C' destructor called!
+ClapTrap 'C' destructor called!
+FragTrap 'C' destructor called!
+ClapTrap 'C' destructor called!
+FragTrap 'B' destructor called!
+ClapTrap 'B' destructor called!
+FragTrap 'A' destructor called!
+ClapTrap 'A' destructor called!
