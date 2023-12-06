@@ -4,6 +4,12 @@ const int initialHitPoints = 10;
 const int initialEnergyPoints = 10;
 const int initialAttackDamage = 0;
 
+ClapTrap::ClapTrap()
+    : name(""), hitPoints(initialHitPoints), energyPoints(initialEnergyPoints),
+      attackDamage(initialAttackDamage) {
+    std::cout << "ClapTrap default constructor called!" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name)
     : name(name), hitPoints(initialHitPoints),
       energyPoints(initialEnergyPoints), attackDamage(initialAttackDamage) {

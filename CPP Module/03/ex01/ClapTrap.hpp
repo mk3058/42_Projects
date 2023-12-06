@@ -12,6 +12,7 @@ class ClapTrap {
     int attackDamage;
 
   public:
+    ClapTrap();
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap &rval);
     ClapTrap &operator=(const ClapTrap &rval);

@@ -6,10 +6,12 @@
 
 class FragTrap : public ClapTrap {
   public:
+    FragTrap();
     FragTrap(std::string name);
     FragTrap(const FragTrap &ref);
     FragTrap &operator=(const FragTrap &rval);
     ~FragTrap();
+    void attack(const std::string &target);
     void highFivesGuys();
 };
 
