@@ -12,7 +12,6 @@ ScavTrap::ScavTrap() {
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-
     hitPoints = initialHitPoints;
     energyPoints = initialEnergyPoints;
     attackDamage = initialAttackDamage;

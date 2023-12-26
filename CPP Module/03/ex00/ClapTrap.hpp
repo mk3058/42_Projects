@@ -10,9 +10,9 @@ class ClapTrap {
     int hitPoints; // health
     int energyPoints;
     int attackDamage;
+    ClapTrap();
 
   public:
-    ClapTrap();
     ClapTrap(std::string name);
     ClapTrap(const ClapTrap &rval);
     ClapTrap &operator=(const ClapTrap &rval);

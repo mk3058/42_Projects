@@ -24,7 +24,6 @@ ClapTrap::ClapTrap(const ClapTrap &rval)
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &rval) {
-
     if (this == &rval) {
         return *this;
     }

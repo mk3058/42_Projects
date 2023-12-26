@@ -28,7 +28,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &rval) {
     if (this == &rval) {
         return *this;
     }
-    
+
     this->name = rval.name;
     this->hitPoints = rval.hitPoints;
     this->energyPoints = rval.energyPoints;
