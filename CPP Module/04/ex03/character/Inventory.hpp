@@ -1,4 +1,4 @@
-#ifndef INVENTPRY_HPP
+#ifndef INVENTORY_HPP
 #define INVENTORY_HPP
 
 #include "AMateria.hpp"
