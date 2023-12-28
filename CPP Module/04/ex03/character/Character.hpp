@@ -9,11 +9,12 @@ class Character : public ICharacter {
     Inventory inventory;
     std::string name;
     Character();
-    Character(const Character &ref);
-    Character &operator=(const Character &rval);
 
   public:
     Character(std::string name);
+    Character(const Character &ref);
+    Character &operator=(const Character &rval);
+    Character &operator=(const ICharacter &rval);
     virtual ~Character();
     std::string const &getName() const;
     void equip(AMateria *m);

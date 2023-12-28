@@ -3,7 +3,7 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
 
 # Binary name
-BINARY_NAME ?= ex02
+BINARY_NAME ?= ex03
 
 # Exclude sources
 exclude_srcs ?=

@@ -15,6 +15,10 @@ Inventory::Inventory(const Inventory &ref) : count(ref.count) {
 }
 
 Inventory &Inventory::operator=(const Inventory &rval) {
+    if (this == &rval) {
+        return *this;
+    }
+
     for (int i = 0; i < 4; i++) {
         delete this->slots[i];
         if (rval.slots[i] == NULL) {
@@ -22,6 +26,7 @@ Inventory &Inventory::operator=(const Inventory &rval) {
             continue;
         }
         this->slots[i] = rval.slots[i]->clone();
+        count++;
     }
     return *this;
 }
@@ -32,17 +37,21 @@ Inventory::~Inventory() {
     }
 }
 
-void Inventory::add(AMateria *materia) {
+int Inventory::add(AMateria *materia) {
     int emptySlotIdx = -1;
 
+    if (materia == NULL) {
+        std::cout << "Materia must be proveded!" << std::endl;
+        return FAILURE;
+    }
     if (count == 4) {
         std::cout << "Inventory slots are full!" << std::endl;
-        return;
+        return FAILURE;
     }
     for (int i = 0; i < 4; i++) {
         if (slots[i] == materia) {
             std::cout << "materia already exist in slots!" << std::endl;
-            return;
+            return FAILURE;
         }
         if (emptySlotIdx == -1 && slots[i] == NULL) {
             emptySlotIdx = i;
@@ -51,6 +60,7 @@ void Inventory::add(AMateria *materia) {
 
     slots[emptySlotIdx] = materia;
     count++;
+    return SUCCESS;
 }
 
 AMateria *Inventory::remove(unsigned int idx) {

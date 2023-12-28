@@ -11,6 +11,10 @@ Character::Character(const Character &ref) : name(ref.name) {
 }
 
 Character &Character::operator=(const Character &rval) {
+    if (this == &rval) {
+        return *this;
+    }
+
     this->name = rval.name;
     this->inventory = rval.inventory;
     return *this;
@@ -22,10 +26,15 @@ std::string const &Character::getName() const { return name; }
 
 void Character::equip(AMateria *m) {
     if (m == NULL) {
-        std::cout << "Materia does not exist!" << std::endl;
+        std::cout << "Materia must be provided!" << std::endl;
         return;
     }
-    inventory.add(m);
+
+    Floor &floor = Floor::getInstance();
+    int result = inventory.add(m);
+    if (result != SUCCESS) {
+        floor.add(m);
+    } // when character cannot equip materia, it's dropped on floor
 }
 
 void Character::unequip(int idx) {

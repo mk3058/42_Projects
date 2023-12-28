@@ -13,9 +13,11 @@ class Inventory {
     Inventory(const Inventory &ref);
     Inventory &operator=(const Inventory &rval);
     ~Inventory();
-    void add(AMateria *materia);
+    int add(AMateria *materia);
     AMateria *remove(unsigned int idx);
     AMateria *get(unsigned int idx) const;
 };
+
+enum { SUCCESS, FAILURE };
 
 #endif

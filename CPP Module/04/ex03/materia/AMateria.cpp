@@ -6,14 +6,12 @@ AMateria::AMateria() : type("none") {}
 
 AMateria::AMateria(const AMateria &ref) : type(ref.type) {}
 
-AMateria &AMateria::operator=(const AMateria &rval) {
+AMateria &AMateria::operator=(const AMateria &rval) { 
     if (this == &rval) {
         return *this;
     }
-
-    this->type = rval.type;
-    return (*this);
-}
+    // do nothing. (materia type cannot be changed)
+    return *this; }
 
 AMateria::~AMateria() {}
 

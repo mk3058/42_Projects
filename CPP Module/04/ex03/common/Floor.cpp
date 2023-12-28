@@ -1,5 +1,6 @@
 #include "Floor.hpp"
 #include <cstring>
+#include <iostream>
 
 Floor::Floor() : size(0), index(0) { memset(materias, 0, sizeof(materias)); }
 
@@ -29,17 +30,24 @@ Floor &Floor::getInstance() {
 }
 
 void Floor::add(AMateria *materia) {
-    size = size + 1 > 1000 ? 1000 : size + 1;
-    if (index + 1 > 1000) {
-        index %= 1000;
-        delete materias[index];
+    if (materia == NULL) {
+        std::cout << "materia must be provided!" << std::endl;
+        return;
     }
 
+    if (index + 1 > 1000) {
+        index %= 1000;
+    }
+    if (size >= 1000) {
+        delete materias[index];
+    } else {
+        size++;
+    }
     materias[index++] = materia;
 }
 
 Floor::~Floor() {
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < size; i++) {
         delete materias[i];
     }
 }
