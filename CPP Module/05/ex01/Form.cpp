@@ -2,7 +2,6 @@
 #include "Bureaucrat.hpp"
 #include "GradeTooLowException.hpp"
 
-const static int highestGrade = 1;
 const static int lowestGrade = 150;
 
 Form::Form()
